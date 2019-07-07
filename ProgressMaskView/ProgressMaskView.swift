@@ -46,7 +46,7 @@ public class ProgressMaskView : UIView {
     }
     /// Create all parts and set all constraints.
     private func setup() {
-        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.backgroundColor = UIColor(white: 0, alpha: 0.7)
 
         roundBackgroundView = SimpleRView(frame: frame)
         roundBackgroundView.cornerRadius = 32
@@ -78,12 +78,13 @@ public class ProgressMaskView : UIView {
         roundBackgroundView.centerXAnchor.constraint(equalTo: activityView.centerXAnchor).isActive = true
         
         progressView = UIProgressView(progressViewStyle: .default)
+        progressView.trackTintColor = UIColor(white: 0.4, alpha: 1)
         roundBackgroundView.addSubview(progressView)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         topConstraint = NSLayoutConstraint(item: progressView!, attribute: .top, relatedBy: .equal, toItem: activityView, attribute: .bottom, multiplier: 1, constant: 32)
         bottomConstraint = NSLayoutConstraint(item: roundBackgroundView!, attribute: .bottom, relatedBy: .equal, toItem: progressView, attribute: .bottom, multiplier: 1, constant: 32)
-        leftConstraint = NSLayoutConstraint(item: progressView!, attribute: .left, relatedBy: .equal, toItem: roundBackgroundView, attribute: .left, multiplier: 1, constant: 32)
-        rightConstraint = NSLayoutConstraint(item: roundBackgroundView!, attribute: .right, relatedBy: .equal, toItem: progressView, attribute: .right, multiplier: 1, constant: 32)
+        leftConstraint = NSLayoutConstraint(item: progressView!, attribute: .left, relatedBy: .equal, toItem: roundBackgroundView, attribute: .left, multiplier: 1, constant: 16)
+        rightConstraint = NSLayoutConstraint(item: roundBackgroundView!, attribute: .right, relatedBy: .equal, toItem: progressView, attribute: .right, multiplier: 1, constant: 16)
         roundBackgroundView.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
     }
     /// add myself to the given view and set constraint for 4 edges.
