@@ -62,7 +62,7 @@ open class LineCircleView : UIView, CircleShape {
             foregroundBlendView.circleRadiusRatio = circleRadiusRatio
         }
     }
-    public var circleLineWidthRatio: CGFloat = 0.01 {
+    public var circleLineWidthRatio: CGFloat = 0.03 {
         didSet {
             backgroundBlendView.circleLineWidthRatio = circleLineWidthRatio
             foregroundBlendView.circleLineWidthRatio = circleLineWidthRatio
@@ -120,6 +120,16 @@ open class LineCircleView : UIView, CircleShape {
         backgroundBlendView = LineCircleMaskView(frame: frame)
         foregroundBlendView = LineCircleMaskView(frame: frame)
         super.init(frame: frame)
+        setup()
+    }
+    public required init?(coder aDecoder: NSCoder) {
+        let dummy = CGRect(x: 0, y: 0, width: 100, height: 100)
+        backgroundBlendView = LineCircleMaskView(frame: dummy)
+        foregroundBlendView = LineCircleMaskView(frame: dummy)
+        super.init(coder: aDecoder)
+        setup()
+    }
+    private func setup() {
         addSubview(backgroundBlendView)
         addSubview(foregroundBlendView)
         setupConstraint(view: backgroundBlendView)
@@ -134,10 +144,7 @@ open class LineCircleView : UIView, CircleShape {
         let constraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
         self.addConstraint(constraint)
         self.backgroundColor = UIColor.clear
-    }
-    public required init?(coder aDecoder: NSCoder) {
-        //super.init(coder: aDecoder)
-        fatalError("init(coder:) has not been implemented")
+
     }
     
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -199,13 +206,16 @@ open class LineCircleView : UIView, CircleShape {
 
 /// 円周を透明で描画
 open class LineCircleMaskView : UIView, CircleShape {
+    private var currentEndAngle:CGFloat = 0
+    private var angleStep = CGFloat.pi / 180 / 2
+    private var endAngleAnimationLink:CADisplayLink?
     public var viewSize: CGFloat = 300 {
         didSet { setNeedsDisplay() }
     }
     public var circleRadiusRatio: CGFloat = 0.45 {
         didSet { setNeedsDisplay() }
     }
-    public var circleLineWidthRatio: CGFloat = 0.04 {
+    public var circleLineWidthRatio: CGFloat = 0.03 {
         didSet { setNeedsDisplay() }
     }
     public var circleCenterRatio: CGPoint = CGPoint(x: 0.5, y: 0.5) {
@@ -221,7 +231,36 @@ open class LineCircleMaskView : UIView, CircleShape {
         didSet { setNeedsDisplay() }
     }
     public var endAngle: CGFloat = CGFloat.pi {
-        didSet { setNeedsDisplay() }
+        didSet {
+            currentEndAngle = oldValue
+            guard endAngleAnimationLink == nil else { return }
+            endAngleAnimationLink = CADisplayLink(target: self, selector: #selector(endAnime))
+            endAngleAnimationLink?.add(to: .main, forMode: .default)
+        }
+    }
+    /// Move one by one
+    @objc func endAnime() {
+        print("endAnime:\(Date())")
+        if abs(currentEndAngle - endAngle) < angleStep {
+            endAngleAnimationLink?.remove(from: .main, forMode: .default)
+            endAngleAnimationLink = nil
+            return
+        }
+        let nextEndAngle = (currentEndAngle + endAngle) / 2
+        let anime = CABasicAnimation(keyPath: "path")
+        let oldPath = createPath(startAngle: startAngle, endAngle: currentEndAngle)
+        let newPath = createPath(startAngle: startAngle, endAngle: nextEndAngle)
+        currentEndAngle = nextEndAngle
+        anime.duration = 0.006
+        anime.fromValue = oldPath
+        anime.toValue = newPath
+        if let mask = layer.mask as? CAShapeLayer {
+            CATransaction.begin()
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.easeOut))
+            mask.add(anime, forKey: "angle")
+            mask.path = newPath
+            CATransaction.commit()
+        }
     }
     public var lineColor: UIColor = UIColor.white {
         didSet { setNeedsDisplay() }
