@@ -12,7 +12,6 @@
 		B74B28C122D201DC00D111F3 /* ProgressMaskViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28C022D201DC00D111F3 /* ProgressMaskViewTests.swift */; };
 		B74B28C322D201DC00D111F3 /* ProgressMaskView.h in Headers */ = {isa = PBXBuildFile; fileRef = B74B28B522D201DC00D111F3 /* ProgressMaskView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B74B28CD22D203CC00D111F3 /* ProgressMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */; };
-		B74B28CF22D2055B00D111F3 /* RView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28CE22D2055B00D111F3 /* RView.swift */; };
 		B74B28D122D2134600D111F3 /* SimpleRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28D022D2134600D111F3 /* SimpleRView.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		B74B28C022D201DC00D111F3 /* ProgressMaskViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskViewTests.swift; sourceTree = "<group>"; };
 		B74B28C222D201DC00D111F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskView.swift; sourceTree = "<group>"; };
-		B74B28CE22D2055B00D111F3 /* RView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RView.swift; sourceTree = "<group>"; };
 		B74B28D022D2134600D111F3 /* SimpleRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +79,6 @@
 			children = (
 				B74B28B522D201DC00D111F3 /* ProgressMaskView.h */,
 				B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */,
-				B74B28CE22D2055B00D111F3 /* RView.swift */,
 				B73125EA22DA2EC5006D767F /* LineCircleView.swift */,
 				B74B28D022D2134600D111F3 /* SimpleRView.swift */,
 				B74B28B622D201DC00D111F3 /* Info.plist */,
@@ -209,7 +206,6 @@
 			files = (
 				B73125EB22DA2EC5006D767F /* LineCircleView.swift in Sources */,
 				B74B28CD22D203CC00D111F3 /* ProgressMaskView.swift in Sources */,
-				B74B28CF22D2055B00D111F3 /* RView.swift in Sources */,
 				B74B28D122D2134600D111F3 /* SimpleRView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

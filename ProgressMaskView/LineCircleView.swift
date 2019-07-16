@@ -8,55 +8,58 @@
 
 import UIKit
 
-
-
+/// Protocol for circle view control
 public protocol CircleShape {
-    /// ビューの大きさ。
-    var viewSize: CGFloat { get set }
-    /// 円の大きさ。0-1の割合で、0.4で全体の8割の大きさの円になる。
+    /// Set length of each size of the view.
+    var sideLength: CGFloat { get set }
+    /// Set radius of the circle as a ratio against sideLength. 0 - 0.5. 0.5 is largest.
     var circleRadiusRatio: CGFloat { get set }
-    /// 円の半径。frameの大きさにcircleRasiudRatioをかけたもの
+    /// sideLength * circleRadiusRatio.
     var circleRadius: CGFloat { get }
-    /// 線の太さ。0-1の割合。
+    /// Set width of the line of circumference as a ratio against sideLength.
     var circleLineWidthRatio: CGFloat { get set }
-    /// 線の太さ。
+    /// sideLength * circleLineWidthRatio.
     var circleLineWidth: CGFloat { get }
-    /// 中心点。0-1の範囲で0.5が中央。
+    /// Set center point of the circle in the view as a ratio against sideLength. Center is (0.5, 0.5)
     var circleCenterRatio: CGPoint { get set }
-    /// 円の大きさ。frameの大きさにcircleCenterRatioをかけたもの
+    /// Center of the circle.
     var circleCenter: CGPoint { get }
-    /// 混色の割合。0-1
+    /// Blend ratio at CCW side of the line. 0 - 1.
     var blendStart: CGFloat { get set }
-    /// 混色の割合。0-1
+    /// Blend ratio at clockwise side of the line. 0 - 1.
     var blendEnd: CGFloat { get set }
-    /// 描画の開始角度
+    /// Counter clockwise side of line. In radian.
     var startAngle:CGFloat { get set }
-    /// 描画の終了角度
+    /// Clockwise side of line. In radian.
     var endAngle:CGFloat { get set }
 }
 
-/// デフォルト実装
+/// Default implementations
 extension CircleShape where Self: UIView {
-    public var circleRadius: CGFloat { return frame.width * circleRadiusRatio }
-    public var circleLineWidth: CGFloat { return frame.width * circleLineWidthRatio }
+    public var circleRadius: CGFloat {
+        return frame.width * circleRadiusRatio
+    }
+    public var circleLineWidth: CGFloat {
+        return frame.width * circleLineWidthRatio
+    }
     public var circleCenter: CGPoint {
         return CGPoint(x: frame.width * circleCenterRatio.x, y: frame.width * circleCenterRatio.y )
     }
 }
 
-/// 太い綺麗な円を描く
+/// UIView of a thick beautiful circle. Rotatable.
 open class LineCircleView : UIView, CircleShape {
     private let backgroundBlendView: LineCircleMaskView
     private let foregroundBlendView: LineCircleMaskView
     private var isRotating: Bool = false
-    public var viewSize: CGFloat = 300 {
+    public var sideLength: CGFloat = 300 {
         didSet {
-            backgroundBlendView.viewSize = viewSize
-            foregroundBlendView.viewSize = viewSize
+            backgroundBlendView.sideLength = sideLength
+            foregroundBlendView.sideLength = sideLength
             setNeedsDisplay()
         }
     }
-    public var circleRadiusRatio: CGFloat = 0.45{
+    public var circleRadiusRatio: CGFloat = 0.45 {
         didSet {
             backgroundBlendView.circleRadiusRatio = circleRadiusRatio
             foregroundBlendView.circleRadiusRatio = circleRadiusRatio
@@ -134,8 +137,8 @@ open class LineCircleView : UIView, CircleShape {
         addSubview(foregroundBlendView)
         setupConstraint(view: backgroundBlendView)
         setupConstraint(view: foregroundBlendView)
-        foregroundBlendView.blendStart = 1.0
-        foregroundBlendView.blendEnd = 0.5
+        foregroundBlendView.blendStart = 0.7
+        foregroundBlendView.blendEnd = 0.3
         foregroundBlendView.endAngle = CGFloat.pi / 2
         backgroundBlendView.blendStart = 0.2
         backgroundBlendView.blendEnd = 0.8
@@ -144,38 +147,26 @@ open class LineCircleView : UIView, CircleShape {
         let constraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
         self.addConstraint(constraint)
         self.backgroundColor = UIColor.clear
+        layer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
 
     }
     
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize(width: viewSize, height: viewSize)
+        return CGSize(width: sideLength, height: sideLength)
     }
     
     open override var intrinsicContentSize: CGSize {
-        return CGSize(width: viewSize, height: viewSize)
+        return CGSize(width: sideLength, height: sideLength)
     }
-    /*open override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        /*guard let cg = UIGraphicsGetCurrentContext() else { return }
-        cg.setFillColor(UIColor.clear.cgColor)
-        cg.addPath(createPath(startAngle: 0, endAngle: pi / 2))
-        cg.closePath()
-        cg.setFillColor(UIColor.clear.cgColor)
-        cg.drawPath(using: .eoFill)
-        
-        let colors:CFArray = [circleForColor.cgColor, UIColor.clear.cgColor, circleForColor.cgColor] as CFArray
-        let locations:[CGFloat] = [0,0,1,1]
-        let gradient = CGGradient(colorsSpace: CGColorSpace(name: CGColorSpace.displayP3), colors: colors, locations: locations)!
-        cg.drawRadialGradient(gradient, startCenter: circleCenterRatio, startRadius: 0, endCenter: CGPoint(x:0, y:0), endRadius: pi/2, options: .drawsBeforeStartLocation)
-        */
-    }*/
     
     // MARK: - Methods
     public func startRotation(duration: CGFloat) {
         print("startRotation", Date())
         guard layer.animation(forKey: "rotate") == nil else { print(" guarded.");return }
         isRotating = true
-        let anime = CABasicAnimation(keyPath: "transform.rotation.z")
+        backgroundBlendView.isAnimate = true
+        foregroundBlendView.isAnimate = true
+        /*let anime = CABasicAnimation(keyPath: "transform.rotation.z")
         anime.duration = CFTimeInterval(duration)
         anime.fromValue = NSNumber(value: -Float.pi)
         anime.toValue = NSNumber(value: Float.pi)
@@ -186,11 +177,12 @@ open class LineCircleView : UIView, CircleShape {
             }
         })
         layer.add(anime, forKey: "rotate")
-        CATransaction.commit()
+        CATransaction.commit()*/
     }
     public func stopRotation() {
         isRotating = false
-        //layer.removeAllAnimations()
+        backgroundBlendView.isAnimate = false
+        foregroundBlendView.isAnimate = false
         layer.removeAnimation(forKey: "rotate")
     }
     private func setupConstraint(view: UIView) {
@@ -204,12 +196,15 @@ open class LineCircleView : UIView, CircleShape {
     }
 }
 
+
 /// 円周を透明で描画
 open class LineCircleMaskView : UIView, CircleShape {
     private var currentEndAngle:CGFloat = 0
     private var angleStep = CGFloat.pi / 180 / 2
     private var endAngleAnimationLink:CADisplayLink?
-    public var viewSize: CGFloat = 300 {
+    private let angleUnit = CGFloat.pi / 60
+    public var isAnimate = false
+    public var sideLength: CGFloat = 300 {
         didSet { setNeedsDisplay() }
     }
     public var circleRadiusRatio: CGFloat = 0.45 {
@@ -232,26 +227,39 @@ open class LineCircleMaskView : UIView, CircleShape {
     }
     public var endAngle: CGFloat = CGFloat.pi {
         didSet {
-            currentEndAngle = oldValue
-            guard endAngleAnimationLink == nil else { return }
-            endAngleAnimationLink = CADisplayLink(target: self, selector: #selector(endAnime))
-            endAngleAnimationLink?.add(to: .main, forMode: .default)
+            print("Set endAngle: From \(oldValue) to \(endAngle)")
+            if isAnimate {
+                currentEndAngle = oldValue
+                guard endAngleAnimationLink == nil else { return }
+                endAngleAnimationLink = CADisplayLink(target: self, selector: #selector(endAnime))
+                endAngleAnimationLink?.add(to: .main, forMode: .default)
+            } else {
+                currentEndAngle = endAngle
+                setNeedsDisplay()
+            }
         }
     }
     /// Move one by one
     @objc func endAnime() {
-        print("endAnime:\(Date())")
         if abs(currentEndAngle - endAngle) < angleStep {
-            endAngleAnimationLink?.remove(from: .main, forMode: .default)
+            endAngleAnimationLink?.invalidate()
             endAngleAnimationLink = nil
             return
         }
-        let nextEndAngle = (currentEndAngle + endAngle) / 2
+        var nextEndAngle:CGFloat = (currentEndAngle + endAngle) / 2
+        if abs(nextEndAngle) > angleUnit {
+            if currentEndAngle > endAngle {
+                nextEndAngle = currentEndAngle + angleUnit
+            } else {
+                nextEndAngle = currentEndAngle - angleUnit
+            }
+        }
+        //let nextEndAngle = (currentEndAngle + endAngle) / 2
         let anime = CABasicAnimation(keyPath: "path")
         let oldPath = createPath(startAngle: startAngle, endAngle: currentEndAngle)
         let newPath = createPath(startAngle: startAngle, endAngle: nextEndAngle)
         currentEndAngle = nextEndAngle
-        anime.duration = 0.006
+        anime.duration = 0.05//endAngleAnimationLink!.duration
         anime.fromValue = oldPath
         anime.toValue = newPath
         if let mask = layer.mask as? CAShapeLayer {
@@ -269,7 +277,7 @@ open class LineCircleMaskView : UIView, CircleShape {
         super.init(frame: frame)
     }
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     open override func draw(_ rect: CGRect) {
         let mask = CAShapeLayer()
@@ -277,9 +285,9 @@ open class LineCircleMaskView : UIView, CircleShape {
         layer.mask = mask
         
         guard let cg = UIGraphicsGetCurrentContext() else { return }
+        UIGraphicsPushContext(cg)
         let color1 = lineColor.withAlphaComponent(blendStart).cgColor
         let color2 = lineColor.withAlphaComponent(blendEnd).cgColor
-        UIGraphicsPushContext(cg)
         let colors = [color1, color2] as CFArray
         let points:[CGFloat] = [1,0, 0,1]
         let gradient = CGGradient(colorsSpace: CGColorSpace(name: CGColorSpace.sRGB), colors: colors, locations: points)!
