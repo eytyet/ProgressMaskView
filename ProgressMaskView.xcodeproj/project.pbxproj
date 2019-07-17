@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B73125EB22DA2EC5006D767F /* LineCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73125EA22DA2EC5006D767F /* LineCircleView.swift */; };
+		B701D49622DF433B0075107E /* LineArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701D49522DF433B0075107E /* LineArcView.swift */; };
+		B73125EB22DA2EC5006D767F /* LineArcRotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */; };
+		B73C2F6022DF5B1E005BC4E8 /* CircleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73C2F5F22DF5B1E005BC4E8 /* CircleShape.swift */; };
 		B74B28BC22D201DC00D111F3 /* ProgressMaskView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */; };
 		B74B28C122D201DC00D111F3 /* ProgressMaskViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28C022D201DC00D111F3 /* ProgressMaskViewTests.swift */; };
 		B74B28C322D201DC00D111F3 /* ProgressMaskView.h in Headers */ = {isa = PBXBuildFile; fileRef = B74B28B522D201DC00D111F3 /* ProgressMaskView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,7 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B73125EA22DA2EC5006D767F /* LineCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineCircleView.swift; sourceTree = "<group>"; };
+		B701D49522DF433B0075107E /* LineArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcView.swift; sourceTree = "<group>"; };
+		B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcRotateView.swift; sourceTree = "<group>"; };
+		B73C2F5F22DF5B1E005BC4E8 /* CircleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleShape.swift; sourceTree = "<group>"; };
 		B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProgressMaskView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74B28B522D201DC00D111F3 /* ProgressMaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgressMaskView.h; sourceTree = "<group>"; };
 		B74B28B622D201DC00D111F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,7 +83,9 @@
 			children = (
 				B74B28B522D201DC00D111F3 /* ProgressMaskView.h */,
 				B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */,
-				B73125EA22DA2EC5006D767F /* LineCircleView.swift */,
+				B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */,
+				B701D49522DF433B0075107E /* LineArcView.swift */,
+				B73C2F5F22DF5B1E005BC4E8 /* CircleShape.swift */,
 				B74B28D022D2134600D111F3 /* SimpleRView.swift */,
 				B74B28B622D201DC00D111F3 /* Info.plist */,
 			);
@@ -204,9 +210,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B73125EB22DA2EC5006D767F /* LineCircleView.swift in Sources */,
+				B73125EB22DA2EC5006D767F /* LineArcRotateView.swift in Sources */,
+				B701D49622DF433B0075107E /* LineArcView.swift in Sources */,
 				B74B28CD22D203CC00D111F3 /* ProgressMaskView.swift in Sources */,
 				B74B28D122D2134600D111F3 /* SimpleRView.swift in Sources */,
+				B73C2F6022DF5B1E005BC4E8 /* CircleShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

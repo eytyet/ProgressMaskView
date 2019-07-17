@@ -54,8 +54,8 @@ public class ProgressMaskView : UIView {
     }
     private var backgroundRoundView: SimpleRView!
     private var titleLabel: UILabel!
-    private var circleActivityView: LineCircleView!
-    private var circleProgressView: LineCircleView!
+    private var circleActivityView: LineArcRotateView!
+    private var circleProgressView: LineArcRotateView!
     private var timer:Timer?
     
     // MARK: - Methods
@@ -92,7 +92,7 @@ public class ProgressMaskView : UIView {
         backgroundRoundView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         // Activity View
-        circleActivityView = LineCircleView(frame: frame)
+        circleActivityView = LineArcRotateView(frame: frame)
         activityColor1 = UIColor(red: 0.3, green: 0.6, blue: 0.9, alpha: 0.9)
         activityColor2 = UIColor(red: 0.5, green: 0.7, blue: 1.0, alpha: 0.5)
         circleActivityView.startAngle = pi / 4
@@ -102,7 +102,7 @@ public class ProgressMaskView : UIView {
         setupConstraints(parentView: backgroundRoundView, childView: circleActivityView, margin: 16)
         
         // Progress View
-        circleProgressView = LineCircleView(frame: frame)
+        circleProgressView = LineArcRotateView(frame: frame)
         progressColor1 = UIColor.init(red: 0.3, green: 0.8, blue: 5.0, alpha: 1)
         progressColor2 = UIColor.init(red: 0.5, green: 0.9, blue: 7.0, alpha: 1)
         circleProgressView.startAngle = pi / 2
