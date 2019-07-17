@@ -97,7 +97,7 @@ public class ProgressMaskView : UIView {
         activityColor2 = UIColor(red: 0.5, green: 0.7, blue: 1.0, alpha: 0.5)
         circleActivityView.startAngle = pi / 4
         circleActivityView.endAngle = pi
-        circleActivityView.sideLength = 200
+        circleActivityView.widthAndHeight = 200
         backgroundRoundView.addSubview(circleActivityView)
         setupConstraints(parentView: backgroundRoundView, childView: circleActivityView, margin: 16)
         
@@ -108,7 +108,7 @@ public class ProgressMaskView : UIView {
         circleProgressView.startAngle = pi / 2
         circleProgressView.endAngle = pi / 2
         circleProgressView.circleRadiusRatio = 0.38
-        circleProgressView.sideLength = 200
+        circleProgressView.widthAndHeight = 200
         backgroundRoundView.addSubview(circleProgressView)
         setupConstraints(parentView: backgroundRoundView, childView: circleProgressView, margin: 16)
         

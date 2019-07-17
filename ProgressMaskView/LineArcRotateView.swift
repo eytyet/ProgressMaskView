@@ -15,10 +15,10 @@ open class LineArcRotateView : UIView, CircleShape {
     private let backgroundArcView: LineArcView
     private let foregroundArcView: LineArcView
     private var isRotating: Bool = false
-    @IBInspectable public var sideLength: CGFloat = 200 {
+    @IBInspectable public var widthAndHeight: CGFloat = 200 {
         didSet {
-            backgroundArcView.sideLength = sideLength
-            foregroundArcView.sideLength = sideLength
+            backgroundArcView.widthAndHeight = widthAndHeight
+            foregroundArcView.widthAndHeight = widthAndHeight
             setNeedsLayout()
         }
     }
@@ -45,30 +45,26 @@ open class LineArcRotateView : UIView, CircleShape {
             foregroundArcView.circleCenterRatio = circleCenterRatio
         }
     }
-    @IBInspectable public var blendStart: CGFloat = 0.1 {
+    @IBInspectable public var lineGradation: CGFloat = 1.0 {
         didSet {
-            backgroundArcView.blendStart = blendStart
-            foregroundArcView.blendStart = blendStart
-        }
-    }
-    @IBInspectable public var blendEnd: CGFloat = 0.9 {
-        didSet {
-            backgroundArcView.blendEnd = blendEnd
-            foregroundArcView.blendEnd = blendEnd
+            backgroundArcView.lineGradation = lineGradation
+            foregroundArcView.lineGradation = lineGradation
         }
     }
     /// Front color
     @IBInspectable public var circleForColor: UIColor = UIColor.white {
         didSet {
-            foregroundArcView.lineColor = circleForColor
-            foregroundArcView.setNeedsDisplay()
+            UIView.animate(withDuration: 0.1) {
+                self.foregroundArcView.backgroundColor = self.circleForColor
+            }
         }
     }
     /// 混色の背面の色
     @IBInspectable public var circleBackColor: UIColor = UIColor.black {
         didSet {
-            self.backgroundArcView.lineColor = circleBackColor
-            backgroundArcView.setNeedsDisplay()
+            UIView.animate(withDuration: 0.1) {
+                self.backgroundArcView.backgroundColor = self.circleBackColor
+            }
         }
     }
     /// 描画の開始角度
@@ -105,11 +101,7 @@ open class LineArcRotateView : UIView, CircleShape {
         addSubview(foregroundArcView)
         setupConstraint(view: backgroundArcView)
         setupConstraint(view: foregroundArcView)
-        foregroundArcView.blendStart = 0.7
-        foregroundArcView.blendEnd = 0.3
         foregroundArcView.endAngle = CGFloat.pi / 2
-        backgroundArcView.blendStart = 0.2
-        backgroundArcView.blendEnd = 0.8
         backgroundArcView.endAngle = CGFloat.pi / 2
         //startRotation(duration: 1.0)
         let constraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
@@ -120,11 +112,11 @@ open class LineArcRotateView : UIView, CircleShape {
     }
     
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize(width: sideLength, height: sideLength)
+        return CGSize(width: widthAndHeight, height: widthAndHeight)
     }
     
     open override var intrinsicContentSize: CGSize {
-        return CGSize(width: sideLength, height: sideLength)
+        return CGSize(width: widthAndHeight, height: widthAndHeight)
     }
     
     // MARK: - Methods
