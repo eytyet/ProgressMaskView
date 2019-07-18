@@ -174,7 +174,7 @@ open class LineArcRotateView : UIView, CircleShape {
         guard layer.animation(forKey: "rotate") == nil else { print(" guarded.");return }
         isRotating = true
         
-        let radian = getRadian(foregroundArcView.layer.transform)
+        let radian = getRadian(from: foregroundArcView.layer.transform)
         let anime1 = CABasicAnimation(keyPath: "transform.rotation.z")
         anime1.duration = CFTimeInterval(duration)
         anime1.fromValue = NSNumber(value: radian)
@@ -200,7 +200,7 @@ open class LineArcRotateView : UIView, CircleShape {
         backgroundArcView.layer.transform = backgroundArcView.layer.presentation()!.transform
         foregroundArcView.layer.removeAnimation(forKey: "rotate")
         backgroundArcView.layer.removeAnimation(forKey: "rotate")
-        let radian = getRadian(foregroundArcView.layer.transform)
+        let radian = getRadian(from: foregroundArcView.layer.transform)
         print("stop: radian= \(radian)")
     }
 }

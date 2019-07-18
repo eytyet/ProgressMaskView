@@ -24,7 +24,7 @@ class ProgressMaskViewTests: XCTestCase {
         // Check getRadian function
         func check(_ radian: CGFloat) {
             let a = matrixRotateZ(radian)
-            let b = getRadian(a)
+            let b = getRadian(from: a)
             let int = Int(b / Float.pi)
             let result = radian - CGFloat(int) * CGFloat.pi
             let diff = abs(result - radian)//.truncatingRemainder(dividingBy: CGFloat.pi)

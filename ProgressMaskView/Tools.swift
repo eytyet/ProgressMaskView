@@ -15,7 +15,7 @@ func matrixRotateZ(_ radian:CGFloat) -> CATransform3D {
 
 /// Return rotation angle in radian for matrixRotateZ.
 ///  Note that the value may be 0 or 3.14... or 6.28... for 0 degree.
-func getRadian(_ transform:CATransform3D) -> Float {
+func getRadian(from transform:CATransform3D) -> Float {
     let cos = transform.m11
     let sin = transform.m12
     let radian = atan(sin/cos)
