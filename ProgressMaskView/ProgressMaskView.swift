@@ -14,30 +14,38 @@ fileprivate let pi = CGFloat.pi
 ///  Easy to append to existing view controll tentatively to let user wait.
 @IBDesignable
 public class ProgressMaskView : UIView {
-    /// Message in progress bar
+
+    /// Set text into title label in progress bar
     @IBInspectable public var title: String? {
         set { titleLabel?.text = newValue }
         get { return titleLabel?.text }
     }
+
     /// First color of the progress circle
     @IBInspectable public var progressColor1: UIColor = UIColor.white {
-        didSet { circleProgressView.circleForColor = progressColor1 }
+        didSet { circleProgressView.arcColor1 = progressColor1 }
     }
+
     /// Second color of the progress circile
     @IBInspectable public var progressColor2: UIColor = UIColor.white {
-        didSet { circleProgressView.circleBackColor = progressColor2 }
+        didSet { circleProgressView.arcColor2 = progressColor2 }
     }
+
     /// First color of activity circle
     @IBInspectable public var activityColor1: UIColor = UIColor.white {
-        didSet { circleActivityView.circleForColor = activityColor1 }
+        didSet { circleActivityView.arcColor1 = activityColor1 }
     }
+
     /// Second color of activity circle
     @IBInspectable public var activityColor2: UIColor = UIColor.gray {
-        didSet { circleActivityView.circleBackColor = activityColor2 }
+        didSet { circleActivityView.arcColor2 = activityColor2 }
     }
-    private var _progress: CGFloat = 0
-    /// Progress start digree 0 to 360. 0 is 00:00
+    
+    /// Progress start digree 0 to 360. 0 is 00:00. Not radian.
     public var progressStartDegree: CGFloat = 0
+    
+    private var _progress: CGFloat = 0
+    
     /// Progress of the progress bar. 0 to 1.
     public var progress: Float {
         set {
@@ -48,14 +56,21 @@ public class ProgressMaskView : UIView {
             return Float(_progress)
         }
     }
+    
     /// Color of the base round view
     public var backgroundPlateColor: UIColor = UIColor(white: 0.6, alpha: 0.9) {
         didSet { backgroundRoundView.backgroundColor = backgroundPlateColor }
     }
+    
     private var backgroundRoundView: SimpleRView!
+    
+    /// Title label shown in center of circle.
     private var titleLabel: UILabel!
+    
     private var circleActivityView: LineArcRotateView!
+    
     private var circleProgressView: LineArcRotateView!
+    
     private var timer:Timer?
     
     // MARK: - Methods
@@ -99,7 +114,7 @@ public class ProgressMaskView : UIView {
         circleActivityView.endAngle = pi
         circleActivityView.widthAndHeight = 200
         backgroundRoundView.addSubview(circleActivityView)
-        setupConstraints(parentView: backgroundRoundView, childView: circleActivityView, margin: 16)
+        backgroundRoundView.addAndSetConstraint(circleActivityView, margin: 16)
         
         // Progress View
         circleProgressView = LineArcRotateView(frame: frame)
@@ -110,7 +125,7 @@ public class ProgressMaskView : UIView {
         circleProgressView.circleRadiusRatio = 0.38
         circleProgressView.widthAndHeight = 200
         backgroundRoundView.addSubview(circleProgressView)
-        setupConstraints(parentView: backgroundRoundView, childView: circleProgressView, margin: 16)
+        backgroundRoundView.addAndSetConstraint(circleProgressView, margin: 16)
         
         // Label at center.
         titleLabel = UILabel(frame: frame)
@@ -126,29 +141,38 @@ public class ProgressMaskView : UIView {
         titleLabel.centerYAnchor.constraint(equalTo: backgroundRoundView.centerYAnchor).isActive = true
     }
     
-    /// Add constraints fot 4 edges
-    private func setupConstraints(parentView: UIView, childView: UIView, margin:CGFloat) {
-        childView.translatesAutoresizingMaskIntoConstraints = false
-        let topConstraint = NSLayoutConstraint(item: childView, attribute: .top, relatedBy: .equal, toItem: parentView, attribute: .top, multiplier: 1, constant: margin)
-        let bottomConstraint = NSLayoutConstraint(item: parentView, attribute: .bottom, relatedBy: .equal, toItem: childView, attribute: .bottom, multiplier: 1, constant: margin)
-        let leftConstraint = NSLayoutConstraint(item: childView, attribute: .left, relatedBy: .equal, toItem: parentView, attribute: .left, multiplier: 1, constant: margin)
-        let rightConstraint = NSLayoutConstraint(item: parentView, attribute: .right, relatedBy: .equal, toItem: childView, attribute: .right, multiplier: 1, constant: margin)
-        parentView.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
-    }
+
     
-    /// Add this view onto the given view and set constraint for 4 edges.
+    /// Add this view onto the given view and set constraint for 4 sides.
     public func install(to view: UIView) {
         view.addSubview(self)
-        setupConstraints(parentView: view, childView: self, margin: 0)
+        view.addAndSetConstraint(self)
     }
-    /// start animation
+    /// Start
+    public func start(showDuration: TimeInterval = 0.3) {
+        startAnimation()
+        UIView.animate(withDuration: showDuration) {
+            self.alpha = 1
+        }
+    }
+    /// Start animation
     public func startAnimation() {
         //activityView?.startAnimating()
         circleActivityView.endAngle = pi
         circleActivityView.startRotation(duration: 2.0)
         startTimer()
     }
-    /// stop animation
+    /// Stop
+    public func stop(uninstall: Bool, hideDuration:TimeInterval = 0.3) {
+        UIView.animate(withDuration: hideDuration, animations: {
+            self.alpha = 0
+        }, completion: { _ in
+            if uninstall {
+                self.removeFromSuperview()
+            }
+        })
+    }
+    /// Stop animation
     public func stopAnnimation() {
         //activityView.stopAnimating()
         stopTimer()

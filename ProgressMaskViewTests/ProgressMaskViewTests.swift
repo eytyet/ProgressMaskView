@@ -19,9 +19,25 @@ class ProgressMaskViewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testTools() {
+        
+        // Check getRadian function
+        func check(_ radian: CGFloat) {
+            let a = matrixRotateZ(radian)
+            let b = getRadian(a)
+            let int = Int(b / Float.pi)
+            let result = radian - CGFloat(int) * CGFloat.pi
+            let diff = abs(result - radian)//.truncatingRemainder(dividingBy: CGFloat.pi)
+            XCTAssertTrue(diff < 0.000001, "Fail on \(radian) radian. atan=\(b).  diff=\(diff)" )
+        }
+        let dig90 = CGFloat.pi / 2
+        let dig30 = CGFloat.pi / 6
+        for i in -2 ... 2 {
+            for j in 0 ..< 3 {
+                print("Test \(90 * i + 30 * j) degree.")
+                check(dig90 * CGFloat(i) + dig30 * CGFloat(j))
+            }
+        }
     }
 
     func testPerformanceExample() {

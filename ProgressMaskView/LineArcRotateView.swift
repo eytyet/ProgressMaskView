@@ -12,76 +12,117 @@ import UIKit
 /// UIView of a thick beautiful circle. Rotatable.
 @IBDesignable
 open class LineArcRotateView : UIView, CircleShape {
+    
     private let backgroundArcView: LineArcView
+    
     private let foregroundArcView: LineArcView
+    
     private var isRotating: Bool = false
-    @IBInspectable public var widthAndHeight: CGFloat = 200 {
-        didSet {
-            backgroundArcView.widthAndHeight = widthAndHeight
-            foregroundArcView.widthAndHeight = widthAndHeight
-            setNeedsLayout()
+    
+    private var angleDifference = CGFloat.pi / 2
+    
+    @IBInspectable public var widthAndHeight: CGFloat {
+        get {
+            return foregroundArcView.widthAndHeight
+        }
+        set {
+            foregroundArcView.widthAndHeight = newValue
+            backgroundArcView.widthAndHeight = newValue
         }
     }
-    @IBInspectable public var autoFitInside: Bool = true {
-        didSet {
-            setNeedsDisplay()
+    
+    @IBInspectable public var autoFitInside: Bool {
+        get {
+            return foregroundArcView.autoFitInside
+        }
+        set {
+            foregroundArcView.autoFitInside = newValue
+            backgroundArcView.autoFitInside = newValue
         }
     }
-    @IBInspectable public var circleRadiusRatio: CGFloat = 0.45 {
-        didSet {
-            backgroundArcView.circleRadiusRatio = circleRadiusRatio
-            foregroundArcView.circleRadiusRatio = circleRadiusRatio
+    
+    @IBInspectable public var circleRadiusRatio: CGFloat {
+        get {
+            return foregroundArcView.circleRadiusRatio
+        }
+        set {
+            foregroundArcView.circleRadiusRatio = newValue
+            backgroundArcView.circleRadiusRatio = newValue
         }
     }
-    @IBInspectable public var circleLineWidthRatio: CGFloat = 0.03 {
-        didSet {
-            backgroundArcView.circleLineWidthRatio = circleLineWidthRatio
-            foregroundArcView.circleLineWidthRatio = circleLineWidthRatio
+    
+    @IBInspectable public var circleLineWidthRatio: CGFloat {
+        get {
+            return foregroundArcView.circleLineWidthRatio
+        }
+        set {
+            foregroundArcView.circleLineWidthRatio = newValue
+            backgroundArcView.circleLineWidthRatio = newValue
         }
     }
-    @IBInspectable public var circleCenterRatio: CGPoint = CGPoint(x: 0.5, y: 0.5) {
-        didSet {
-            backgroundArcView.circleCenterRatio = circleCenterRatio
-            foregroundArcView.circleCenterRatio = circleCenterRatio
+    
+    @IBInspectable public var circleCenterRatio: CGPoint {
+        get {
+            return foregroundArcView.circleCenterRatio
+        }
+        set {
+            foregroundArcView.circleCenterRatio = newValue
+            backgroundArcView.circleCenterRatio = newValue
         }
     }
-    @IBInspectable public var lineGradation: CGFloat = 1.0 {
-        didSet {
-            backgroundArcView.lineGradation = lineGradation
-            foregroundArcView.lineGradation = lineGradation
+    
+    @IBInspectable public var arcGradation: CGFloat {
+        get {
+            return foregroundArcView.arcGradation
+        }
+        set {
+            foregroundArcView.arcGradation = newValue
+            backgroundArcView.arcGradation = newValue
         }
     }
-    /// Front color
-    @IBInspectable public var circleForColor: UIColor = UIColor.white {
-        didSet {
-            UIView.animate(withDuration: 0.1) {
-                self.foregroundArcView.backgroundColor = self.circleForColor
-            }
+    
+    /// Arc fill color 1
+    @IBInspectable public var arcColor1: UIColor {
+        get {
+            return foregroundArcView.lineColor
+        }
+        set {
+            foregroundArcView.lineColor = newValue
         }
     }
-    /// 混色の背面の色
-    @IBInspectable public var circleBackColor: UIColor = UIColor.black {
-        didSet {
-            UIView.animate(withDuration: 0.1) {
-                self.backgroundArcView.backgroundColor = self.circleBackColor
-            }
+    
+    /// Arc fill color 2
+    @IBInspectable public var arcColor2: UIColor {
+        get {
+            return backgroundArcView.lineColor
+        }
+        set {
+            backgroundArcView.lineColor = newValue
         }
     }
-    /// 描画の開始角度
-    @IBInspectable public var startAngle:CGFloat = 0 {
-        didSet {
-            backgroundArcView.startAngle = startAngle
-            foregroundArcView.startAngle = startAngle
+    
+    /// Start angle
+    @IBInspectable public var startAngle: CGFloat {
+        get {
+            return foregroundArcView.startAngle
+        }
+        set {
+            foregroundArcView.startAngle = newValue
+            backgroundArcView.startAngle = newValue + angleDifference
         }
     }
+    
     /// 描画の終了角度
-    @IBInspectable public var endAngle:CGFloat = CGFloat.pi * 2 {
-        didSet {
-            backgroundArcView.endAngle = endAngle
-            foregroundArcView.endAngle = endAngle
+    @IBInspectable public var endAngle: CGFloat {
+        get {
+            return foregroundArcView.endAngle
+        }
+        set {
+            foregroundArcView.endAngle = newValue
+            backgroundArcView.endAngle = newValue + angleDifference
         }
     }
-        
+    
     // MARK: - UIView
     public override init(frame: CGRect) {
         backgroundArcView = LineArcView(frame: frame)
@@ -89,6 +130,7 @@ open class LineArcRotateView : UIView, CircleShape {
         super.init(frame: frame)
         setup()
     }
+    
     public required init?(coder aDecoder: NSCoder) {
         let dummy = CGRect(x: 0, y: 0, width: 100, height: 100)
         backgroundArcView = LineArcView(frame: dummy)
@@ -96,19 +138,25 @@ open class LineArcRotateView : UIView, CircleShape {
         super.init(coder: aDecoder)
         setup()
     }
+    
+    /// setup views, constraints and default values.
     private func setup() {
-        addSubview(backgroundArcView)
-        addSubview(foregroundArcView)
-        setupConstraint(view: backgroundArcView)
-        setupConstraint(view: foregroundArcView)
-        foregroundArcView.endAngle = CGFloat.pi / 2
-        backgroundArcView.endAngle = CGFloat.pi / 2
-        //startRotation(duration: 1.0)
-        let constraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
-        self.addConstraint(constraint)
-        self.backgroundColor = UIColor.clear
-        layer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
-
+        func addAndSetup(_ view: LineArcView) {
+            addAndSetConstraint(view)
+            view.shouldAnimate = true
+        }
+        addAndSetup(backgroundArcView)
+        addAndSetup(foregroundArcView)
+        let squareConstraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
+        self.addConstraint(squareConstraint)
+        foregroundArcView.shouldAnimate = true
+        backgroundArcView.shouldAnimate = false
+        foregroundArcView.layer.transform = matrixRotateZ(0)
+        backgroundArcView.layer.transform = matrixRotateZ(-angleDifference)
+        circleRadiusRatio = 0.45
+        circleLineWidthRatio = 0.05
+        startAngle = 0
+        endAngle = 0
     }
     
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -120,39 +168,40 @@ open class LineArcRotateView : UIView, CircleShape {
     }
     
     // MARK: - Methods
+    /// rotate the
     public func startRotation(duration: CGFloat) {
-        print("startRotation", Date())
+        print("startRotation", Date(), foregroundArcView.layer.transform)
         guard layer.animation(forKey: "rotate") == nil else { print(" guarded.");return }
         isRotating = true
-        backgroundArcView.sholdAnimate = true
-        foregroundArcView.sholdAnimate = true
-        /*let anime = CABasicAnimation(keyPath: "transform.rotation.z")
-        anime.duration = CFTimeInterval(duration)
-        anime.fromValue = NSNumber(value: -Float.pi)
-        anime.toValue = NSNumber(value: Float.pi)
+        
+        let radian = getRadian(foregroundArcView.layer.transform)
+        let anime1 = CABasicAnimation(keyPath: "transform.rotation.z")
+        anime1.duration = CFTimeInterval(duration)
+        anime1.fromValue = NSNumber(value: radian)
+        anime1.toValue = NSNumber(value: radian + Float.pi * 2)
+        let anime2 = CABasicAnimation(keyPath: "transform.rotation.z")
+        anime2.duration = CFTimeInterval(duration)
+        anime2.fromValue = NSNumber(value: radian - Float(angleDifference))
+        anime2.toValue = NSNumber(value: radian - Float(angleDifference) + Float.pi * 2)
+        print("start from \(radian). from [\(anime1.fromValue), \(anime2.fromValue)")
         CATransaction.begin()
-        CATransaction.setCompletionBlock({
-            if self.isRotating { // repeat
+        CATransaction.setCompletionBlock({  // repeat rotation
+            if self.isRotating {
                 self.startRotation(duration: duration)
             }
         })
-        layer.add(anime, forKey: "rotate")
-        CATransaction.commit()*/
+        foregroundArcView.layer.add(anime1, forKey: "rotate")
+        backgroundArcView.layer.add(anime2, forKey: "rotate")
+        CATransaction.commit()
     }
     public func stopRotation() {
         isRotating = false
-        backgroundArcView.sholdAnimate = false
-        foregroundArcView.sholdAnimate = false
-        layer.removeAnimation(forKey: "rotate")
-    }
-    private func setupConstraint(view: UIView) {
-        let parent = view.superview!
-        view.translatesAutoresizingMaskIntoConstraints = false
-        let top = NSLayoutConstraint(item: parent, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        let bottom = NSLayoutConstraint(item: parent, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-        let left = NSLayoutConstraint(item: parent, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
-        let right = NSLayoutConstraint(item: parent, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0)
-        addConstraints([top, bottom, left, right])
+        foregroundArcView.layer.transform = foregroundArcView.layer.presentation()!.transform
+        backgroundArcView.layer.transform = backgroundArcView.layer.presentation()!.transform
+        foregroundArcView.layer.removeAnimation(forKey: "rotate")
+        backgroundArcView.layer.removeAnimation(forKey: "rotate")
+        let radian = getRadian(foregroundArcView.layer.transform)
+        print("stop: radian= \(radian)")
     }
 }
 

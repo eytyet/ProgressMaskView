@@ -15,7 +15,7 @@ import Foundation
 @IBDesignable
 open class LineArcView : UIView, CircleShape {
     
-    private var currentFrame: CGRect
+    private var currentBounds: CGRect
     
     private var currentStartAngle: CGFloat = 0
     
@@ -23,11 +23,11 @@ open class LineArcView : UIView, CircleShape {
     
     private let angleMinStep = CGFloat.pi / 18000
     
-    private let angleStep = CGFloat.pi / 30
+    private let angleStep = CGFloat.pi / 90
     
     private var angleAnimationLink: CADisplayLink?
     
-    public var sholdAnimate = false
+    public var shouldAnimate = false
     
     @IBInspectable public var widthAndHeight: CGFloat = 100 {
         didSet { setNeedsDisplay() }
@@ -49,13 +49,13 @@ open class LineArcView : UIView, CircleShape {
         didSet { setNeedsDisplay() }
     }
     
-    @IBInspectable public var lineGradation: CGFloat = 1 {
+    @IBInspectable public var arcGradation: CGFloat = 0.5 {
         didSet { setNeedsDisplay() }
     }
     
     @IBInspectable public var startAngle: CGFloat = 0 {
         didSet {
-            if sholdAnimate {
+            if shouldAnimate {
                 currentStartAngle = oldValue
                 guard angleAnimationLink == nil else { return }
                 angleAnimationLink = CADisplayLink(target: self, selector: #selector(animateAngles))
@@ -69,7 +69,7 @@ open class LineArcView : UIView, CircleShape {
     
     @IBInspectable public var endAngle: CGFloat = CGFloat.pi {
         didSet {
-            if sholdAnimate {
+            if shouldAnimate {
                 currentEndAngle = oldValue
                 guard angleAnimationLink == nil else { return }
                 angleAnimationLink = CADisplayLink(target: self, selector: #selector(animateAngles))
@@ -80,21 +80,28 @@ open class LineArcView : UIView, CircleShape {
             }
         }
     }
+    private let minColorDifference: CGFloat = 0.001 // smaller than 8 bit alpha channel
+    //private var currentLineColor: CGColor = UIColor.white.cgColor
+    @IBInspectable public var lineColor: UIColor = UIColor.white {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     // MARK: - Methods
     
     public override init(frame: CGRect) {
-        currentFrame = frame
+        currentBounds = frame
         super.init(frame: frame)
-        backgroundColor = UIColor.clear
+        backgroundColor = nil
     }
     
     public required init?(coder aDecoder: NSCoder) {
         let dummy = CGRect(x: 0, y: 0, width: 100, height: 100)  // dummy
-        currentFrame = dummy
+        currentBounds = dummy
         super.init(coder: aDecoder)
-        currentFrame = frame
-        backgroundColor = UIColor.clear
+        frame = dummy
+        backgroundColor = nil
     }
     
     open override var intrinsicContentSize: CGSize {
@@ -104,26 +111,28 @@ open class LineArcView : UIView, CircleShape {
     // Fit inside if required.
     open override func layoutSubviews() {
         guard autoFitInside else { return }
-        guard currentFrame.size != frame.size else { return }
-        currentFrame = frame
+        guard currentBounds.size != frame.size else { return }
+        currentBounds = frame
         let minLength = min(frame.width, frame.height)
         widthAndHeight = minLength
     }
     
     // draw thick arc.
     open override func draw(_ rect: CGRect) {
+        super.draw(rect)
         let mask = CAShapeLayer()
         mask.path = makeArcPath(startAngle: startAngle, endAngle: endAngle)
         layer.mask = mask
         
         guard let cg = UIGraphicsGetCurrentContext() else { return }
         UIGraphicsPushContext(cg)
-        let color1 = backgroundColor!.cgColor
-        let color2 = backgroundColor!.withAlphaComponent((1 - lineGradation)).cgColor
-        let colors = [color1, color2] as CFArray
-        let points:[CGFloat] = [1, 0.5, 0, 0.5]  // radian 0 is backgroundColor.
+        cg.setFillColor(UIColor.white.cgColor)
+        cg.fill(rect)
+        let color1 = lineColor.withAlphaComponent( 1 - arcGradation).cgColor
+        let colors = [lineColor.cgColor, color1] as CFArray
+        let points: [CGFloat] = [1, 0.5, 0, 0.5]  // radian 0 is backgroundColor.
         let gradient = CGGradient(colorsSpace: CGColorSpace(name: CGColorSpace.sRGB), colors: colors, locations: points)!
-        cg.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: frame.width, y: frame.height), options: [.drawsAfterEndLocation, .drawsAfterEndLocation])
+        cg.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: bounds.width, y: bounds.height), options: [.drawsAfterEndLocation, .drawsAfterEndLocation])
         UIGraphicsPopContext()
     }
     
@@ -135,7 +144,7 @@ open class LineArcView : UIView, CircleShape {
         return shape.cgPath
     }
     
-    /// Calc next angle for animation
+    /// Calc the next angle for animation
     func nextTickAngle(current: CGFloat, final: CGFloat) -> CGFloat {
         var next:CGFloat = (current + final) / 2
         if abs(next - final) > angleStep {
@@ -147,7 +156,10 @@ open class LineArcView : UIView, CircleShape {
         }
         return next
     }
-    /// Set path animation. Taple is (Start Angle, End Angle) in radian.
+    
+    /// Set path animation.
+    /// - parameter from : Start point of the animation. (Start Angle, End Angle)
+    /// - parameter to : End point of the animation. (Start Angle, End Angle)
     func executePathAnimation(from: (CGFloat, CGFloat), to: (CGFloat, CGFloat)) {
         let anime = CABasicAnimation(keyPath: "path")
         let oldPath = makeArcPath(startAngle: from.0, endAngle: from.1)
@@ -165,9 +177,8 @@ open class LineArcView : UIView, CircleShape {
     }
     
     /// Move arc length step by step
-    /// Automatic layer animation is not suitable for an arc length change because it changes a thickness also. Therefore, set small amount of change to minimize the effect.
+    /// Automatic layer animation is not suitable for the arc length change because it affects its thickness. Set small amount of change to minimize this side effect.
     @objc func animateAngles() {
-        //print("-- \(currentStartAngle) - \(currentEndAngle) --")
         if abs(currentEndAngle - endAngle) < angleMinStep && abs(currentStartAngle - startAngle) < angleMinStep {
             angleAnimationLink?.invalidate()
             angleAnimationLink = nil

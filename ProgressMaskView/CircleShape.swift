@@ -28,11 +28,11 @@ public protocol CircleShape {
     /// Center of the circle.
     var circleCenter: CGPoint { get }
     /// Gradation to clear of the line color. 0 - 1. 0 is no gradation.
-    var lineGradation: CGFloat { get set }
+    var arcGradation: CGFloat { get set }
     /// Blend ratio at clockwise side of the line. 0 - 1.
-    var startAngle:CGFloat { get set }
+    var startAngle: CGFloat { get set }
     /// Clockwise side of line. In radian.
-    var endAngle:CGFloat { get set }
+    var endAngle: CGFloat { get set }
 }
 
 /// Default implementations
@@ -44,7 +44,7 @@ extension CircleShape where Self: UIView {
         return widthAndHeight * circleLineWidthRatio * circleRadiusRatio * 2 / (circleRadiusRatio*2 + circleLineWidthRatio)
     }
     public var circleCenter: CGPoint {
-        let minLength = min(frame.width, frame.height)
+        let minLength = min(bounds.width, bounds.height)
         return CGPoint(x: minLength * circleCenterRatio.x, y: minLength * circleCenterRatio.y )
     }
 }
