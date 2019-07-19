@@ -87,10 +87,49 @@ open class LineArcView : UIView, CircleShape {
     }
     /// Remember size of cached information.
     private var sizeOfCachedInformatin: CGSize?
+    private var _gradientMaskCache: CGImage?
     /// Cache for gradient image mask.
-    private var gradientMaskCache: CGImage?
-    /// Cache for filled image with lineColor.
-    private var fillImageCache: CGImage?
+    private var gradientMaskCache: CGImage? {
+        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _gradientMaskCache }
+        sizeOfCachedInformatin = bounds.size
+        let width = Int(bounds.size.width)
+        let height = Int(bounds.size.height)
+        let colorSpace = CGColorSpaceCreateDeviceGray()
+        guard let cg = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: 0) else {
+            print("Failed to create a CGContext for a gradation mask.")
+            return _gradientMaskCache
+        }
+        let color1 = UIColor.white
+        let color2 = UIColor.white.withAlphaComponent(1 - arcGradation)
+        let colors = [color1.cgColor, color2.cgColor]
+        let points: [CGFloat] = [0, 1]
+        guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceGray(), colors: colors as CFArray, locations: points) else { return _gradientMaskCache }
+        cg.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: bounds.width, y: 0), options: [.drawsAfterEndLocation, .drawsAfterEndLocation]) // radian 0 is backgroundColor.
+        guard let maskImage = cg.makeImage() else { return _gradientMaskCache }
+        let imageMask = CGImage(maskWidth: width, height: height, bitsPerComponent: 8, bitsPerPixel: 8, bytesPerRow: width, provider: maskImage.dataProvider!, decode: nil, shouldInterpolate: false)
+        _gradientMaskCache = imageMask
+        return _gradientMaskCache
+    }
+    /// Remember size of cached image.
+    private var sizeOfFillImage: CGSize?
+    private var _fillImageCache: CGImage?
+    /// A lineColor filled image. Cached
+    private var fillImageCache: CGImage? {
+        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _fillImageCache }
+        sizeOfFillImage = bounds.size
+        let width = Int(bounds.size.width)
+        let height = Int(bounds.size.height)
+        guard let cg = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4, space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            print("Cannot create fillContext!")
+            return _fillImageCache
+        }
+        cg.setFillColor(lineColor.cgColor)
+        cg.fill(bounds)
+        _fillImageCache = cg.makeImage()
+        return _fillImageCache
+    }
+
+
     // MARK: - UIView
     
     public override init(frame: CGRect) {
@@ -135,18 +174,17 @@ open class LineArcView : UIView, CircleShape {
         let mask = CAShapeLayer()
         mask.path = makeArcPath(startAngle: startAngle, endAngle: endAngle)
         layer.mask = mask
-        createOrUpdateGradientMask(rect: bounds)
-        createOrUpdateFillImage(rect: rect)
+        guard let fillImage = fillImageCache?.copy() else { return }
+        guard let maskImage = gradientMaskCache else { return }
+        guard let img = fillImage.masking(maskImage) else { return }
 
-        cg.saveGState()// UIGraphicsPushContext(cg)
+        cg.saveGState()
         cg.beginTransparencyLayer(auxiliaryInfo: nil)
-        guard let tmp = fillImageCache!.copy() else { return }
-        guard let img = tmp.masking(gradientMaskCache!) else { return }
         cg.setBlendMode(CGBlendMode.normal)
         cg.draw(img, in: rect)
         cg.clip(to: rect, mask: gradientMaskCache!)
         cg.endTransparencyLayer()
-        cg.restoreGState()// UIGraphicsPopContext()
+        cg.restoreGState()
     }
     
     // MARK: - Methods
@@ -155,53 +193,10 @@ open class LineArcView : UIView, CircleShape {
         sizeOfCachedInformatin = nil
         setNeedsDisplay()
     }
+    
     /// Create filled image.
-    private func createOrUpdateFillImage(rect: CGRect) {
-        guard let cg = CGContext(data: nil, width: Int(rect.width), height: Int(rect.height), bitsPerComponent: 8, bytesPerRow: Int(rect.width)*4, space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { fatalError("Cannot create fillContext!") }
-        cg.setFillColor(lineColor.cgColor)
-        cg.fill(rect)
-        fillImageCache = cg.makeImage()!
-    }
-    /// Create gradient mask.
-    private func createOrUpdateGradientMask(rect: CGRect) {
-        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return }
-        sizeOfCachedInformatin = bounds.size
-        
-        // Grayscale version
-        let width = Int(rect.width)
-        let height = Int(rect.width)
-        let colorSpace = CGColorSpaceCreateDeviceGray()
-        guard var cg = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: 0/*CGImageAlphaInfo.none.rawValue*/) else { fatalError("Failed to create mask") }
-        let color1 = UIColor.white
-        let color2 = UIColor.white.withAlphaComponent(1 - arcGradation)
-        let colors = [color1.cgColor, color2.cgColor]
-        let points: [CGFloat] = [0, 1]
-        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceGray(), colors: colors as CFArray, locations: points)!
-        cg.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: bounds.width, y: 0), options: [.drawsAfterEndLocation, .drawsAfterEndLocation]) // radian 0 is backgroundColor.
-        let maskImage = cg.makeImage()!
-        let mask2 = maskImage.copy(colorSpace: CGColorSpaceCreateDeviceGray())!
-        
-        let imageMask = CGImage(maskWidth: width, height: height, bitsPerComponent: 8, bitsPerPixel: 8, bytesPerRow: width, provider: maskImage.dataProvider!, decode: nil, shouldInterpolate: false)
-        
-        /*
-        // normal version
-        guard let cg = UIGraphicsGetCurrentContext() else { fatalError("Can't get current CG Context.") }
-        UIGraphicsPushContext(cg)
-        cg.beginTransparencyLayer(auxiliaryInfo: nil)
-        //cg.clear(rect)
-        let color1 = UIColor.white
-        let color2 = UIColor.white.withAlphaComponent(0)
-        let colors = [color1.cgColor, color2.cgColor]
-        let points: [CGFloat] = [0, 1]
-        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceGray(), colors: colors as CFArray, locations: points)!
-        cg.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: bounds.width, y: 0), options: [.drawsAfterEndLocation, .drawsAfterEndLocation]) // radian 0 is backgroundColor.
-        cg.endTransparencyLayer()
-        let maskImage = cg.makeImage()!
-        UIGraphicsPopContext()
-        */
-        
-        gradientMaskCache = imageMask!//maskImage
-    }
+    
+
     
     /// Return a closed path of a thick arc
     /// - Parameter startAngle: Radian (edge with largear number)
@@ -263,8 +258,6 @@ open class LineArcView : UIView, CircleShape {
         currentEndAngle = nextEndAngle
         executePathAnimation(from: (currentStartAngle, currentEndAngle), to: (nextStartAngle, nextEndAngle))
     }
-    
-
 }
 
 
