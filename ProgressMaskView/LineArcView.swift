@@ -82,7 +82,7 @@ open class LineArcView : UIView, CircleShape {
     }
     @IBInspectable public var lineColor: UIColor = UIColor.white {
         didSet {
-            setNeedsDisplay()
+            requestUpdate()
         }
     }
     /// Remember size of cached information.

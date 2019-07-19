@@ -169,30 +169,46 @@ open class LineArcRotateView : UIView, CircleShape {
     
     // MARK: - Methods
     /// rotate the
-    public func startRotation(duration: CGFloat) {
+    public func startRotation(duration: TimeInterval) {
         print("startRotation", Date(), foregroundArcView.layer.transform)
-        guard layer.animation(forKey: "rotate") == nil else { print(" guarded.");return }
+        guard foregroundArcView.layer.animation(forKey: "rotate") == nil else { return }
         isRotating = true
         
-        let radian = getRadian(from: foregroundArcView.layer.transform)
+        let currentRadian = getRadian(from: foregroundArcView.layer.transform)
         let anime1 = CABasicAnimation(keyPath: "transform.rotation.z")
-        anime1.duration = CFTimeInterval(duration)
-        anime1.fromValue = NSNumber(value: radian)
-        anime1.toValue = NSNumber(value: radian + Float.pi * 2)
+        anime1.duration = duration
+        anime1.fromValue = NSNumber(value: currentRadian)
+        anime1.toValue = NSNumber(value: currentRadian + Float.pi * 2)
+        anime1.repeatCount = Float.infinity
         let anime2 = CABasicAnimation(keyPath: "transform.rotation.z")
-        anime2.duration = CFTimeInterval(duration)
-        anime2.fromValue = NSNumber(value: radian - Float(angleDifference))
-        anime2.toValue = NSNumber(value: radian - Float(angleDifference) + Float.pi * 2)
-        print("start from \(radian). from [\(anime1.fromValue), \(anime2.fromValue)")
-        CATransaction.begin()
+        anime2.duration = duration
+        anime2.fromValue = NSNumber(value: currentRadian - Float(angleDifference))
+        anime2.toValue = NSNumber(value: currentRadian - Float(angleDifference) + Float.pi * 2)
+        anime2.repeatCount = Float.infinity
+        print("start from \(currentRadian). from [\(anime1.fromValue), \(anime2.fromValue)")
+        /*CATransaction.begin()
         CATransaction.setCompletionBlock({  // repeat rotation
             if self.isRotating {
                 self.startRotation(duration: duration)
             }
         })
-        foregroundArcView.layer.add(anime1, forKey: "rotate")
-        backgroundArcView.layer.add(anime2, forKey: "rotate")
-        CATransaction.commit()
+        CATransaction.commit()*/
+        #warning("anime3は動いていない。要更新。")
+        let anime3 = CABasicAnimation(keyPath: "angleDifference")
+        anime3.duration = duration
+        anime3.fromValue = NSNumber(value: Float(angleDifference))
+        anime3.toValue = NSNumber(value: Float(angleDifference + CGFloat.pi))
+        self.foregroundArcView.layer.add(anime1, forKey: "rotate")
+        self.backgroundArcView.layer.add(anime2, forKey: "rotate")
+        self.backgroundArcView.layer.add(anime3, forKey: "angleDifference")
+        UIView.animate(withDuration: duration, animations: {
+            self.layoutIfNeeded()
+            self.angleDifference += CGFloat.pi
+        }, completion: { (_) in
+            if self.isRotating {
+                self.startRotation(duration: duration)
+            }
+        })
     }
     public func stopRotation() {
         isRotating = false
@@ -200,6 +216,7 @@ open class LineArcRotateView : UIView, CircleShape {
         backgroundArcView.layer.transform = backgroundArcView.layer.presentation()!.transform
         foregroundArcView.layer.removeAnimation(forKey: "rotate")
         backgroundArcView.layer.removeAnimation(forKey: "rotate")
+        backgroundArcView.layer.removeAnimation(forKey: "angleDifference")
         let radian = getRadian(from: foregroundArcView.layer.transform)
         print("stop: radian= \(radian)")
     }
