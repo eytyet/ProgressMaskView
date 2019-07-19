@@ -173,7 +173,7 @@ open class LineArcView : UIView, CircleShape {
         let colorSpace = CGColorSpaceCreateDeviceGray()
         guard var cg = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: 0/*CGImageAlphaInfo.none.rawValue*/) else { fatalError("Failed to create mask") }
         let color1 = UIColor.white
-        let color2 = UIColor.white.withAlphaComponent(arcGradation)
+        let color2 = UIColor.white.withAlphaComponent(1 - arcGradation)
         let colors = [color1.cgColor, color2.cgColor]
         let points: [CGFloat] = [0, 1]
         let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceGray(), colors: colors as CFArray, locations: points)!
