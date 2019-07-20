@@ -9,8 +9,8 @@
 import Foundation
 
 /// Create rotation matrix for Z rotation.
-func matrixRotateZ(_ radian:CGFloat) -> CATransform3D {
-    return CATransform3DMakeRotation(radian, 0, 0, 1)
+func matrixRotateZ(_ radian:Float) -> CATransform3D {
+    return CATransform3DMakeRotation(CGFloat(radian), 0, 0, 1)
 }
 
 /// Return rotation angle in radian for matrixRotateZ.

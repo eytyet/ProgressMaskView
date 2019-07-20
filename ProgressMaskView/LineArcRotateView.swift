@@ -19,7 +19,15 @@ open class LineArcRotateView : UIView, CircleShape {
     
     private var isRotating: Bool = false
     
-    private var angleDifference = CGFloat.pi / 2
+    private var angleDifference = CGFloat.pi / 2 {
+        didSet {
+            backgroundArcLayer.offsetAngle = -Float(angleDifference)
+        }
+    }
+    
+    private var foregroundArcLayer: RotateLayer!
+    
+    private var backgroundArcLayer: RotateLayer!
     
     @IBInspectable public var widthAndHeight: CGFloat {
         get {
@@ -150,9 +158,10 @@ open class LineArcRotateView : UIView, CircleShape {
         let squareConstraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
         self.addConstraint(squareConstraint)
         foregroundArcView.shouldAnimate = true
-        backgroundArcView.shouldAnimate = false
-        foregroundArcView.layer.transform = matrixRotateZ(0)
-        backgroundArcView.layer.transform = matrixRotateZ(-angleDifference)
+        backgroundArcView.shouldAnimate = true
+        foregroundArcLayer = (foregroundArcView.layer as! RotateLayer)
+        backgroundArcLayer = (backgroundArcView.layer as! RotateLayer)
+        backgroundArcLayer.offsetAngle = -Float(angleDifference)
         circleRadiusRatio = 0.45
         circleLineWidthRatio = 0.05
         startAngle = 0
@@ -170,10 +179,14 @@ open class LineArcRotateView : UIView, CircleShape {
     // MARK: - Methods
     /// rotate the
     public func startRotation(duration: TimeInterval) {
-        print("startRotation", Date(), foregroundArcView.layer.transform)
-        guard foregroundArcView.layer.animation(forKey: "rotate") == nil else { return }
+        //guard foregroundArcView.layer.animation(forKey: "rotate") == nil else { return }
+        guard isRotating == false else { return }
         isRotating = true
+        foregroundArcLayer.rotate(duration: 3)
+        backgroundArcLayer.rotate(duration: 3)
+        //backgroundArcLayer.startOffsetChange(duration: 30)
         
+        /*
         let currentRadian = getRadian(from: foregroundArcView.layer.transform)
         let anime1 = CABasicAnimation(keyPath: "transform.rotation.z")
         anime1.duration = duration
@@ -209,18 +222,24 @@ open class LineArcRotateView : UIView, CircleShape {
                 self.startRotation(duration: duration)
             }
         })
+ */
     }
     public func stopRotation() {
         isRotating = false
-        foregroundArcView.layer.transform = foregroundArcView.layer.presentation()!.transform
-        backgroundArcView.layer.transform = backgroundArcView.layer.presentation()!.transform
-        foregroundArcView.layer.removeAnimation(forKey: "rotate")
-        backgroundArcView.layer.removeAnimation(forKey: "rotate")
-        backgroundArcView.layer.removeAnimation(forKey: "angleDifference")
-        let radian = getRadian(from: foregroundArcView.layer.transform)
-        print("stop: radian= \(radian)")
+        foregroundArcLayer.stopRotation()
+        backgroundArcLayer.stopRotation()
+        //backgroundArcLayer.stopOffsetChange()
+        //foregroundArcView.layer.transform = foregroundArcView.layer.presentation()!.transform
+        //backgroundArcView.layer.transform = backgroundArcView.layer.presentation()!.transform
+        //foregroundArcView.layer.removeAnimation(forKey: "rotate")
+        //backgroundArcView.layer.removeAnimation(forKey: "rotate")
+        //backgroundArcView.layer.removeAnimation(forKey: "angleDifference")
+        //let radian = getRadian(from: foregroundArcView.layer.transform)
+        //print("stop: radian= \(radian)")
     }
 }
+
+
 
 
 

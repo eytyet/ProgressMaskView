@@ -152,6 +152,11 @@ open class LineArcView : UIView, CircleShape {
         //clipsToBounds = true
     }
     
+    // Use RotateLayer
+    open override class var layerClass : AnyClass {
+        return RotateLayer.self
+    }
+    
     // This view wants to be widthAndHeight x widthAndHeight in size.
     open override var intrinsicContentSize: CGSize {
         return CGSize(width: widthAndHeight, height: widthAndHeight)
@@ -259,5 +264,6 @@ open class LineArcView : UIView, CircleShape {
         executePathAnimation(from: (currentStartAngle, currentEndAngle), to: (nextStartAngle, nextEndAngle))
     }
 }
+
 
 
