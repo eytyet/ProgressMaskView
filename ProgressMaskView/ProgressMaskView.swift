@@ -15,35 +15,35 @@ fileprivate let pi = CGFloat.pi
 @IBDesignable
 public class ProgressMaskView : UIView {
 
-    /// Set text into title label in progress bar
+    /// Set text into title label in progress bar.
     @IBInspectable public var title: String? {
         set { titleLabel?.text = newValue }
         get { return titleLabel?.text }
     }
 
-    /// First color of the progress circle
+    /// First color of the progress circle. Default is white.
     @IBInspectable public var progressColor1: UIColor = UIColor.white {
         didSet { circleProgressView.arcColor1 = progressColor1 }
     }
 
-    /// Second color of the progress circile
-    @IBInspectable public var progressColor2: UIColor = UIColor.white {
+    /// Second color of the progress circile. Default is black.
+    @IBInspectable public var progressColor2: UIColor = UIColor.black {
         didSet { circleProgressView.arcColor2 = progressColor2 }
     }
 
-    /// First color of activity circle
+    /// First color of activity circle. Default is white.
     @IBInspectable public var activityColor1: UIColor = UIColor.white {
         didSet { circleActivityView.arcColor1 = activityColor1 }
     }
 
-    /// Second color of activity circle
+    /// Second color of activity circle. Default is gray.
     @IBInspectable public var activityColor2: UIColor = UIColor.gray {
         didSet { circleActivityView.arcColor2 = activityColor2 }
     }
     
     private var _progress: CGFloat = 0
     
-    /// Progress of the progress bar. 0 to 1.
+    /// Progress of the progress bar. 0 to 1. Default is 0.
     public var progress: Float {
         set {
             _progress = CGFloat(newValue)
@@ -54,25 +54,31 @@ public class ProgressMaskView : UIView {
         }
     }
     
-    /// Color of the base round view
+    /// Color of the base corner round view
     public var backgroundPlateColor: UIColor = UIColor(white: 0.6, alpha: 0.9) {
         didSet { backgroundRoundView.backgroundColor = backgroundPlateColor }
     }
     
+    /// Corner round view which ha all UI parts.
     private var backgroundRoundView: SimpleRView!
     
-    /// Title label shown in center of circle.
+    /// Title label shown in center of the circles.
     private var titleLabel: UILabel!
     
+    /// Activity view.
     private var circleActivityView: LineArcRotateView!
     
+    /// Progress view.
     private var circleProgressView: LineArcRotateView!
     
+    /// Time for color animation of activity view..
     private var timer:Timer?
     
+    /// Parameter to control length of activity view.
     private var animationDirection:Int = -8
     
-    private var angleStep = CGFloat.pi / 90
+    /// Cache of an angle unit value.
+    private let angleStep = CGFloat.pi / 90
     
     // MARK: - Methods
 
@@ -192,7 +198,7 @@ public class ProgressMaskView : UIView {
         timer = nil
     }
     
-    
+    /// Timer callback to control activity bar length and color.
     @objc func timerFunc() {
         let center = animationDirection > 0 ? 4 : -4
         let d = angleStep * CGFloat(center - animationDirection)
