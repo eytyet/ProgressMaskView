@@ -10,7 +10,7 @@
 		B701D49622DF433B0075107E /* LineArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701D49522DF433B0075107E /* LineArcView.swift */; };
 		B7075DAE22E25BE5007C620A /* RotateLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7075DAD22E25BE5007C620A /* RotateLayer.swift */; };
 		B73125EB22DA2EC5006D767F /* LineArcRotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */; };
-		B73C2F6022DF5B1E005BC4E8 /* CircleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73C2F5F22DF5B1E005BC4E8 /* CircleShape.swift */; };
+		B73C2F6022DF5B1E005BC4E8 /* ArcShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73C2F5F22DF5B1E005BC4E8 /* ArcShape.swift */; };
 		B73C2F6222DFB1EA005BC4E8 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73C2F6122DFB1EA005BC4E8 /* Tools.swift */; };
 		B74B28BC22D201DC00D111F3 /* ProgressMaskView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */; };
 		B74B28C122D201DC00D111F3 /* ProgressMaskViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28C022D201DC00D111F3 /* ProgressMaskViewTests.swift */; };
@@ -33,7 +33,7 @@
 		B701D49522DF433B0075107E /* LineArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcView.swift; sourceTree = "<group>"; };
 		B7075DAD22E25BE5007C620A /* RotateLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateLayer.swift; sourceTree = "<group>"; };
 		B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcRotateView.swift; sourceTree = "<group>"; };
-		B73C2F5F22DF5B1E005BC4E8 /* CircleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleShape.swift; sourceTree = "<group>"; };
+		B73C2F5F22DF5B1E005BC4E8 /* ArcShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcShape.swift; sourceTree = "<group>"; };
 		B73C2F6122DFB1EA005BC4E8 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProgressMaskView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74B28B522D201DC00D111F3 /* ProgressMaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgressMaskView.h; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 				B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */,
 				B701D49522DF433B0075107E /* LineArcView.swift */,
 				B7075DAD22E25BE5007C620A /* RotateLayer.swift */,
-				B73C2F5F22DF5B1E005BC4E8 /* CircleShape.swift */,
+				B73C2F5F22DF5B1E005BC4E8 /* ArcShape.swift */,
 				B74B28D022D2134600D111F3 /* SimpleRView.swift */,
 				B73C2F6122DFB1EA005BC4E8 /* Tools.swift */,
 				B74B28B622D201DC00D111F3 /* Info.plist */,
@@ -222,7 +222,7 @@
 				B7075DAE22E25BE5007C620A /* RotateLayer.swift in Sources */,
 				B73C2F6222DFB1EA005BC4E8 /* Tools.swift in Sources */,
 				B74B28D122D2134600D111F3 /* SimpleRView.swift in Sources */,
-				B73C2F6022DF5B1E005BC4E8 /* CircleShape.swift in Sources */,
+				B73C2F6022DF5B1E005BC4E8 /* ArcShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

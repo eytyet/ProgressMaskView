@@ -13,7 +13,7 @@ import Foundation
 
 /// Arc with thick line filled with two color gradation.
 @IBDesignable
-open class LineArcView : UIView, CircleShape {
+open class LineArcView : UIView, ArcShape {
     
     private var currentBounds: CGRect
     
@@ -37,15 +37,15 @@ open class LineArcView : UIView, CircleShape {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var circleRadiusRatio: CGFloat = 0.45 {
+    @IBInspectable public var arcRadiusRatio: CGFloat = 0.45 {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var circleLineWidthRatio: CGFloat = 0.05 {
+    @IBInspectable public var arcLineWidthRatio: CGFloat = 0.05 {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var circleCenterRatio: CGPoint = CGPoint(x: 0.5, y: 0.5) {
+    @IBInspectable public var arcCenterRatio: CGPoint = CGPoint(x: 0.5, y: 0.5) {
         didSet { requestUpdate() }
     }
     
@@ -208,8 +208,8 @@ open class LineArcView : UIView, CircleShape {
     /// - Parameter endAngle: Radian (edge with smaller number)
     /// - Returns: CGPath of a closed thick arc shape.
     private func makeArcPath(startAngle: CGFloat, endAngle: CGFloat) -> CGPath {
-        let shape = UIBezierPath(arcCenter: circleCenter, radius: circleRadius + circleLineWidth / 2, startAngle: startAngle, endAngle: endAngle, clockwise: false)
-        shape.addArc(withCenter: circleCenter, radius: circleRadius - circleLineWidth / 2, startAngle: endAngle, endAngle: startAngle, clockwise: true)
+        let shape = UIBezierPath(arcCenter: arcCenter, radius: arcRadius + arcLineWidth / 2, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+        shape.addArc(withCenter: arcCenter, radius: arcRadius - arcLineWidth / 2, startAngle: endAngle, endAngle: startAngle, clockwise: true)
         shape.close()
         return shape.cgPath
     }

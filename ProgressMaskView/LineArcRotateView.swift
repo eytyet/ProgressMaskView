@@ -1,5 +1,5 @@
 //
-//  LineCircleView.swift
+//  LineArcView.swift
 //  ProgressMaskView
 //
 //  Created by Yu Software on 2019/07/13.
@@ -9,9 +9,9 @@
 import UIKit
 
 
-/// UIView of a thick beautiful circle. Rotatable.
+/// UIView of a thick beautiful arc. Rotatable.
 @IBDesignable
-open class LineArcRotateView : UIView, CircleShape {
+open class LineArcRotateView : UIView, ArcShape {
     
     private let backgroundArcView: LineArcView
     
@@ -49,33 +49,33 @@ open class LineArcRotateView : UIView, CircleShape {
         }
     }
     
-    @IBInspectable public var circleRadiusRatio: CGFloat {
+    @IBInspectable public var arcRadiusRatio: CGFloat {
         get {
-            return foregroundArcView.circleRadiusRatio
+            return foregroundArcView.arcRadiusRatio
         }
         set {
-            foregroundArcView.circleRadiusRatio = newValue
-            backgroundArcView.circleRadiusRatio = newValue
+            foregroundArcView.arcRadiusRatio = newValue
+            backgroundArcView.arcRadiusRatio = newValue
         }
     }
     
-    @IBInspectable public var circleLineWidthRatio: CGFloat {
+    @IBInspectable public var arcLineWidthRatio: CGFloat {
         get {
-            return foregroundArcView.circleLineWidthRatio
+            return foregroundArcView.arcLineWidthRatio
         }
         set {
-            foregroundArcView.circleLineWidthRatio = newValue
-            backgroundArcView.circleLineWidthRatio = newValue
+            foregroundArcView.arcLineWidthRatio = newValue
+            backgroundArcView.arcLineWidthRatio = newValue
         }
     }
     
-    @IBInspectable public var circleCenterRatio: CGPoint {
+    @IBInspectable public var arcCenterRatio: CGPoint {
         get {
-            return foregroundArcView.circleCenterRatio
+            return foregroundArcView.arcCenterRatio
         }
         set {
-            foregroundArcView.circleCenterRatio = newValue
-            backgroundArcView.circleCenterRatio = newValue
+            foregroundArcView.arcCenterRatio = newValue
+            backgroundArcView.arcCenterRatio = newValue
         }
     }
     
@@ -120,7 +120,7 @@ open class LineArcRotateView : UIView, CircleShape {
         }
     }
     
-    /// 描画の終了角度
+    /// End angle. It should be endAngle < startAngle.
     @IBInspectable public var endAngle: CGFloat {
         get {
             return foregroundArcView.endAngle
@@ -132,6 +132,7 @@ open class LineArcRotateView : UIView, CircleShape {
     }
     
     // MARK: - UIView
+    
     public override init(frame: CGRect) {
         backgroundArcView = LineArcView(frame: frame)
         foregroundArcView = LineArcView(frame: frame)
@@ -162,8 +163,8 @@ open class LineArcRotateView : UIView, CircleShape {
         foregroundArcLayer = (foregroundArcView.layer as! RotateLayer)
         backgroundArcLayer = (backgroundArcView.layer as! RotateLayer)
         backgroundArcLayer.offsetAngle = -Float(angleDifference)
-        circleRadiusRatio = 0.45
-        circleLineWidthRatio = 0.05
+        arcRadiusRatio = 0.45
+        arcLineWidthRatio = 0.05
         startAngle = 0
         endAngle = 0
     }
@@ -177,7 +178,8 @@ open class LineArcRotateView : UIView, CircleShape {
     }
     
     // MARK: - Methods
-    /// rotate the
+    
+    /// Start rotate animation
     public func startRotation(duration: TimeInterval) {
         //guard foregroundArcView.layer.animation(forKey: "rotate") == nil else { return }
         guard isRotating == false else { return }
@@ -224,6 +226,8 @@ open class LineArcRotateView : UIView, CircleShape {
         })
  */
     }
+    
+    /// Stop rotate animation.
     public func stopRotation() {
         isRotating = false
         foregroundArcLayer.stopRotation()
@@ -237,6 +241,19 @@ open class LineArcRotateView : UIView, CircleShape {
         //let radian = getRadian(from: foregroundArcView.layer.transform)
         //print("stop: radian= \(radian)")
     }
+    
+    /// Setup initial angle without animation
+    public func setInitialAngle(start: CGFloat, end: CGFloat) {
+        func setup(_ view: LineArcView) {
+            view.shouldAnimate = false
+            view.startAngle = start
+            view.endAngle = end
+            view.shouldAnimate = true
+        }
+        setup(foregroundArcView)
+        setup(backgroundArcView)
+    }
+    
 }
 
 
