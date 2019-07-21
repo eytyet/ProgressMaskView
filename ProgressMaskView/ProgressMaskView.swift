@@ -97,7 +97,8 @@ public class ProgressMaskView : UIView {
     private func setup() {
 
         // Darken all area.
-        self.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        backgroundColor = UIColor(white: 0, alpha: 0.7)
+        isUserInteractionEnabled = false
 
         // Base round view
         backgroundRoundView = SimpleRView(frame: frame)

@@ -37,12 +37,19 @@ public protocol ArcShape {
 
 /// Default implementations
 extension ArcShape where Self: UIView {
+    
+    /// Radius of arc. Rasius is from the center of circle to the center of line width.
+    /// Keep (arcRadiusRatio + arcLineWidthRatio) < 0.5.
     public var arcRadius: CGFloat {
         return widthAndHeight * arcRadiusRatio * arcRadiusRatio * 2 / (arcRadiusRatio*2 + arcLineWidthRatio)
     }
+    
+    /// Line width.
     public var arcLineWidth: CGFloat {
         return widthAndHeight * arcLineWidthRatio * arcRadiusRatio * 2 / (arcRadiusRatio*2 + arcLineWidthRatio)
     }
+    
+    /// Center position.
     public var arcCenter: CGPoint {
         let minLength = min(bounds.width, bounds.height)
         return CGPoint(x: minLength * arcCenterRatio.x, y: minLength * arcCenterRatio.y )
