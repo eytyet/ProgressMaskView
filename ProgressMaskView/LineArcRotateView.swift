@@ -13,21 +13,29 @@ import UIKit
 @IBDesignable
 open class LineArcRotateView : UIView, ArcShape {
     
-    private let backgroundArcView: LineArcView
-    
+    /// Arc view on front side.
     private let foregroundArcView: LineArcView
     
+    /// Arc view on back side. Two arcs show beautiful colors.
+    private let backgroundArcView: LineArcView
+    
+    /// Flag.
     private var isRotating: Bool = false
     
-    private var angleDifference = CGFloat.pi / 2 {
+    /// Layer of foregroundArcView
+    private var foregroundArcLayer: RotateLayer!
+    
+    /// Layer of backgroundArcView
+    private var backgroundArcLayer: RotateLayer!
+    
+    /// Angle difference between front and back. Used to color change.
+    public var angleDifference = CGFloat.pi / 2 {
         didSet {
             backgroundArcLayer.offsetAngle = -Float(angleDifference)
         }
     }
     
-    private var foregroundArcLayer: RotateLayer!
-    
-    private var backgroundArcLayer: RotateLayer!
+    // MRAK: ArcShape protocol
     
     @IBInspectable public var widthAndHeight: CGFloat {
         get {
@@ -181,50 +189,11 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Start rotate animation
     public func startRotation(duration: TimeInterval) {
-        //guard foregroundArcView.layer.animation(forKey: "rotate") == nil else { return }
         guard isRotating == false else { return }
         isRotating = true
         foregroundArcLayer.rotate(duration: 3)
         backgroundArcLayer.rotate(duration: 3)
-        //backgroundArcLayer.startOffsetChange(duration: 30)
-        
-        /*
-        let currentRadian = getRadian(from: foregroundArcView.layer.transform)
-        let anime1 = CABasicAnimation(keyPath: "transform.rotation.z")
-        anime1.duration = duration
-        anime1.fromValue = NSNumber(value: currentRadian)
-        anime1.toValue = NSNumber(value: currentRadian + Float.pi * 2)
-        anime1.repeatCount = Float.infinity
-        let anime2 = CABasicAnimation(keyPath: "transform.rotation.z")
-        anime2.duration = duration
-        anime2.fromValue = NSNumber(value: currentRadian - Float(angleDifference))
-        anime2.toValue = NSNumber(value: currentRadian - Float(angleDifference) + Float.pi * 2)
-        anime2.repeatCount = Float.infinity
-        print("start from \(currentRadian). from [\(anime1.fromValue), \(anime2.fromValue)")
-        /*CATransaction.begin()
-        CATransaction.setCompletionBlock({  // repeat rotation
-            if self.isRotating {
-                self.startRotation(duration: duration)
-            }
-        })
-        CATransaction.commit()*/
-        #warning("anime3は動いていない。要更新。")
-        let anime3 = CABasicAnimation(keyPath: "angleDifference")
-        anime3.duration = duration
-        anime3.fromValue = NSNumber(value: Float(angleDifference))
-        anime3.toValue = NSNumber(value: Float(angleDifference + CGFloat.pi))
-        self.foregroundArcView.layer.add(anime1, forKey: "rotate")
-        self.backgroundArcView.layer.add(anime2, forKey: "rotate")
-        self.backgroundArcView.layer.add(anime3, forKey: "angleDifference")
-        UIView.animate(withDuration: duration, animations: {
-            self.layoutIfNeeded()
-            self.angleDifference += CGFloat.pi
-        }, completion: { (_) in
-            if self.isRotating {
-                self.startRotation(duration: duration)
-            }
-        })
- */
+
     }
     
     /// Stop rotate animation.
@@ -232,22 +201,17 @@ open class LineArcRotateView : UIView, ArcShape {
         isRotating = false
         foregroundArcLayer.stopRotation()
         backgroundArcLayer.stopRotation()
-        //backgroundArcLayer.stopOffsetChange()
-        //foregroundArcView.layer.transform = foregroundArcView.layer.presentation()!.transform
-        //backgroundArcView.layer.transform = backgroundArcView.layer.presentation()!.transform
-        //foregroundArcView.layer.removeAnimation(forKey: "rotate")
-        //backgroundArcView.layer.removeAnimation(forKey: "rotate")
-        //backgroundArcView.layer.removeAnimation(forKey: "angleDifference")
-        //let radian = getRadian(from: foregroundArcView.layer.transform)
-        //print("stop: radian= \(radian)")
     }
     
     /// Setup initial angle without animation
-    public func setInitialAngle(start: CGFloat, end: CGFloat) {
+    public func setInitialAngle(start: CGFloat, end: CGFloat, offset: CGFloat? = nil) {
         func setup(_ view: LineArcView) {
             view.shouldAnimate = false
             view.startAngle = start
             view.endAngle = end
+            if let offset = offset {
+                view.offsetAngle = offset
+            }
             view.shouldAnimate = true
         }
         setup(foregroundArcView)

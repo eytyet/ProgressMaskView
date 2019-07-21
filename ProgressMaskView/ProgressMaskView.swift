@@ -41,16 +41,13 @@ public class ProgressMaskView : UIView {
         didSet { circleActivityView.arcColor2 = activityColor2 }
     }
     
-    /// Progress start digree 0 to 360. 0 is 00:00. Not radian.
-    public var progressStartDegree: CGFloat = 0
-    
     private var _progress: CGFloat = 0
     
     /// Progress of the progress bar. 0 to 1.
     public var progress: Float {
         set {
             _progress = CGFloat(newValue)
-            circleProgressView.endAngle = (pi * 2) * (_progress + progressStartDegree / 360) + pi / 2
+            circleProgressView.startAngle = pi * 2 * _progress
         }
         get {
             return Float(_progress)
@@ -103,9 +100,9 @@ public class ProgressMaskView : UIView {
         addSubview(backgroundRoundView)
         backgroundRoundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundRoundView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 8).isActive = true
-        backgroundRoundView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 8).isActive = true
+        backgroundRoundView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -8).isActive = true
         backgroundRoundView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor, constant: 8).isActive = true
-        backgroundRoundView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: 8).isActive = true
+        backgroundRoundView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -8).isActive = true
         backgroundRoundView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         backgroundRoundView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
@@ -122,9 +119,10 @@ public class ProgressMaskView : UIView {
         circleProgressView = LineArcRotateView(frame: frame)
         progressColor1 = UIColor.cyan//init(red: 0.3, green: 0.8, blue: 5.0, alpha: 1)
         progressColor2 = UIColor.white//init(red: 0.5, green: 0.9, blue: 7.0, alpha: 1)
-        circleProgressView.setInitialAngle(start: pi / 2, end: 0)
-        circleProgressView.circleRadiusRatio = 0.38
-        circleProgressView.circleLineWidthRatio
+        circleProgressView.angleDifference = 0
+        circleProgressView.setInitialAngle(start: 0, end: 0, offset: -pi / 2)
+        circleProgressView.arcRadiusRatio = 0.4
+        circleProgressView.arcLineWidthRatio = 0.1
         circleProgressView.widthAndHeight = 200
         backgroundRoundView.addSubview(circleProgressView)
         backgroundRoundView.addAndSetConstraint(circleProgressView, margin: 16)
@@ -136,10 +134,11 @@ public class ProgressMaskView : UIView {
         backgroundRoundView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.topAnchor, constant: 32).isActive = true
-        titleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.bottomAnchor, constant: 32).isActive = true
+        titleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.bottomAnchor, constant: -32).isActive = true
         titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.leftAnchor, constant: 16).isActive = true
-        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: 16).isActive = true
+        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: -16).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: backgroundRoundView.centerYAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: backgroundRoundView.centerXAnchor).isActive = true
     }
     
     /// Add this view onto the given view and set constraint for 4 sides.
@@ -170,7 +169,6 @@ public class ProgressMaskView : UIView {
     
     /// Start animation
     public func startAnimation() {
-        //activityView?.startAnimating()
         circleActivityView.endAngle = circleActivityView.startAngle - pi / 2
         circleActivityView.startRotation(duration: 2.0)
         startTimer()
@@ -178,7 +176,6 @@ public class ProgressMaskView : UIView {
     
     /// Stop animation
     public func stopAnimation() {
-        //activityView.stopAnimating()
         stopTimer()
         circleActivityView.stopRotation()
     }

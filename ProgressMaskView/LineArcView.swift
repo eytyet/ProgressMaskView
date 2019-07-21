@@ -15,19 +15,35 @@ import Foundation
 @IBDesignable
 open class LineArcView : UIView, ArcShape {
     
+    /// Bounds at current state.
     private var currentBounds: CGRect
     
+    /// Start angle of arc at current state.
     private var currentStartAngle: CGFloat = 0
     
+    /// End angle of arc at current state.
     private var currentEndAngle: CGFloat = 0
     
+    /// Threshold to determine the same angle or not.
     private let angleMinStep = CGFloat.pi / 18000
     
+    /// Step of path animation.
     private let angleStep = CGFloat.pi / 90
     
+    /// Timer which is syncronized to the device refresh ratio.
     private var angleAnimationLink: CADisplayLink?
     
+    /// If this flag is on, angle change is animaed automatically. Default is false.
     public var shouldAnimate = false
+    
+    /// Offset against startAngle and endAngle
+    @IBInspectable public var offsetAngle: CGFloat = 0 {
+        didSet {
+            (layer as! RotateLayer).offsetAngle = Float(offsetAngle)
+        }
+    }
+
+    // MARK: ArcShape protocol
     
     @IBInspectable public var widthAndHeight: CGFloat = 100 {
         didSet { requestUpdate() }
@@ -80,6 +96,7 @@ open class LineArcView : UIView, ArcShape {
             }
         }
     }
+    
     @IBInspectable public var lineColor: UIColor = UIColor.white {
         didSet {
             requestUpdate()
