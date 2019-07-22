@@ -31,6 +31,16 @@ public class ProgressMaskView : UIView {
         didSet { circleProgressView.arcColor2 = progressColor2 }
     }
 
+    /// Progress Bar Radius Ratio
+    @IBInspectable public var progressRadiusRatio: CGFloat = 0.45 {
+        didSet { circleProgressView.arcRadiusRatio = progressWidthRatio }
+    }
+    
+    /// Progress Bar width Ratio
+    @IBInspectable public var progressWidthRatio: CGFloat = 0.05 {
+        didSet { circleProgressView.arcLineWidthRatio = progressWidthRatio }
+    }
+
     /// First color of activity circle. Default is white.
     @IBInspectable public var activityColor1: UIColor = UIColor.white {
         didSet { circleActivityView.arcColor1 = activityColor1 }
@@ -41,6 +51,17 @@ public class ProgressMaskView : UIView {
         didSet { circleActivityView.arcColor2 = activityColor2 }
     }
     
+    /// Progress Bar Radius Ratio
+    @IBInspectable public var activityRadiusRatio: CGFloat = 0.4 {
+        didSet { circleActivityView.arcRadiusRatio = activityWidthRatio }
+    }
+    
+    /// Progress Bar width Ratio
+    @IBInspectable public var activityWidthRatio: CGFloat = 0.05 {
+        didSet { circleActivityView.arcLineWidthRatio = activityWidthRatio }
+    }
+    
+
     private var _progress: CGFloat = 0
     
     /// Progress of the progress bar. 0 to 1. Default is 0.
