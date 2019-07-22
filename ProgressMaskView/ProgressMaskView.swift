@@ -140,10 +140,10 @@ public class ProgressMaskView : UIView {
     private func setup() {
 
         self.alpha = 0
-        
+        isUserInteractionEnabled = true     // Disable user input.
+
         // Darken all area.
         backgroundColor = UIColor(white: 0, alpha: 0.7)
-        isUserInteractionEnabled = false
 
         // Base round view
         backgroundRoundView = SimpleRView(frame: frame)
