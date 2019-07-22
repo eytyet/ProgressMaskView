@@ -10,13 +10,13 @@ import UIKit
 
 private let pi = CGFloat.pi
 private let defaultProgressColor1 = UIColor.white
-private let defaultProgressColor2 = UIColor.gray
-private let defaultProgressBlendLevel = CGFloat(0.7)
+private let defaultProgressColor2 = UIColor.lightGray
+private let defaultProgressBlendLevel = CGFloat(0.9)
 private let defaultProgressRadius = CGFloat(0.45)
 private let defaultProgressWidth = CGFloat(0.05)
 private let defaultActivityColor1 = UIColor.white
 private let defaultActivityColor2 = UIColor.gray
-private let defaultActivityBlendLevel = CGFloat(0.3)
+private let defaultActivityBlendLevel = CGFloat(0.4)
 private let defaultActivityRadius = CGFloat(0.40)
 private let defaultActivityWidth = CGFloat(0.05)
 private let defaultMinCircleSize = CGFloat(200)
@@ -39,12 +39,12 @@ public class ProgressMaskView : UIView {
         didSet { circleProgressView.arcColor1 = progressColor1 }
     }
 
-    /// Second color of the progress circile. Default is gray.
+    /// Second color of the progress circile. Default is lightGray.
     @IBInspectable public var progressColor2: UIColor = defaultProgressColor2 {
         didSet { circleProgressView.arcColor2 = progressColor2 }
     }
 
-    /// Progress bar blend ratio. 0 - 1. Default is 0
+    /// Progress bar color blend ratio. 0 - 1. Default is 0.7
     @IBInspectable public var progressBlendLevel: CGFloat = defaultProgressBlendLevel {
         didSet { circleProgressView.arcGradation = progressBlendLevel }
     }
@@ -69,7 +69,7 @@ public class ProgressMaskView : UIView {
         didSet { circleActivityView.arcColor2 = activityColor2 }
     }
     
-    /// Activity color blend ratio. 0 - 1. Default is 0
+    /// Activity color blend ratio. 0 - 1. Default is 0.4
     @IBInspectable public var activityBlendLevel: CGFloat = defaultActivityBlendLevel {
         didSet { circleActivityView.arcGradation = defaultActivityBlendLevel }
     }
@@ -139,6 +139,8 @@ public class ProgressMaskView : UIView {
     /// default value of each property did not passed to its didSet block. So call it again at here.
     private func setup() {
 
+        self.alpha = 0
+        
         // Darken all area.
         backgroundColor = UIColor(white: 0, alpha: 0.7)
         isUserInteractionEnabled = false

@@ -43,7 +43,7 @@
 		B74B28C222D201DC00D111F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskView.swift; sourceTree = "<group>"; };
 		B74B28D022D2134600D111F3 /* SimpleRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRView.swift; sourceTree = "<group>"; };
-		B761636322E5148D00FC3D07 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B761636322E5148D00FC3D07 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

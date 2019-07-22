@@ -12,3 +12,46 @@ Fit to all screen size.
 
 Animation is all layer base and it will not consume too many processing power.
 
+![Screen shot](./10fps.gif)
+
+## Usage
+
+
+### Install
+Select ProgressMaskView.framework to the Embedded Binaries on Project General.
+
+
+### Show the mask view on a button.
+
+```Swift
+    private var maskView: ProgressMaskView?
+    
+    ...
+
+    @IBAction func onStartButton(_ sender: Any) {
+        guard maskView == nil else { return }
+        maskView = createMaskView()
+        maskView?.title = "Processing..."
+        maskView?.install(to: self)
+        maskView?.showIn(second: 1.0)
+        
+        startDummyProcess()
+    }
+```
+
+### Set progress
+
+```Swift
+    maskView?.progress = value // 0.0 - 1.0
+```
+
+### Hide the mask view
+
+```Swift
+    maskView?.hideIn(second: 1.0, uninstall: true)
+    maskView = nil
+```
+
+
+
+
