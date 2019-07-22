@@ -70,6 +70,13 @@ public class ProgressMaskView : UIView {
     @IBInspectable public var progressWidthRatio: CGFloat = defaultProgressWidth {
         didSet { circleProgressView.arcLineWidthRatio = progressWidthRatio }
     }
+    /// Progress bar start degrerr. 0 - 360. 0 is noon.
+    @IBInspectable public var progressZeroDegree: Float = 0 {
+        didSet {
+            circleProgressView.endAngle = CGFloat(progressZeroDegree - 90) * pi / 180
+            progress = Float(_progress)
+        }
+    }
     
     /// First color of activity circle. Default is white.
     @IBInspectable public var activityColor1: UIColor = defaultActivityColor1 {
@@ -102,7 +109,7 @@ public class ProgressMaskView : UIView {
     public var progress: Float {
         set {
             _progress = CGFloat(newValue)
-            circleProgressView.startAngle = pi * 2 * _progress
+            circleProgressView.startAngle = pi * 2 * _progress + circleProgressView.endAngle
         }
         get {
             return Float(_progress)
@@ -172,14 +179,15 @@ public class ProgressMaskView : UIView {
         
         // Progress View
         circleProgressView = LineArcRotateView(frame: frame)
-        circleProgressView.angleDifference = 0
-        circleProgressView.setInitialAngle(start: 0, end: 0, offset: -pi / 2)
+        //circleProgressView.angleDifference = 0
+        circleProgressView.setInitialAngle(start: 0, end: 0)
         circleProgressView.widthAndHeight = defaultMinCircleSize
         progressColor1 = defaultProgressColor1
         progressColor2 = defaultProgressColor2
         progressBlendLevel = defaultProgressBlendLevel
         progressRadiusRatio = defaultProgressRadius
         progressWidthRatio = defaultProgressWidth
+        progressZeroDegree = 0
         backgroundRoundView.addSubview(circleProgressView)
         backgroundRoundView.addAndSetConstraint(circleProgressView, margin: 16)
         
