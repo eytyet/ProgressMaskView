@@ -28,12 +28,18 @@ private let defaultMinCircleSize = CGFloat(200)
 public class ProgressMaskView : UIView {
     
 
-    /// Set text into title label in progress bar.
-    @IBInspectable public var title: String? {
+    /// Text of the title label.
+    @IBInspectable public var title: String {
         set { titleLabel?.text = newValue }
-        get { return titleLabel?.text }
+        get { return titleLabel?.text ?? "" }
     }
 
+    /// Font of title label.
+    @IBInspectable public var titleFont: UIFont {
+        set { titleLabel?.font = newValue }
+        get { return titleLabel?.font ?? UIFont.preferredFont(forTextStyle: .headline)}
+    }
+    
     /// First color of the progress circle. Default is white.
     @IBInspectable public var progressColor1: UIColor = defaultProgressColor1 {
         didSet { circleProgressView.arcColor1 = progressColor1 }
