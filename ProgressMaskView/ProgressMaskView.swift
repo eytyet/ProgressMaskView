@@ -30,20 +30,20 @@ public class ProgressMaskView : UIView {
 
     /// Text of the title label.
     @IBInspectable public var title: String {
-        set { titleLabel?.text = newValue }
-        get { return titleLabel?.text ?? "" }
+        set { titleLabel.text = newValue }
+        get { return titleLabel.text ?? "" }
     }
 
     /// Font of title label.
     @IBInspectable public var titleFont: UIFont {
-        set { titleLabel?.font = newValue }
-        get { return titleLabel?.font ?? UIFont.preferredFont(forTextStyle: .headline)}
+        set { titleLabel.font = newValue }
+        get { return titleLabel.font }
     }
     
     /// Color of title label.
     @IBInspectable public var titleColor: UIColor {
-        set { titleLabel?.textColor = newValue }
-        get { return titleLabel?.textColor ?? UIColor.black}
+        set { titleLabel.textColor = newValue }
+        get { return titleLabel.textColor }
     }
 
     /// First color of the progress circle. Default is white.
