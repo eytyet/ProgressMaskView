@@ -229,7 +229,7 @@ public class ProgressMaskView : UIView {
     }
 
     /// Disappear. Must be called from the main thread.
-    public func hideIn(second: TimeInterval, uninstall: Bool) {
+    public func hideIn(second: TimeInterval, uninstall: Bool, completion: (()->())? = nil) {
         UIView.animate(withDuration: second, animations: {
             self.alpha = 0
         }, completion: { _ in
@@ -239,6 +239,7 @@ public class ProgressMaskView : UIView {
             } else {
                 self.progress = 0    // Prepare for next execution.
             }
+            completion?()
         })
     }
     
