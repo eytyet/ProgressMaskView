@@ -40,6 +40,12 @@ public class ProgressMaskView : UIView {
         get { return titleLabel?.font ?? UIFont.preferredFont(forTextStyle: .headline)}
     }
     
+    /// Color of title label.
+    @IBInspectable public var titleColor: UIColor {
+        set { titleLabel?.textColor = newValue }
+        get { return titleLabel?.textColor ?? UIColor.black}
+    }
+
     /// First color of the progress circle. Default is white.
     @IBInspectable public var progressColor1: UIColor = defaultProgressColor1 {
         didSet { circleProgressView.arcColor1 = progressColor1 }
