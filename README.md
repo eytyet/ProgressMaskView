@@ -26,7 +26,8 @@ Animation is implemented on CALayer. Lightweight.
 5. Call `hideIn(second:uninstall)` to complete.
 
 ## Customize
- - 
+ - Change colors
+ - Change Radius and Thickness
 
 
 ### Install
@@ -35,15 +36,18 @@ Get all code and buid it on Xcode to create ProgressMaskView.framework.
 Select ProgressMaskView.framework to the Embedded Binaries on Project General.
 
 
-### Show the mask view on a button.
+### Sample
 
-```Swift
+#### Show
+
+```Swift: UIViewController
 private var maskView: ProgressMaskView?
     
     ...
 
 @IBAction func onButtonTap(_ sender: Any) {
     guard maskView == nil else { return }
+
     maskView = ProgressMaskView()
     maskView?.title = "Processing..."
     maskView?.install(to: self)
@@ -53,13 +57,13 @@ private var maskView: ProgressMaskView?
 }
 ```
 
-### Set progress
+#### Progress
 
 ```Swift
 maskView?.progress = value // 0.0 - 1.0
 ```
 
-### Hide the mask view
+#### Hide
 
 ```Swift
 maskView?.hideIn(second: 1.0, uninstall: true)
