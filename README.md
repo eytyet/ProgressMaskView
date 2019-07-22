@@ -1,4 +1,4 @@
-#  ProgressMaskView
+#  ProgressMaskView for iOS
 
 **Progress Mask View** is a view which masks all screen to show a progress and an activity. You can disable user interaction while processing very easily.
 
@@ -11,8 +11,7 @@ This view has:
  - Dynamic Type capable.
  - Fit to all screen size.
 
-Animation is implemented on CALayer. Lightweight.
-
+Animation is implemented on CALayer and this will not consume CPU power.
 
 ## Easy to Use
 
