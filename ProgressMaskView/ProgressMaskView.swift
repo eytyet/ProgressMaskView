@@ -8,12 +8,25 @@
 
 import UIKit
 
-fileprivate let pi = CGFloat.pi
+private let pi = CGFloat.pi
+private let defaultProgressColor1 = UIColor.white
+private let defaultProgressColor2 = UIColor.gray
+private let defaultProgressBlendLevel = CGFloat(0.7)
+private let defaultProgressRadius = CGFloat(0.45)
+private let defaultProgressWidth = CGFloat(0.05)
+private let defaultActivityColor1 = UIColor.white
+private let defaultActivityColor2 = UIColor.gray
+private let defaultActivityBlendLevel = CGFloat(0.3)
+private let defaultActivityRadius = CGFloat(0.40)
+private let defaultActivityWidth = CGFloat(0.05)
+private let defaultMinCircleSize = CGFloat(200)
+
 
 /// Show activity and progress bar of circle shape.
 ///  Easy to append to existing view controll tentatively to let user wait.
 @IBDesignable
 public class ProgressMaskView : UIView {
+    
 
     /// Set text into title label in progress bar.
     @IBInspectable public var title: String? {
@@ -22,45 +35,54 @@ public class ProgressMaskView : UIView {
     }
 
     /// First color of the progress circle. Default is white.
-    @IBInspectable public var progressColor1: UIColor = UIColor.white {
+    @IBInspectable public var progressColor1: UIColor = defaultProgressColor1 {
         didSet { circleProgressView.arcColor1 = progressColor1 }
     }
 
-    /// Second color of the progress circile. Default is black.
-    @IBInspectable public var progressColor2: UIColor = UIColor.black {
+    /// Second color of the progress circile. Default is gray.
+    @IBInspectable public var progressColor2: UIColor = defaultProgressColor2 {
         didSet { circleProgressView.arcColor2 = progressColor2 }
     }
 
-    /// Progress Bar Radius Ratio
-    @IBInspectable public var progressRadiusRatio: CGFloat = 0.45 {
-        didSet { circleProgressView.arcRadiusRatio = progressWidthRatio }
-    }
-    
-    /// Progress Bar width Ratio
-    @IBInspectable public var progressWidthRatio: CGFloat = 0.05 {
-        didSet { circleProgressView.arcLineWidthRatio = progressWidthRatio }
+    /// Progress bar blend ratio. 0 - 1. Default is 0
+    @IBInspectable public var progressBlendLevel: CGFloat = defaultProgressBlendLevel {
+        didSet { circleProgressView.arcGradation = progressBlendLevel }
     }
 
+    /// Progress bar radius ratio. 0.5 - 0. Default is 0.45
+    @IBInspectable public var progressRadiusRatio: CGFloat = defaultProgressRadius {
+        didSet { circleProgressView.arcRadiusRatio = progressRadiusRatio }
+    }
+    
+    /// Progress bar width ratio. 0.5 - 0. Default is 0.05
+    @IBInspectable public var progressWidthRatio: CGFloat = defaultProgressWidth {
+        didSet { circleProgressView.arcLineWidthRatio = progressWidthRatio }
+    }
+    
     /// First color of activity circle. Default is white.
-    @IBInspectable public var activityColor1: UIColor = UIColor.white {
+    @IBInspectable public var activityColor1: UIColor = defaultActivityColor1 {
         didSet { circleActivityView.arcColor1 = activityColor1 }
     }
 
     /// Second color of activity circle. Default is gray.
-    @IBInspectable public var activityColor2: UIColor = UIColor.gray {
+    @IBInspectable public var activityColor2: UIColor = defaultActivityColor2 {
         didSet { circleActivityView.arcColor2 = activityColor2 }
     }
     
-    /// Progress Bar Radius Ratio
-    @IBInspectable public var activityRadiusRatio: CGFloat = 0.4 {
-        didSet { circleActivityView.arcRadiusRatio = activityWidthRatio }
+    /// Activity color blend ratio. 0 - 1. Default is 0
+    @IBInspectable public var activityBlendLevel: CGFloat = defaultActivityBlendLevel {
+        didSet { circleActivityView.arcGradation = defaultActivityBlendLevel }
     }
     
-    /// Progress Bar width Ratio
-    @IBInspectable public var activityWidthRatio: CGFloat = 0.05 {
+    /// Activity radius ratio. 0.5 - 0. Default is 0.4
+    @IBInspectable public var activityRadiusRatio: CGFloat = defaultActivityRadius {
+        didSet { circleActivityView.arcRadiusRatio = activityRadiusRatio }
+    }
+    
+    /// Activity width ratio. 0.5 - 0. Default is 0.05
+    @IBInspectable public var activityWidthRatio: CGFloat = defaultActivityWidth {
         didSet { circleActivityView.arcLineWidthRatio = activityWidthRatio }
     }
-    
 
     private var _progress: CGFloat = 0
     
@@ -134,26 +156,30 @@ public class ProgressMaskView : UIView {
         backgroundRoundView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         backgroundRoundView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
-        // Activity View
-        circleActivityView = LineArcRotateView(frame: frame)
-        activityColor1 = UIColor.blue//(red: 0.3, green: 0.6, blue: 0.9, alpha: 0.9)
-        activityColor2 = UIColor.cyan//(red: 0.5, green: 0.7, blue: 1.0, alpha: 0.5)
-        circleActivityView.setInitialAngle(start: 0, end: 0)
-        circleActivityView.widthAndHeight = 200
-        backgroundRoundView.addSubview(circleActivityView)
-        backgroundRoundView.addAndSetConstraint(circleActivityView, margin: 16)
-        
         // Progress View
         circleProgressView = LineArcRotateView(frame: frame)
-        progressColor1 = UIColor.cyan//init(red: 0.3, green: 0.8, blue: 5.0, alpha: 1)
-        progressColor2 = UIColor.white//init(red: 0.5, green: 0.9, blue: 7.0, alpha: 1)
         circleProgressView.angleDifference = 0
         circleProgressView.setInitialAngle(start: 0, end: 0, offset: -pi / 2)
-        circleProgressView.arcRadiusRatio = 0.4
-        circleProgressView.arcLineWidthRatio = 0.1
-        circleProgressView.widthAndHeight = 200
+        circleProgressView.widthAndHeight = defaultMinCircleSize
+        progressColor1 = defaultProgressColor1
+        progressColor2 = defaultProgressColor2
+        progressBlendLevel = defaultProgressBlendLevel
+        progressRadiusRatio = defaultProgressRadius
+        progressWidthRatio = defaultProgressWidth
         backgroundRoundView.addSubview(circleProgressView)
         backgroundRoundView.addAndSetConstraint(circleProgressView, margin: 16)
+        
+        // Activity View
+        circleActivityView = LineArcRotateView(frame: frame)
+        circleActivityView.setInitialAngle(start: 0, end: 0)
+        circleActivityView.widthAndHeight = defaultMinCircleSize
+        activityColor1 = defaultActivityColor1
+        activityColor2 = defaultActivityColor2
+        activityBlendLevel = defaultActivityBlendLevel
+        activityRadiusRatio = defaultActivityRadius
+        activityWidthRatio = defaultActivityWidth
+        backgroundRoundView.addSubview(circleActivityView)
+        backgroundRoundView.addAndSetConstraint(circleActivityView, margin: 16)
         
         // Label at center.
         titleLabel = UILabel(frame: frame)
@@ -171,10 +197,21 @@ public class ProgressMaskView : UIView {
     
     /// Add this view onto the given view and set constraint for 4 sides.
     public func install(to view: UIView) {
-        view.addSubview(self)
         view.addAndSetConstraint(self)
     }
-    
+
+    /// Add this view onto the given view controller and set constraint for 4 sides.
+    /// This function will install this view to the UITabBarController if exist. If not, to UINavigationController. If not, to the passed controller.
+    public func install(to controller: UIViewController) {
+        if let tab = controller.tabBarController {
+            tab.view.addAndSetConstraint(self)
+        } else if let navi = controller.navigationController {
+            navi.view.addAndSetConstraint(self)
+        } else {
+            controller.view.addAndSetConstraint(self)
+        }
+    }
+
     /// Appear. Must be called from the main thread.
     public func showIn(second: TimeInterval = 0.3) {
         startAnimation()
