@@ -236,6 +236,8 @@ public class ProgressMaskView : UIView {
             self.stopAnimation()
             if uninstall {
                 self.removeFromSuperview()
+            } else {
+                self.progress = 0    // Prepare for next execution.
             }
         })
     }
