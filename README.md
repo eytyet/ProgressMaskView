@@ -1,14 +1,13 @@
 #  ProgressMaskView
 
-**Progress Mask View** is a view wich masks all screen to show a progress and an activity.
-Easy to use.
+**Progress Mask View** is a view which masks all screen to show a progress and an activity. You can disable user interaction while processing very easily.
 
 ![Screen shot](./10fps.gif)
 
 This view has:
- - Beautiful circule shape activity view. You can change radius, thickness, speed and colors.
- - Progress bar in circle shape. You can change radius, thickness and colors.
- - Label is placed in center of the circles.
+ - Circular activity view.
+ - Circular progress view.
+ - Label in center.
  - Dynamic Type capable.
  - Fit to all screen size.
 
@@ -25,20 +24,20 @@ Animation is implemented on CALayer. Lightweight.
 
 5. Call `hideIn(second:uninstall)` to complete.
 
-## Customize
- - Change colors
- - Change Radius and Thickness
+## Customizable
+ - Change colors.
+ - Change Radius and Thickness.
+ - Change activity rotation speed.
 
-
-### Install
+## Install
 Get all code and buid it on Xcode to create ProgressMaskView.framework.
 
 Select ProgressMaskView.framework to the Embedded Binaries on Project General.
 
 
-### Sample
+## Sample
 
-#### Show
+### Show
 
 ```Swift: UIViewController
 private var maskView: ProgressMaskView?
@@ -57,19 +56,21 @@ private var maskView: ProgressMaskView?
 }
 ```
 
-#### Progress
+### Progress
 
 ```Swift
 maskView?.progress = value // 0.0 - 1.0
 ```
 
-#### Hide
+### Hide
 
 ```Swift
 maskView?.hideIn(second: 1.0, uninstall: true)
 maskView = nil
 ```
 
+## License
+MIT License
 
-
-
+## Welcome
+Any comments, requests, contributions are welcome.
