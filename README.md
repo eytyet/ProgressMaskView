@@ -2,7 +2,9 @@
 
 **Progress Mask View** is a view which covers entire screen.  User can aware that any interaction is disabled and he/she need to wait. Beautiful activity movement will turn the wait time to enjoyable one. And for you, a developer, this is easy to use.
 
-![Screen shot](./10fps.gif)
+![Screen shot 1](./10fps.gif)
+![Screen shot 2](./10fps-2.gif)
+![Screen shot 3](./10fps-3.gif)
 
 This view has:
  - Circular activity view.
