@@ -73,8 +73,8 @@ public class ProgressMaskView : UIView {
     /// Progress bar start degrerr. 0 - 360. 0 is noon.
     @IBInspectable public var progressZeroDegree: Float = 0 {
         didSet {
-            circleProgressView.endAngle = CGFloat(progressZeroDegree - 90) * pi / 180
-            progress = Float(_progress)
+            let radian = CGFloat(progressZeroDegree - 90) * pi / 180
+            circleProgressView.setInitialAngle(start: radian, end: radian)
         }
     }
     

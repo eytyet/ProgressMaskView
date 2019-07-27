@@ -173,8 +173,8 @@ open class LineArcRotateView : UIView, ArcShape {
         backgroundArcLayer.offsetAngle = -Float(angleDifference)
         arcRadiusRatio = 0.45
         arcLineWidthRatio = 0.05
-        startAngle = 0
         endAngle = 0
+        startAngle = 0
     }
     
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -205,17 +205,17 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Setup initial angle without animation
     public func setInitialAngle(start: CGFloat, end: CGFloat, offset: CGFloat? = nil) {
-        func setup(_ view: LineArcView) {
+        func setup(_ view: LineArcView, diff: CGFloat) {
             view.shouldAnimate = false
-            view.startAngle = start
-            view.endAngle = end
+            view.startAngle = start + diff
+            view.endAngle = end + diff
             if let offset = offset {
                 view.offsetAngle = offset
             }
             view.shouldAnimate = true
         }
-        setup(foregroundArcView)
-        setup(backgroundArcView)
+        setup(foregroundArcView, diff:0)
+        setup(backgroundArcView, diff: angleDifference)
     }
     
 }

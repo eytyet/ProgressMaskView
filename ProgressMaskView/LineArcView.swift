@@ -83,7 +83,7 @@ open class LineArcView : UIView, ArcShape {
         }
     }
     
-    @IBInspectable public var endAngle: CGFloat = CGFloat.pi {
+    @IBInspectable public var endAngle: CGFloat = 0 {
         didSet {
             if shouldAnimate {
                 currentEndAngle = oldValue
