@@ -157,11 +157,6 @@ open class LineArcView : UIView, ArcShape {
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented.")
-        let dummy = CGRect(x: 0, y: 0, width: 100, height: 100)
-        currentBounds = dummy
-        super.init(coder: aDecoder)
-        frame = dummy
-        setup()
     }
     private func setup() {
         backgroundColor = nil
