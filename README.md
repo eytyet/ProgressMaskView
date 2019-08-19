@@ -1,33 +1,48 @@
 #  ProgressMaskView for iOS
 
-**Progress Mask View** is a view which covers entire screen.  User can aware that any interaction is disabled and he/she need to wait. Beautiful activity movement will turn the wait time to enjoyable one. And for you, a developer, this is easy to use.
+**Progress Mask View** is a view which covers the entire screen to disable any user interaction including Tab bar items and navigation bar buttons. It shows an activity indicator and progress. User can aware that any interaction is disabled and he/she has to wait. Activity movement and color change are very beautiful.
 
+Basically, you should not use this. Disabling user interaction is not a good idea as a recent modern app.
+However, in some case, it is necessary. I created this view to use on a backup function and a restore function since it is not possible to change any data while it is backing up or restoring from the backup data. This view does not has any cancel button. If your function can be cancelled, you should not disable navigation bar nor tab bar.
+You should use this at very limited case.
+
+## Screenshots
 ![Screen shot 1](./10fps.gif)
 ![Screen shot 2](./10fps-2.gif)
 ![Screen shot 3](./10fps-3.gif)
 
+## Features
 This view has:
  - Circular activity view.
  - Circular progress view.
  - Label in center.
+ - Transparent black effect covers all screen.
+ 
+This is:
+ - Light.
  - Dynamic Type capable.
  - Fit to all screen size.
+ - Easy to use.
 
-Animation is implemented on CALayer. This view will not consume many CPU power for animation.
+Animation is implemented at CALayer and it is lightweight.
 
-## Easy to Use
+## How to Use
 
-This view is available from code. Interface Builder is not required.
+It is recommended to use this view from a code.
+This view automatically insert itself into the view hierarchy at beginning, and remove it at the end.
 
-1. Make a `ProgressMaskView` instance
-2. Pass your UIViewController to the `install(to:)` method.
-3. Call the `showIn()` method to show a progress view.
+Start:
+1. Make a `ProgressMaskView` instance.
+2. Pass your UIViewController to the `install(to:)` method of the instance.
+3. Call the `showIn()` method to show the progress view.
 
-4. Specify the `progress` property like a UIProgressView.
+Update:
+4. Specify the `progress` property like a UIProgressView to update UI.
 
-5. Call the `hideIn(second:uninstall)` at the end.
+End:
+5. Call the `hideIn(second:uninstall)` method at the end.
 
-That's all. This view automatically decide acppropriate insert point in the view hierarchy and insert it, set up all constraint, and start animation. At the end, this view is removed from the tree so that it can be freed.
+That's all. This view automatically decide appropriate insert point in the view hierarchy and insert it, set up all constraint, and start animation. At the end, this view is removed from the tree so that it can be freed.
 
 If you want, you can use Interface builder. But I suggest above code approach because it is easier.
 
@@ -46,7 +61,7 @@ If you want, you can use Interface builder. But I suggest above code approach be
 
 ## Sample Code
 
-### Show
+### Start
 
 In your view controller;
 
@@ -72,15 +87,15 @@ private var maskView: ProgressMaskView?
 }
 ```
 
-### Progress
+### Set Progress
 
 While processing, set progress value to ProgressMaskView to update display.
 
 ```Swift
-maskView?.progress = value // 0.0 - 1.0
+maskView?.progress = progressValue // 0.0 - 1.0
 ```
 
-### Hide
+### End
 
 At the end, call `hideIn` method to discard the view.
 
@@ -89,7 +104,7 @@ maskView?.hideIn(second: 1.0, uninstall: true)
 maskView = nil
 ```
 
-If uninstall is fase, Progress Mask view remains. You can reuse it.
+If uninstall is false, The Progress Mask View become hidden but remains in the view hierarchy. You can reuse it by calling `show(in:)` method.
 
 ## License
 MIT License
