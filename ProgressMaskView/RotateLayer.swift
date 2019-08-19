@@ -13,7 +13,7 @@ open class RotateLayer : CALayer {
     /// Rotation degree offset
     dynamic public var offsetAngle: Float = 0 {
         didSet {
-            transform = matrixRotateZ(offsetAngle)
+            transform = Tool.matrixRotateZ(offsetAngle)
         }
     }
     
@@ -21,7 +21,7 @@ open class RotateLayer : CALayer {
     
     public override init() {
         super.init()
-        transform = matrixRotateZ(0.0)
+        transform = Tool.matrixRotateZ(0.0)
         //registerRotateAnimation()
     }
  
@@ -55,7 +55,7 @@ open class RotateLayer : CALayer {
         guard animation(forKey: "transform.rotation.z") == nil else { return }
         var start:Float
         if startAngle == nil {
-            start = getRadian(from: transform) + offsetAngle
+            start = Tool.convertRotationZToRadian(from: transform) + offsetAngle
         } else {
             start = startAngle!
         }

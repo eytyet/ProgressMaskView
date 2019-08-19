@@ -8,25 +8,28 @@
 
 import Foundation
 
-/// Create rotation matrix for Z rotation.
-/// - Parameter radian: Rotation angle in radian.
-/// - Returns: A rotation matrix.
-func matrixRotateZ(_ radian:Float) -> CATransform3D {
-    return CATransform3DMakeRotation(CGFloat(radian), 0, 0, 1)
-}
-
-/// Return rotation angle in radian for matrixRotateZ.
-///  Note that the value may be 0 or 3.14... or 6.28... for 0 degree.
-/// - Parameter transform: Z rotation matrix
-/// - Returns: Rotation angle in radian
-func getRadian(from transform:CATransform3D) -> Float {
-    let cos = transform.m11
-    let sin = transform.m12
-    let radian = atan(sin/cos)
-    if cos < 0 {
-        return Float(radian) + Float.pi
+/// Keep common functions into Tool namespace
+struct Tool {
+    /// Create rotation matrix for Z rotation.
+    /// - Parameter radian: Rotation angle in radian.
+    /// - Returns: A rotation matrix.
+    static func matrixRotateZ(_ radian:Float) -> CATransform3D {
+        return CATransform3DMakeRotation(CGFloat(radian), 0, 0, 1)
     }
-    return Float(radian)
+    
+    /// Return rotation angle in radian for matrixRotateZ.
+    ///  Note that the value may be 0 or 3.14... or 6.28... for 0 degree.
+    /// - Parameter transform: Z rotation matrix
+    /// - Returns: Rotation angle in radian
+    static func convertRotationZToRadian(from transform:CATransform3D) -> Float {
+        let cos = transform.m11
+        let sin = transform.m12
+        let radian = atan(sin/cos)
+        if cos < 0 {
+            return Float(radian) + Float.pi
+        }
+        return Float(radian)
+    }
 }
 
 // MARK: - UIView Extension
