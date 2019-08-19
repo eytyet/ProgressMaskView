@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Layer with automatic rotation feature.
 open class RotateLayer : CALayer {
     /// Rotation degree offset
     dynamic public var offsetAngle: Float = 0 {
@@ -44,7 +45,6 @@ open class RotateLayer : CALayer {
         return super.needsDisplay(forKey: key)
     }
  
-    
     // MARK: - Methods
     
     /// Start rotation.

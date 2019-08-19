@@ -24,7 +24,7 @@ open class LineArcView : UIView, ArcShape {
     /// End angle of arc at current state.
     private var currentEndAngle: CGFloat = 0
     
-    /// Threshold to determine the same angle or not.
+    /// Threshold to determine whether the same angle or not.
     private let angleMinStep = CGFloat.pi / 18000
     
     /// Step of path animation.
@@ -104,7 +104,10 @@ open class LineArcView : UIView, ArcShape {
     }
     /// Remember size of cached information.
     private var sizeOfCachedInformatin: CGSize?
+    
+    /// Content of gradientMaskCache
     private var _gradientMaskCache: CGImage?
+    
     /// Cache for gradient image mask.
     private var gradientMaskCache: CGImage? {
         if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _gradientMaskCache }
@@ -127,9 +130,13 @@ open class LineArcView : UIView, ArcShape {
         _gradientMaskCache = imageMask
         return _gradientMaskCache
     }
+    
     /// Remember size of cached image.
     private var sizeOfFillImage: CGSize?
+
+    /// Content of fillImageCache
     private var _fillImageCache: CGImage?
+
     /// A lineColor filled image. Cached
     private var fillImageCache: CGImage? {
         if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _fillImageCache }
@@ -145,7 +152,6 @@ open class LineArcView : UIView, ArcShape {
         _fillImageCache = cg.makeImage()
         return _fillImageCache
     }
-
 
     // MARK: - UIView
     
@@ -205,15 +211,12 @@ open class LineArcView : UIView, ArcShape {
     }
     
     // MARK: - Methods
+    
     /// Set force redraw
     private func requestUpdate() {
         sizeOfCachedInformatin = nil
         setNeedsDisplay()
     }
-    
-    /// Create filled image.
-    
-
     
     /// Return a closed path of a thick arc
     /// - Parameter startAngle: Radian (edge with largear number)

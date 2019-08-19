@@ -104,7 +104,7 @@ public class ProgressMaskView : UIView {
         didSet { circleActivityView.arcLineWidthRatio = activityWidthRatio }
     }
 
-    /// Substance of progress property.
+    /// Content of progress property.
     private var _progress: CGFloat = 0
     
     /// Progress of the progress bar. 0 - 1.0. Default is 0.
