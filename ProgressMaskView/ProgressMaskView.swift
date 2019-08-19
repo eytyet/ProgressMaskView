@@ -11,23 +11,24 @@ import UIKit
 private let pi = CGFloat.pi
 private let defaultProgressColor1 = UIColor.white
 private let defaultProgressColor2 = UIColor.lightGray
-private let defaultProgressBlendLevel = CGFloat(0.9)
-private let defaultProgressRadius = CGFloat(0.45)
-private let defaultProgressWidth = CGFloat(0.05)
+private let defaultProgressBlendLevel:CGFloat = 0.9
+private let defaultProgressRadius:CGFloat = 0.45
+private let defaultProgressWidth: CGFloat = 0.05
 private let defaultActivityColor1 = UIColor.white
 private let defaultActivityColor2 = UIColor.gray
-private let defaultActivityBlendLevel = CGFloat(0.4)
-private let defaultActivityRadius = CGFloat(0.40)
-private let defaultActivityWidth = CGFloat(0.05)
-private let defaultMinCircleSize = CGFloat(200)
+private let defaultActivityBlendLevel: CGFloat = 0.4
+private let defaultActivityRadius: CGFloat = 0.40
+private let defaultActivityWidth: CGFloat = 0.05
+private let defaultMinCircleSize: CGFloat = 200
+private let titleWidthInset: CGFloat = 32
+private let titleHeightInset: CGFloat = 16
 
 
-/// Show activity and progress bar of circle shape.
-///  Easy to append to existing view controll tentatively to let user wait.
+/// Show activity and progress bar in circle shape.
+///  Easy to append to existing view controll to let user wait tentatively.
 @IBDesignable
 public class ProgressMaskView : UIView {
     
-
     /// Text of the title label.
     @IBInspectable public var title: String {
         set { titleLabel.text = newValue }
@@ -61,16 +62,16 @@ public class ProgressMaskView : UIView {
         didSet { circleProgressView.arcGradation = progressBlendLevel }
     }
 
-    /// Progress bar radius ratio. 0.5 - 0. Default is 0.45
+    /// Progress bar radius ratio. 0 - 0.5. Default is 0.45
     @IBInspectable public var progressRadiusRatio: CGFloat = defaultProgressRadius {
         didSet { circleProgressView.arcRadiusRatio = progressRadiusRatio }
     }
     
-    /// Progress bar width ratio. 0.5 - 0. Default is 0.05
+    /// Progress bar width ratio. 0 - 0.5. Default is 0.05
     @IBInspectable public var progressWidthRatio: CGFloat = defaultProgressWidth {
         didSet { circleProgressView.arcLineWidthRatio = progressWidthRatio }
     }
-    /// Progress bar start degrerr. 0 - 360. 0 is noon.
+    /// Progress bar start degrerr. 0 - 360. 0 is 12:00.
     @IBInspectable public var progressZeroDegree: Float = 0 {
         didSet {
             let radian = CGFloat(progressZeroDegree - 90) * pi / 180
@@ -93,19 +94,20 @@ public class ProgressMaskView : UIView {
         didSet { circleActivityView.arcGradation = defaultActivityBlendLevel }
     }
     
-    /// Activity radius ratio. 0.5 - 0. Default is 0.4
+    /// Activity radius ratio. 0 - 0.5. Default is 0.4
     @IBInspectable public var activityRadiusRatio: CGFloat = defaultActivityRadius {
         didSet { circleActivityView.arcRadiusRatio = activityRadiusRatio }
     }
     
-    /// Activity width ratio. 0.5 - 0. Default is 0.05
+    /// Activity width ratio. 0 - 0.5. Default is 0.05
     @IBInspectable public var activityWidthRatio: CGFloat = defaultActivityWidth {
         didSet { circleActivityView.arcLineWidthRatio = activityWidthRatio }
     }
 
+    /// Substance of progress property.
     private var _progress: CGFloat = 0
     
-    /// Progress of the progress bar. 0 to 1. Default is 0.
+    /// Progress of the progress bar. 0 - 1.0. Default is 0.
     public var progress: Float {
         set {
             _progress = CGFloat(newValue)
@@ -209,21 +211,23 @@ public class ProgressMaskView : UIView {
         titleLabel.textAlignment = .center
         backgroundRoundView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.topAnchor, constant: 32).isActive = true
-        titleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.bottomAnchor, constant: -32).isActive = true
-        titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.leftAnchor, constant: 16).isActive = true
-        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: -16).isActive = true
+        titleLabel.topAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.topAnchor, constant: titleWidthInset).isActive = true
+        titleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.bottomAnchor, constant: -titleWidthInset).isActive = true
+        titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.leftAnchor, constant: titleHeightInset).isActive = true
+        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: -titleHeightInset).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: backgroundRoundView.centerYAnchor).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: backgroundRoundView.centerXAnchor).isActive = true
     }
     
     /// Add this view onto the given view and set constraint for 4 sides.
+    /// - Parameter view: Specify a parent view.
     public func install(to view: UIView) {
         view.addAndSetConstraint(self)
     }
 
     /// Add this view onto the given view controller and set constraint for 4 sides.
     /// This function will install this view to the UITabBarController if exist. If not, to UINavigationController. If not, to the passed controller.
+    /// - Parameter controller: Specify current UIViewController. (e.g. "self")
     public func install(to controller: UIViewController) {
         if let tab = controller.tabBarController {
             tab.view.addAndSetConstraint(self)
@@ -235,6 +239,7 @@ public class ProgressMaskView : UIView {
     }
 
     /// Appear. Must be called from the main thread.
+    /// - Parameter second: Optional. Animation duration in second. Default is 0.3.
     public func showIn(second: TimeInterval = 0.3) {
         startAnimation()
         UIView.animate(withDuration: second) {
@@ -243,7 +248,11 @@ public class ProgressMaskView : UIView {
     }
 
     /// Disappear. Must be called from the main thread.
-    public func hideIn(second: TimeInterval, uninstall: Bool, completion: (()->())? = nil) {
+    /// - Parameters:
+    ///   - second: Optional. Default is 0.3. Animation duration in second.
+    ///   - uninstall: Optional. Set true (default) to remove this view from the view hierarchly. If false, it is disappeared since alpha is 0 but remains in the view hierarchly.
+    ///   - completion: Optional. completion handler.
+    public func hideIn(second: TimeInterval = 0.3, uninstall: Bool = true, completion: (()->())? = nil) {
         UIView.animate(withDuration: second, animations: {
             self.alpha = 0
         }, completion: { _ in
