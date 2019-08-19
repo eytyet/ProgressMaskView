@@ -37,6 +37,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     // MRAK: ArcShape protocol
     
+    /// Size of view. Only one value since it must be square
     @IBInspectable public var widthAndHeight: CGFloat {
         get {
             return foregroundArcView.widthAndHeight
@@ -47,6 +48,7 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
+    /// If true, the diameter is always smaller than widthAndHeight.
     @IBInspectable public var autoFitInside: Bool {
         get {
             return foregroundArcView.autoFitInside
@@ -57,6 +59,7 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
+    /// Ratio of the arc radius against widthAndHeight. 0.5 is maximum.
     @IBInspectable public var arcRadiusRatio: CGFloat {
         get {
             return foregroundArcView.arcRadiusRatio
@@ -67,6 +70,8 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
+    /// Ratio of the arc line width against widthAndHeight.
+    /// If arcRadiusRatio is 0.45 and arcLineWidthRatio is 0.02, line fills 0.43-0.46.
     @IBInspectable public var arcLineWidthRatio: CGFloat {
         get {
             return foregroundArcView.arcLineWidthRatio
@@ -77,6 +82,7 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
+    /// Ratio of the arc center.
     @IBInspectable public var arcCenterRatio: CGPoint {
         get {
             return foregroundArcView.arcCenterRatio
@@ -87,6 +93,7 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
+    /// Ratio of the arc line color mix.
     @IBInspectable public var arcGradation: CGFloat {
         get {
             return foregroundArcView.arcGradation
@@ -97,7 +104,7 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
-    /// Arc fill color 1
+    /// Arc line fill color 1
     @IBInspectable public var arcColor1: UIColor {
         get {
             return foregroundArcView.lineColor
@@ -107,7 +114,7 @@ open class LineArcRotateView : UIView, ArcShape {
         }
     }
     
-    /// Arc fill color 2
+    /// Arc line fill color 2
     @IBInspectable public var arcColor2: UIColor {
         get {
             return backgroundArcView.lineColor
@@ -188,11 +195,12 @@ open class LineArcRotateView : UIView, ArcShape {
     // MARK: - Methods
     
     /// Start rotate animation
+    /// - Parameter duration: Time period of one rotation.
     public func startRotation(duration: TimeInterval) {
         guard isRotating == false else { return }
         isRotating = true
-        foregroundArcLayer.rotate(duration: 3)
-        backgroundArcLayer.rotate(duration: 3)
+        foregroundArcLayer.rotate(duration: duration)
+        backgroundArcLayer.rotate(duration: duration)
 
     }
     
@@ -204,6 +212,10 @@ open class LineArcRotateView : UIView, ArcShape {
     }
     
     /// Setup initial angle without animation
+    /// - Parameters:
+    ///   - start: Start angle of the arc in radian.
+    ///   - end: End angle of the arc in radian.
+    ///   - offset: Offset of angle in radian. If 0, start/end angle begin at 03:00. -pi/2 is 0:00.
     public func setInitialAngle(start: CGFloat, end: CGFloat, offset: CGFloat? = nil) {
         func setup(_ view: LineArcView, diff: CGFloat) {
             view.shouldAnimate = false
