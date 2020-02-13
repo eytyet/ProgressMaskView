@@ -2,7 +2,7 @@
 //  ArcShape.swift
 //  ProgressMaskView
 //
-//  Created by Yu Software on 2019/07/17.
+//  Created by eytyet on 2019/07/17.
 //  Copyright © 2019 Yu Software. All rights reserved.
 //
 

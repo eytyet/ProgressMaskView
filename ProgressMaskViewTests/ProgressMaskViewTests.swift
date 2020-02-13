@@ -40,6 +40,10 @@ class ProgressMaskViewTests: XCTestCase {
         }
     }
 
+    func testScopes() {
+        
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

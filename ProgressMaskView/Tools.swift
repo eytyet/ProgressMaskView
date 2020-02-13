@@ -42,10 +42,11 @@ extension UIView {
     func addAndSetConstraint(_ childView: UIView, margin:CGFloat = 0) {
         addSubview(childView)
         childView.translatesAutoresizingMaskIntoConstraints = false
-        let topConstraint = NSLayoutConstraint(item: childView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: margin)
-        let bottomConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: childView, attribute: .bottom, multiplier: 1, constant: margin)
-        let leftConstraint = NSLayoutConstraint(item: childView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: margin)
-        let rightConstraint = NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: childView, attribute: .right, multiplier: 1, constant: margin)
-        addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
+        addConstraints([
+            childView.topAnchor.constraint(equalTo: topAnchor, constant: margin),
+            bottomAnchor.constraint(equalTo: childView.bottomAnchor, constant: margin),
+            childView.leftAnchor.constraint(equalTo: leftAnchor, constant: margin),
+            rightAnchor.constraint(equalTo: childView.rightAnchor, constant: margin)
+        ])
     }
 }
