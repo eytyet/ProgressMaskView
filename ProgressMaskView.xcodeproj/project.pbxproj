@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		B701D49622DF433B0075107E /* LineArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701D49522DF433B0075107E /* LineArcView.swift */; };
 		B7075DAE22E25BE5007C620A /* RotateLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7075DAD22E25BE5007C620A /* RotateLayer.swift */; };
+		B72F5C0823F64C3D003D0F4B /* ParameterControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C0723F64C3D003D0F4B /* ParameterControlView.swift */; };
+		B72F5C0A23F654B1003D0F4B /* SidewayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C0923F654B1003D0F4B /* SidewayView.swift */; };
+		B72F5C0F23F67020003D0F4B /* SimpleRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C0D23F67019003D0F4B /* SimpleRView.swift */; };
+		B72F5C1123F67751003D0F4B /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C1023F67751003D0F4B /* MainTableViewController.swift */; };
+		B72F5C1323F67996003D0F4B /* ParameterDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C1223F67996003D0F4B /* ParameterDemoViewController.swift */; };
+		B72F5C1623F688F2003D0F4B /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C1523F688F2003D0F4B /* UIColorExtensions.swift */; };
+		B72F5C1823F68952003D0F4B /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C1723F68952003D0F4B /* CGFloatExtensions.swift */; };
+		B72F5C1C23F690BB003D0F4B /* BinaryFloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C1B23F690BB003D0F4B /* BinaryFloatingPointExtensions.swift */; };
+		B72F5C1E23F6E7DF003D0F4B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C1D23F6E7DF003D0F4B /* UIViewExtensions.swift */; };
 		B73125EB22DA2EC5006D767F /* LineArcRotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */; };
 		B73C2F6022DF5B1E005BC4E8 /* ArcShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73C2F5F22DF5B1E005BC4E8 /* ArcShape.swift */; };
 		B73C2F6222DFB1EA005BC4E8 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73C2F6122DFB1EA005BC4E8 /* Tools.swift */; };
@@ -19,7 +28,7 @@
 		B74B28D122D2134600D111F3 /* SimpleRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28D022D2134600D111F3 /* SimpleRView.swift */; };
 		B7B155E023F51BA300A84799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155DF23F51BA300A84799 /* AppDelegate.swift */; };
 		B7B155E223F51BA300A84799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155E123F51BA300A84799 /* SceneDelegate.swift */; };
-		B7B155E423F51BA300A84799 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155E323F51BA300A84799 /* ViewController.swift */; };
+		B7B155E423F51BA300A84799 /* RandamDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155E323F51BA300A84799 /* RandamDemoViewController.swift */; };
 		B7B155E723F51BA300A84799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B155E523F51BA300A84799 /* Main.storyboard */; };
 		B7B155E923F51BA800A84799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7B155E823F51BA800A84799 /* Assets.xcassets */; };
 		B7B155EC23F51BA800A84799 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B155EA23F51BA800A84799 /* LaunchScreen.storyboard */; };
@@ -27,6 +36,8 @@
 		B7B1560223F51BA800A84799 /* TestProgressMaskViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1560123F51BA800A84799 /* TestProgressMaskViewUITests.swift */; };
 		B7B1561223F57AAF00A84799 /* ProgressMaskView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */; };
 		B7B1561323F57AAF00A84799 /* ProgressMaskView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B7B1561623F598CB00A84799 /* ParameterControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1561523F598CB00A84799 /* ParameterControlView.xib */; };
+		B7B1561823F5991500A84799 /* ProgressMaskBarParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1561723F5991500A84799 /* ProgressMaskBarParameter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +81,15 @@
 /* Begin PBXFileReference section */
 		B701D49522DF433B0075107E /* LineArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcView.swift; sourceTree = "<group>"; };
 		B7075DAD22E25BE5007C620A /* RotateLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateLayer.swift; sourceTree = "<group>"; };
+		B72F5C0723F64C3D003D0F4B /* ParameterControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterControlView.swift; sourceTree = "<group>"; };
+		B72F5C0923F654B1003D0F4B /* SidewayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidewayView.swift; sourceTree = "<group>"; };
+		B72F5C0D23F67019003D0F4B /* SimpleRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleRView.swift; path = TestProgressMaskView/CommonParts/SimpleRView.swift; sourceTree = SOURCE_ROOT; };
+		B72F5C1023F67751003D0F4B /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		B72F5C1223F67996003D0F4B /* ParameterDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterDemoViewController.swift; sourceTree = "<group>"; };
+		B72F5C1523F688F2003D0F4B /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		B72F5C1723F68952003D0F4B /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
+		B72F5C1B23F690BB003D0F4B /* BinaryFloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPointExtensions.swift; sourceTree = "<group>"; };
+		B72F5C1D23F6E7DF003D0F4B /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcRotateView.swift; sourceTree = "<group>"; };
 		B73C2F5F22DF5B1E005BC4E8 /* ArcShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcShape.swift; sourceTree = "<group>"; };
 		B73C2F6122DFB1EA005BC4E8 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -85,7 +105,7 @@
 		B7B155DD23F51BA300A84799 /* TestProgressMaskView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProgressMaskView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B155DF23F51BA300A84799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B155E123F51BA300A84799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B7B155E323F51BA300A84799 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B7B155E323F51BA300A84799 /* RandamDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandamDemoViewController.swift; sourceTree = "<group>"; };
 		B7B155E623F51BA300A84799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7B155E823F51BA800A84799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7B155EB23F51BA800A84799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,6 +116,8 @@
 		B7B155FD23F51BA800A84799 /* TestProgressMaskViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestProgressMaskViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B1560123F51BA800A84799 /* TestProgressMaskViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProgressMaskViewUITests.swift; sourceTree = "<group>"; };
 		B7B1560323F51BA800A84799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7B1561523F598CB00A84799 /* ParameterControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParameterControlView.xib; sourceTree = "<group>"; };
+		B7B1561723F5991500A84799 /* ProgressMaskBarParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskBarParameter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +161,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B72F5C1423F688DE003D0F4B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B72F5C1523F688F2003D0F4B /* UIColorExtensions.swift */,
+				B72F5C1723F68952003D0F4B /* CGFloatExtensions.swift */,
+				B72F5C1B23F690BB003D0F4B /* BinaryFloatingPointExtensions.swift */,
+				B72F5C1D23F6E7DF003D0F4B /* UIViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B72F5C2023F6F7BE003D0F4B /* CommonParts */ = {
+			isa = PBXGroup;
+			children = (
+				B72F5C0D23F67019003D0F4B /* SimpleRView.swift */,
+				B72F5C0923F654B1003D0F4B /* SidewayView.swift */,
+				B7B1561523F598CB00A84799 /* ParameterControlView.xib */,
+				B72F5C0723F64C3D003D0F4B /* ParameterControlView.swift */,
+			);
+			path = CommonParts;
+			sourceTree = "<group>";
+		};
 		B74B28A822D201DC00D111F3 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +213,7 @@
 			children = (
 				B74B28B522D201DC00D111F3 /* ProgressMaskView.h */,
 				B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */,
+				B7B1561723F5991500A84799 /* ProgressMaskBarParameter.swift */,
 				B73125EA22DA2EC5006D767F /* LineArcRotateView.swift */,
 				B701D49522DF433B0075107E /* LineArcView.swift */,
 				B7075DAD22E25BE5007C620A /* RotateLayer.swift */,
@@ -193,10 +238,14 @@
 		B7B155DE23F51BA300A84799 /* TestProgressMaskView */ = {
 			isa = PBXGroup;
 			children = (
+				B72F5C1423F688DE003D0F4B /* Extensions */,
+				B72F5C2023F6F7BE003D0F4B /* CommonParts */,
 				B7B155DF23F51BA300A84799 /* AppDelegate.swift */,
 				B7B155E123F51BA300A84799 /* SceneDelegate.swift */,
-				B7B155E323F51BA300A84799 /* ViewController.swift */,
 				B7B155E523F51BA300A84799 /* Main.storyboard */,
+				B72F5C1023F67751003D0F4B /* MainTableViewController.swift */,
+				B7B155E323F51BA300A84799 /* RandamDemoViewController.swift */,
+				B72F5C1223F67996003D0F4B /* ParameterDemoViewController.swift */,
 				B7B155E823F51BA800A84799 /* Assets.xcassets */,
 				B7B155EA23F51BA800A84799 /* LaunchScreen.storyboard */,
 				B7B155ED23F51BA800A84799 /* Info.plist */,
@@ -406,6 +455,7 @@
 			files = (
 				B7B155EC23F51BA800A84799 /* LaunchScreen.storyboard in Resources */,
 				B7B155E923F51BA800A84799 /* Assets.xcassets in Resources */,
+				B7B1561623F598CB00A84799 /* ParameterControlView.xib in Resources */,
 				B7B155E723F51BA300A84799 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7B1561823F5991500A84799 /* ProgressMaskBarParameter.swift in Sources */,
 				B73125EB22DA2EC5006D767F /* LineArcRotateView.swift in Sources */,
 				B701D49622DF433B0075107E /* LineArcView.swift in Sources */,
 				B74B28CD22D203CC00D111F3 /* ProgressMaskView.swift in Sources */,
@@ -453,9 +504,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7B155E423F51BA300A84799 /* ViewController.swift in Sources */,
+				B72F5C1623F688F2003D0F4B /* UIColorExtensions.swift in Sources */,
+				B7B155E423F51BA300A84799 /* RandamDemoViewController.swift in Sources */,
 				B7B155E023F51BA300A84799 /* AppDelegate.swift in Sources */,
+				B72F5C0823F64C3D003D0F4B /* ParameterControlView.swift in Sources */,
+				B72F5C1823F68952003D0F4B /* CGFloatExtensions.swift in Sources */,
+				B72F5C1323F67996003D0F4B /* ParameterDemoViewController.swift in Sources */,
 				B7B155E223F51BA300A84799 /* SceneDelegate.swift in Sources */,
+				B72F5C0A23F654B1003D0F4B /* SidewayView.swift in Sources */,
+				B72F5C0F23F67020003D0F4B /* SimpleRView.swift in Sources */,
+				B72F5C1123F67751003D0F4B /* MainTableViewController.swift in Sources */,
+				B72F5C1E23F6E7DF003D0F4B /* UIViewExtensions.swift in Sources */,
+				B72F5C1C23F690BB003D0F4B /* BinaryFloatingPointExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

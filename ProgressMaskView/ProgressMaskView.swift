@@ -28,7 +28,12 @@ private let titleHeightInset: CGFloat = 16
 ///  Easy to append to existing view controll to let user wait tentatively.
 @IBDesignable
 public class ProgressMaskView : UIView {
-    
+
+    public enum BarType {
+        case activity
+        case progress
+    }
+
     /// Text of the title label.
     @IBInspectable public var title: String {
         set { titleLabel.text = newValue }
@@ -217,6 +222,27 @@ public class ProgressMaskView : UIView {
         titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: -titleHeightInset).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: backgroundRoundView.centerYAnchor).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: backgroundRoundView.centerXAnchor).isActive = true
+    }
+
+    /// Setup all parameters of activity or progress bar.
+    /// - Parameters:
+    ///   - bar: which bar to be set.
+    ///   - parameter: parameters of the bar
+    public func setParameters(bar: BarType, parameter: ProgressMaskBarParameter) {
+        switch bar {
+        case .activity:
+            activityColor1 = parameter.color1
+            activityColor2 = parameter.color2
+            activityBlendLevel = parameter.blend
+            activityRadiusRatio = parameter.radiusRatio
+            activityWidthRatio = parameter.widthRatio
+        case .progress:
+            progressColor1 = parameter.color1
+            progressColor2 = parameter.color2
+            progressBlendLevel = parameter.blend
+            progressRadiusRatio = parameter.radiusRatio
+            progressWidthRatio = parameter.widthRatio
+        }
     }
     
     /// Add this view onto the given view and set constraint for 4 sides.

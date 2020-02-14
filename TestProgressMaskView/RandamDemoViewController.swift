@@ -9,7 +9,7 @@
 import UIKit
 import ProgressMaskView
 
-class ViewController: UIViewController {
+class RandamDemoViewController: UIViewController {
 
     @IBOutlet weak var activityColor1View: UIView!
     @IBOutlet weak var activityColor2View: UIView!
@@ -59,24 +59,20 @@ class ViewController: UIViewController {
         let view = ProgressMaskView()
 
         view.title = "Test..."
-        view.activityColor1 = makeRandomColor()
-        view.activityColor2 = makeRandomColor()
-        view.activityBlendLevel = random
+        view.activityColor1 = .random
+        view.activityColor2 = .random
+        view.activityBlendLevel = .random
         view.activityRadiusRatio = 0.5//random / 3 + 0.1
-        view.activityWidthRatio = random / 3 + 0.15
-        view.progressColor1 = makeRandomColor()
-        view.progressColor2 = makeRandomColor()
-        view.progressBlendLevel = random / 2 + 0.5
-        view.progressRadiusRatio = random / 4 + 0.25
-        view.progressWidthRatio = random / 4 + 0.25
+        view.activityWidthRatio = .random / 3 + 0.15
+        view.progressColor1 = .random
+        view.progressColor2 = .random
+        view.progressBlendLevel = .random / 2 + 0.5
+        view.progressRadiusRatio = .random / 4 + 0.25
+        view.progressWidthRatio = .random / 4 + 0.25
 
         view.install(to: self)
         view.showIn(second: 1.0)
         return view
-    }
-
-    private func makeRandomColor() -> UIColor {
-        return UIColor(red: random, green: random, blue: random, alpha: 1)
     }
 
     private func showParameters(_ view: ProgressMaskView) {

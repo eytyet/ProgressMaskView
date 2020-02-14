@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JjR-D9-5KN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,16 +8,84 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main Table View Controller-->
+        <scene sceneID="Fvo-Bg-sOI">
+            <objects>
+                <tableViewController id="JjR-D9-5KN" customClass="MainTableViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MZD-gX-aL8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Demo 1" id="ljB-Ko-Rce">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="thA-SP-xcc" style="IBUITableViewCellStyleDefault" id="rXg-a2-gIM">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rXg-a2-gIM" id="HJY-Ap-gLO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Random ProgressMaskViews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="thA-SP-xcc">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="krh-60-CVP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Demo 2" id="Cgm-0G-Aci">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="AC8-qk-Ddw" style="IBUITableViewCellStyleDefault" id="xd5-C6-Gcf">
+                                        <rect key="frame" x="0.0" y="127.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xd5-C6-Gcf" id="SRc-av-S8j">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Set Parameters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AC8-qk-Ddw">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bdi-oN-992" kind="show" id="c4G-IU-Z4f"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="JjR-D9-5KN" id="duI-uA-zH3"/>
+                            <outlet property="delegate" destination="JjR-D9-5KN" id="V58-C5-xXr"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YjI-he-AGm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-957" y="339"/>
+        </scene>
+        <!--Randam Demo View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RandamDemoViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QV3-Gi-6eX">
-                                <rect key="frame" x="57" y="44" width="300" height="165"/>
+                                <rect key="frame" x="57" y="0.0" width="300" height="165"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKQ-V7-iya">
                                         <rect key="frame" x="108.5" y="0.0" width="83.5" height="31.5"/>
@@ -100,7 +168,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fba-mO-uTi">
-                                <rect key="frame" x="57" y="697" width="300" height="165"/>
+                                <rect key="frame" x="57" y="643" width="300" height="165"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogu-gC-TRt">
                                         <rect key="frame" x="101" y="0.0" width="98.5" height="31.5"/>
@@ -192,6 +260,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="FSa-XG-MJF"/>
                     <connections>
                         <outlet property="activityBlendLabel" destination="sAp-eo-V5B" id="yeK-Jz-EfA"/>
                         <outlet property="activityColor1View" destination="orj-Pm-QIk" id="WlJ-NU-feh"/>
@@ -207,7 +276,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="106.47321428571428"/>
+            <point key="canvasLocation" x="32" y="9"/>
+        </scene>
+        <!--Parameter Demo View Controller-->
+        <scene sceneID="3NE-CF-luj">
+            <objects>
+                <viewController id="bdi-oN-992" customClass="ParameterDemoViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VyG-BZ-Skr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-Gs-Q7A" customClass="ParameterControlView" customModule="TestProgressMaskView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="471" width="414" height="168.5"/>
+                                <color key="backgroundColor" red="1" green="0.896484375" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctN-QO-Wcq" customClass="ParameterControlView" customModule="TestProgressMaskView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="639.5" width="414" height="168.5"/>
+                                <color key="backgroundColor" red="0.78553082191780821" green="0.95186750856164382" blue="0.86009738869863017" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6r-OW-ynb" customClass="ProgressMaskView" customModule="ProgressMaskView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="471"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ctN-QO-Wcq" firstAttribute="height" secondItem="VyG-BZ-Skr" secondAttribute="height" multiplier="0.2" id="0jg-Ak-7il"/>
+                            <constraint firstItem="u6r-OW-ynb" firstAttribute="leading" secondItem="VyG-BZ-Skr" secondAttribute="leading" id="58V-0D-nzf"/>
+                            <constraint firstItem="fcr-Gs-Q7A" firstAttribute="leading" secondItem="VyG-BZ-Skr" secondAttribute="leading" id="Ehh-Vf-Kgu"/>
+                            <constraint firstItem="68n-jF-RbB" firstAttribute="bottom" secondItem="ctN-QO-Wcq" secondAttribute="bottom" id="N62-oA-2Bg"/>
+                            <constraint firstAttribute="trailing" secondItem="fcr-Gs-Q7A" secondAttribute="trailing" id="PqT-r1-I0M"/>
+                            <constraint firstItem="ctN-QO-Wcq" firstAttribute="top" secondItem="fcr-Gs-Q7A" secondAttribute="bottom" id="V1x-Vr-Hkp"/>
+                            <constraint firstItem="fcr-Gs-Q7A" firstAttribute="height" secondItem="ctN-QO-Wcq" secondAttribute="height" id="VgL-8M-5mq"/>
+                            <constraint firstItem="fcr-Gs-Q7A" firstAttribute="top" secondItem="u6r-OW-ynb" secondAttribute="bottom" id="W1b-b8-CBF"/>
+                            <constraint firstItem="u6r-OW-ynb" firstAttribute="top" secondItem="VyG-BZ-Skr" secondAttribute="top" id="bNe-Ae-mml"/>
+                            <constraint firstAttribute="trailing" secondItem="u6r-OW-ynb" secondAttribute="trailing" id="e3E-5K-IU8"/>
+                            <constraint firstItem="ctN-QO-Wcq" firstAttribute="leading" secondItem="68n-jF-RbB" secondAttribute="leading" id="sNd-zU-yTU"/>
+                            <constraint firstItem="68n-jF-RbB" firstAttribute="trailing" secondItem="ctN-QO-Wcq" secondAttribute="trailing" id="z8b-hk-rde"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="68n-jF-RbB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NXU-PV-B4B"/>
+                    <connections>
+                        <outlet property="activityControlView" destination="fcr-Gs-Q7A" id="w2V-Yj-dRH"/>
+                        <outlet property="progressControlerView" destination="ctN-QO-Wcq" id="H8f-jH-0Vp"/>
+                        <outlet property="progressMaskView" destination="u6r-OW-ynb" id="S7u-G1-gDY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zwz-aH-bl2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32" y="717"/>
         </scene>
     </scenes>
 </document>

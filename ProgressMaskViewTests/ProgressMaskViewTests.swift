@@ -2,7 +2,7 @@
 //  ProgressMaskViewTests.swift
 //  ProgressMaskViewTests
 //
-//  Created by Yu Software on 2019/07/07.
+//  Created by eytyet on 2019/07/07.
 //  Copyright © 2019 Yu Software. All rights reserved.
 //
 
