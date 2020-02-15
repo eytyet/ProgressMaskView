@@ -24,7 +24,7 @@ public protocol ArcShape {
     /// widthAndHeight * arcRadiusRatio.
     var arcRadius: CGFloat { get }
 
-    /// Set width of the line of circumference as a ratio against widthAndHeight.
+    /// Set width of the line of circumference as a ratio against widthAndHeight. 0 - arcRadiusRatio.
     var arcLineWidthRatio: CGFloat { get set }
 
     /// widthAndHeight * arcLineWidthRatio.
@@ -46,20 +46,23 @@ public protocol ArcShape {
     var endAngle: CGFloat { get set }
 }
 
-/// Default implementations
-extension ArcShape where Self: UIView {
+// MARK : - Default implementations
+
+extension ArcShape {
     
     /// Radius of arc. Rasius is from the center of circle to the center of line width.
-    /// Keep (arcRadiusRatio + arcLineWidthRatio) < 0.5.
     public var arcRadius: CGFloat {
-        return widthAndHeight * arcRadiusRatio * arcRadiusRatio * 2 / (arcRadiusRatio*2 + arcLineWidthRatio)
+        return widthAndHeight * (arcRadiusRatio - arcLineWidthRatio / 2)
     }
     
     /// Line width.
     public var arcLineWidth: CGFloat {
-        return widthAndHeight * arcLineWidthRatio * arcRadiusRatio * 2 / (arcRadiusRatio*2 + arcLineWidthRatio)
+        return widthAndHeight * arcLineWidthRatio
     }
-    
+}
+
+extension ArcShape where Self: UIView {
+
     /// Center position.
     public var arcCenter: CGPoint {
         let minLength = min(bounds.width, bounds.height)
