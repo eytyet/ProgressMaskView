@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TestProgressMaskView
+@testable import TestProgressMaskViewApp
 
 class TestProgressMaskViewTests: XCTestCase {
 
@@ -19,9 +19,13 @@ class TestProgressMaskViewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testScope() {
+        /*// Could not be built with lines below
+        let _ = LineArcRotateView()
+        let _ = LineArcView()
+        let _ = LoatateLayer()
+        let _ = ArcShape()
+        */
     }
 
     func testPerformanceExample() {

@@ -27,7 +27,7 @@ private let titleHeightInset: CGFloat = 16
 /// Show activity and progress bar in circle shape.
 ///  Easy to append to existing view controll to let user wait tentatively.
 @IBDesignable
-public class ProgressMaskView : UIView {
+public class ProgressMaskView: UIView {
 
     public enum BarType {
         case activity

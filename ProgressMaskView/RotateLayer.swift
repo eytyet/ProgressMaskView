@@ -9,9 +9,9 @@
 import Foundation
 
 /// Layer with automatic rotation feature.
-open class RotateLayer: CALayer {
+class RotateLayer: CALayer {
     /// Rotation degree offset
-    dynamic public var offsetAngle: Float = 0 {
+    dynamic var offsetAngle: Float = 0 {
         didSet {
             transform = Tool.matrixRotateZ(offsetAngle)
         }
@@ -19,17 +19,17 @@ open class RotateLayer: CALayer {
     
     // MARK: - CALayer
     
-    public override init() {
+    override init() {
         super.init()
         transform = Tool.matrixRotateZ(0.0)
     }
  
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     /// This is used to duplicate layers to presentation layers.
-    public override init(layer: Any) {
+    override init(layer: Any) {
         super.init(layer: layer)
         let original = layer as! RotateLayer
         offsetAngle = original.offsetAngle
@@ -37,7 +37,7 @@ open class RotateLayer: CALayer {
     }
     
     /// Notify needs of redraw.
-    open override class func needsDisplay(forKey key: String) -> Bool {
+    override class func needsDisplay(forKey key: String) -> Bool {
         if key == "offsetAngle" {
             return false
         }
@@ -50,7 +50,7 @@ open class RotateLayer: CALayer {
     /// - Parameters:
     ///   - duration: Time of one round.
     ///   - startAngle: Start angle. omit it to start current location.
-    public func rotate(duration: TimeInterval, from startAngle: Float? = nil) {
+    func rotate(duration: TimeInterval, from startAngle: Float? = nil) {
         guard animation(forKey: "transform.rotation.z") == nil else { return }
         var start:Float
         if startAngle == nil {
@@ -67,7 +67,7 @@ open class RotateLayer: CALayer {
     }
     
     /// Stop rotation.
-    public func stopRotation() {
+    func stopRotation() {
         if let current = presentation() {
             transform = current.transform
         }
