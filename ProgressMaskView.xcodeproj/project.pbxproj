@@ -83,7 +83,7 @@
 		B7075DAD22E25BE5007C620A /* RotateLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateLayer.swift; sourceTree = "<group>"; };
 		B72F5C0723F64C3D003D0F4B /* ParameterControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterControlView.swift; sourceTree = "<group>"; };
 		B72F5C0923F654B1003D0F4B /* SidewayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidewayView.swift; sourceTree = "<group>"; };
-		B72F5C0D23F67019003D0F4B /* SimpleRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleRView.swift; path = TestProgressMaskView/CommonParts/SimpleRView.swift; sourceTree = SOURCE_ROOT; };
+		B72F5C0D23F67019003D0F4B /* SimpleRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleRView.swift; path = TestProgressMaskViewApp/CommonParts/SimpleRView.swift; sourceTree = SOURCE_ROOT; };
 		B72F5C1023F67751003D0F4B /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		B72F5C1223F67996003D0F4B /* ParameterDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterDemoViewController.swift; sourceTree = "<group>"; };
 		B72F5C1523F688F2003D0F4B /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskView.swift; sourceTree = "<group>"; };
 		B74B28D022D2134600D111F3 /* SimpleRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRView.swift; sourceTree = "<group>"; };
 		B761636322E5148D00FC3D07 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		B7B155DD23F51BA300A84799 /* TestProgressMaskView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProgressMaskView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7B155DD23F51BA300A84799 /* TestProgressMaskViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProgressMaskViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B155DF23F51BA300A84799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B155E123F51BA300A84799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B7B155E323F51BA300A84799 /* RandamDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandamDemoViewController.swift; sourceTree = "<group>"; };
@@ -110,10 +110,10 @@
 		B7B155E823F51BA800A84799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7B155EB23F51BA800A84799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7B155ED23F51BA800A84799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7B155F223F51BA800A84799 /* TestProgressMaskViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestProgressMaskViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7B155F223F51BA800A84799 /* TestProgressMaskViewAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestProgressMaskViewAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B155F623F51BA800A84799 /* TestProgressMaskViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProgressMaskViewTests.swift; sourceTree = "<group>"; };
 		B7B155F823F51BA800A84799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7B155FD23F51BA800A84799 /* TestProgressMaskViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestProgressMaskViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7B155FD23F51BA800A84799 /* TestProgressMaskViewAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestProgressMaskViewAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B1560123F51BA800A84799 /* TestProgressMaskViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProgressMaskViewUITests.swift; sourceTree = "<group>"; };
 		B7B1560323F51BA800A84799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7B1561523F598CB00A84799 /* ParameterControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParameterControlView.xib; sourceTree = "<group>"; };
@@ -188,9 +188,9 @@
 			children = (
 				B74B28B422D201DC00D111F3 /* ProgressMaskView */,
 				B74B28BF22D201DC00D111F3 /* ProgressMaskViewTests */,
-				B7B155DE23F51BA300A84799 /* TestProgressMaskView */,
-				B7B155F523F51BA800A84799 /* TestProgressMaskViewTests */,
-				B7B1560023F51BA800A84799 /* TestProgressMaskViewUITests */,
+				B7B155DE23F51BA300A84799 /* TestProgressMaskViewApp */,
+				B7B155F523F51BA800A84799 /* TestProgressMaskViewAppTests */,
+				B7B1560023F51BA800A84799 /* TestProgressMaskViewAppUITests */,
 				B74B28B322D201DC00D111F3 /* Products */,
 				B7B1560E23F5677900A84799 /* Frameworks */,
 			);
@@ -201,9 +201,9 @@
 			children = (
 				B74B28B222D201DC00D111F3 /* ProgressMaskView.framework */,
 				B74B28BB22D201DC00D111F3 /* ProgressMaskViewTests.xctest */,
-				B7B155DD23F51BA300A84799 /* TestProgressMaskView.app */,
-				B7B155F223F51BA800A84799 /* TestProgressMaskViewTests.xctest */,
-				B7B155FD23F51BA800A84799 /* TestProgressMaskViewUITests.xctest */,
+				B7B155DD23F51BA300A84799 /* TestProgressMaskViewApp.app */,
+				B7B155F223F51BA800A84799 /* TestProgressMaskViewAppTests.xctest */,
+				B7B155FD23F51BA800A84799 /* TestProgressMaskViewAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			path = ProgressMaskViewTests;
 			sourceTree = "<group>";
 		};
-		B7B155DE23F51BA300A84799 /* TestProgressMaskView */ = {
+		B7B155DE23F51BA300A84799 /* TestProgressMaskViewApp */ = {
 			isa = PBXGroup;
 			children = (
 				B72F5C1423F688DE003D0F4B /* Extensions */,
@@ -250,25 +250,25 @@
 				B7B155EA23F51BA800A84799 /* LaunchScreen.storyboard */,
 				B7B155ED23F51BA800A84799 /* Info.plist */,
 			);
-			path = TestProgressMaskView;
+			path = TestProgressMaskViewApp;
 			sourceTree = "<group>";
 		};
-		B7B155F523F51BA800A84799 /* TestProgressMaskViewTests */ = {
+		B7B155F523F51BA800A84799 /* TestProgressMaskViewAppTests */ = {
 			isa = PBXGroup;
 			children = (
 				B7B155F623F51BA800A84799 /* TestProgressMaskViewTests.swift */,
 				B7B155F823F51BA800A84799 /* Info.plist */,
 			);
-			path = TestProgressMaskViewTests;
+			path = TestProgressMaskViewAppTests;
 			sourceTree = "<group>";
 		};
-		B7B1560023F51BA800A84799 /* TestProgressMaskViewUITests */ = {
+		B7B1560023F51BA800A84799 /* TestProgressMaskViewAppUITests */ = {
 			isa = PBXGroup;
 			children = (
 				B7B1560123F51BA800A84799 /* TestProgressMaskViewUITests.swift */,
 				B7B1560323F51BA800A84799 /* Info.plist */,
 			);
-			path = TestProgressMaskViewUITests;
+			path = TestProgressMaskViewAppUITests;
 			sourceTree = "<group>";
 		};
 		B7B1560E23F5677900A84799 /* Frameworks */ = {
@@ -328,9 +328,9 @@
 			productReference = B74B28BB22D201DC00D111F3 /* ProgressMaskViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B7B155DC23F51BA300A84799 /* TestProgressMaskView */ = {
+		B7B155DC23F51BA300A84799 /* TestProgressMaskViewApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7B1560A23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskView" */;
+			buildConfigurationList = B7B1560A23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewApp" */;
 			buildPhases = (
 				B7B155D923F51BA300A84799 /* Sources */,
 				B7B155DA23F51BA300A84799 /* Frameworks */,
@@ -341,14 +341,14 @@
 			);
 			dependencies = (
 			);
-			name = TestProgressMaskView;
+			name = TestProgressMaskViewApp;
 			productName = TestProgressMaskView;
-			productReference = B7B155DD23F51BA300A84799 /* TestProgressMaskView.app */;
+			productReference = B7B155DD23F51BA300A84799 /* TestProgressMaskViewApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B7B155F123F51BA800A84799 /* TestProgressMaskViewTests */ = {
+		B7B155F123F51BA800A84799 /* TestProgressMaskViewAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7B1560B23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewTests" */;
+			buildConfigurationList = B7B1560B23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewAppTests" */;
 			buildPhases = (
 				B7B155EE23F51BA800A84799 /* Sources */,
 				B7B155EF23F51BA800A84799 /* Frameworks */,
@@ -359,14 +359,14 @@
 			dependencies = (
 				B7B155F423F51BA800A84799 /* PBXTargetDependency */,
 			);
-			name = TestProgressMaskViewTests;
+			name = TestProgressMaskViewAppTests;
 			productName = TestProgressMaskViewTests;
-			productReference = B7B155F223F51BA800A84799 /* TestProgressMaskViewTests.xctest */;
+			productReference = B7B155F223F51BA800A84799 /* TestProgressMaskViewAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B7B155FC23F51BA800A84799 /* TestProgressMaskViewUITests */ = {
+		B7B155FC23F51BA800A84799 /* TestProgressMaskViewAppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7B1560C23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewUITests" */;
+			buildConfigurationList = B7B1560C23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewAppUITests" */;
 			buildPhases = (
 				B7B155F923F51BA800A84799 /* Sources */,
 				B7B155FA23F51BA800A84799 /* Frameworks */,
@@ -377,9 +377,9 @@
 			dependencies = (
 				B7B155FF23F51BA800A84799 /* PBXTargetDependency */,
 			);
-			name = TestProgressMaskViewUITests;
+			name = TestProgressMaskViewAppUITests;
 			productName = TestProgressMaskViewUITests;
-			productReference = B7B155FD23F51BA800A84799 /* TestProgressMaskViewUITests.xctest */;
+			productReference = B7B155FD23F51BA800A84799 /* TestProgressMaskViewAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -427,9 +427,9 @@
 			targets = (
 				B74B28B122D201DC00D111F3 /* ProgressMaskView */,
 				B74B28BA22D201DC00D111F3 /* ProgressMaskViewTests */,
-				B7B155DC23F51BA300A84799 /* TestProgressMaskView */,
-				B7B155F123F51BA800A84799 /* TestProgressMaskViewTests */,
-				B7B155FC23F51BA800A84799 /* TestProgressMaskViewUITests */,
+				B7B155DC23F51BA300A84799 /* TestProgressMaskViewApp */,
+				B7B155F123F51BA800A84799 /* TestProgressMaskViewAppTests */,
+				B7B155FC23F51BA800A84799 /* TestProgressMaskViewAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -545,12 +545,12 @@
 		};
 		B7B155F423F51BA800A84799 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B7B155DC23F51BA300A84799 /* TestProgressMaskView */;
+			target = B7B155DC23F51BA300A84799 /* TestProgressMaskViewApp */;
 			targetProxy = B7B155F323F51BA800A84799 /* PBXContainerItemProxy */;
 		};
 		B7B155FF23F51BA800A84799 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B7B155DC23F51BA300A84799 /* TestProgressMaskView */;
+			target = B7B155DC23F51BA300A84799 /* TestProgressMaskViewApp */;
 			targetProxy = B7B155FE23F51BA800A84799 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -736,7 +736,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = ProgressMaskView/Info.plist;
+				INFOPLIST_FILE = ProgressMaskViewApp/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -777,7 +777,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NUGY3GPKNT;
-				INFOPLIST_FILE = ProgressMaskViewTests/Info.plist;
+				INFOPLIST_FILE = ProgressMaskViewAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -796,7 +796,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R9A97CK9U4;
-				INFOPLIST_FILE = TestProgressMaskView/Info.plist;
+				INFOPLIST_FILE = TestProgressMaskViewApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -815,7 +815,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R9A97CK9U4;
-				INFOPLIST_FILE = TestProgressMaskView/Info.plist;
+				INFOPLIST_FILE = TestProgressMaskViewApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -835,7 +835,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R9A97CK9U4;
-				INFOPLIST_FILE = TestProgressMaskViewTests/Info.plist;
+				INFOPLIST_FILE = TestProgressMaskViewAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -857,7 +857,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R9A97CK9U4;
-				INFOPLIST_FILE = TestProgressMaskViewTests/Info.plist;
+				INFOPLIST_FILE = TestProgressMaskViewAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -878,7 +878,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R9A97CK9U4;
-				INFOPLIST_FILE = TestProgressMaskViewUITests/Info.plist;
+				INFOPLIST_FILE = TestProgressMaskViewAppUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -899,7 +899,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R9A97CK9U4;
-				INFOPLIST_FILE = TestProgressMaskViewUITests/Info.plist;
+				INFOPLIST_FILE = TestProgressMaskViewAppUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -944,7 +944,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7B1560A23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskView" */ = {
+		B7B1560A23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7B1560423F51BA800A84799 /* Debug */,
@@ -953,7 +953,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7B1560B23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewTests" */ = {
+		B7B1560B23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7B1560623F51BA800A84799 /* Debug */,
@@ -962,7 +962,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7B1560C23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewUITests" */ = {
+		B7B1560C23F51BA800A84799 /* Build configuration list for PBXNativeTarget "TestProgressMaskViewAppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7B1560823F51BA800A84799 /* Debug */,
