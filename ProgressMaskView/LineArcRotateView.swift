@@ -2,7 +2,7 @@
 //  LineArcView.swift
 //  ProgressMaskView
 //
-//  Created by Yu Software on 2019/07/13.
+//  Created by eytyet on 2019/07/13.
 //  Copyright © 2019 Yu Software. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 
 /// UIView of a thick beautiful arc. Rotatable.
 @IBDesignable
-open class LineArcRotateView : UIView, ArcShape {
+open class LineArcRotateView: UIView, ArcShape {
     
     /// Arc view on front side.
     private let foregroundArcView: LineArcView
@@ -39,9 +39,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Size of view. Only one value since it must be square
     @IBInspectable public var widthAndHeight: CGFloat {
-        get {
-            return foregroundArcView.widthAndHeight
-        }
+        get { foregroundArcView.widthAndHeight }
         set {
             foregroundArcView.widthAndHeight = newValue
             backgroundArcView.widthAndHeight = newValue
@@ -50,9 +48,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// If true, the diameter is always smaller than widthAndHeight.
     @IBInspectable public var autoFitInside: Bool {
-        get {
-            return foregroundArcView.autoFitInside
-        }
+        get { foregroundArcView.autoFitInside }
         set {
             foregroundArcView.autoFitInside = newValue
             backgroundArcView.autoFitInside = newValue
@@ -61,9 +57,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Ratio of the arc radius against widthAndHeight. 0.5 is maximum.
     @IBInspectable public var arcRadiusRatio: CGFloat {
-        get {
-            return foregroundArcView.arcRadiusRatio
-        }
+        get { foregroundArcView.arcRadiusRatio }
         set {
             foregroundArcView.arcRadiusRatio = newValue
             backgroundArcView.arcRadiusRatio = newValue
@@ -73,9 +67,7 @@ open class LineArcRotateView : UIView, ArcShape {
     /// Ratio of the arc line width against widthAndHeight.
     /// If arcRadiusRatio is 0.45 and arcLineWidthRatio is 0.02, line fills 0.43-0.46.
     @IBInspectable public var arcLineWidthRatio: CGFloat {
-        get {
-            return foregroundArcView.arcLineWidthRatio
-        }
+        get { foregroundArcView.arcLineWidthRatio }
         set {
             foregroundArcView.arcLineWidthRatio = newValue
             backgroundArcView.arcLineWidthRatio = newValue
@@ -84,9 +76,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Ratio of the arc center.
     @IBInspectable public var arcCenterRatio: CGPoint {
-        get {
-            return foregroundArcView.arcCenterRatio
-        }
+        get { foregroundArcView.arcCenterRatio }
         set {
             foregroundArcView.arcCenterRatio = newValue
             backgroundArcView.arcCenterRatio = newValue
@@ -95,9 +85,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Ratio of the arc line color mix.
     @IBInspectable public var arcGradation: CGFloat {
-        get {
-            return foregroundArcView.arcGradation
-        }
+        get { foregroundArcView.arcGradation }
         set {
             foregroundArcView.arcGradation = newValue
             backgroundArcView.arcGradation = newValue
@@ -106,29 +94,19 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// Arc line fill color 1
     @IBInspectable public var arcColor1: UIColor {
-        get {
-            return foregroundArcView.lineColor
-        }
-        set {
-            foregroundArcView.lineColor = newValue
-        }
+        get { foregroundArcView.lineColor }
+        set { foregroundArcView.lineColor = newValue }
     }
     
     /// Arc line fill color 2
     @IBInspectable public var arcColor2: UIColor {
-        get {
-            return backgroundArcView.lineColor
-        }
-        set {
-            backgroundArcView.lineColor = newValue
-        }
+        get { backgroundArcView.lineColor }
+        set { backgroundArcView.lineColor = newValue }
     }
     
     /// Start angle
     @IBInspectable public var startAngle: CGFloat {
-        get {
-            return foregroundArcView.startAngle
-        }
+        get { foregroundArcView.startAngle }
         set {
             foregroundArcView.startAngle = newValue
             backgroundArcView.startAngle = newValue + angleDifference
@@ -137,9 +115,7 @@ open class LineArcRotateView : UIView, ArcShape {
     
     /// End angle. It should be endAngle < startAngle.
     @IBInspectable public var endAngle: CGFloat {
-        get {
-            return foregroundArcView.endAngle
-        }
+        get { foregroundArcView.endAngle }
         set {
             foregroundArcView.endAngle = newValue
             backgroundArcView.endAngle = newValue + angleDifference
@@ -172,7 +148,7 @@ open class LineArcRotateView : UIView, ArcShape {
         addAndSetup(backgroundArcView)
         addAndSetup(foregroundArcView)
         let squareConstraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)
-        self.addConstraint(squareConstraint)
+        addConstraint(squareConstraint)
         foregroundArcView.shouldAnimate = true
         backgroundArcView.shouldAnimate = true
         foregroundArcLayer = (foregroundArcView.layer as! RotateLayer)
@@ -226,7 +202,7 @@ open class LineArcRotateView : UIView, ArcShape {
             }
             view.shouldAnimate = true
         }
-        setup(foregroundArcView, diff:0)
+        setup(foregroundArcView, diff: 0)
         setup(backgroundArcView, diff: angleDifference)
     }
     

@@ -2,14 +2,14 @@
 //  RotateLayer.swift
 //  ProgressMaskView
 //
-//  Created by Yu Software on 2019/07/19.
+//  Created by eytyet on 2019/07/19.
 //  Copyright © 2019 Yu Software. All rights reserved.
 //
 
 import Foundation
 
 /// Layer with automatic rotation feature.
-open class RotateLayer : CALayer {
+open class RotateLayer: CALayer {
     /// Rotation degree offset
     dynamic public var offsetAngle: Float = 0 {
         didSet {
@@ -22,14 +22,13 @@ open class RotateLayer : CALayer {
     public override init() {
         super.init()
         transform = Tool.matrixRotateZ(0.0)
-        //registerRotateAnimation()
     }
  
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // This is used to duplicate layers to presentation layers.
+    /// This is used to duplicate layers to presentation layers.
     public override init(layer: Any) {
         super.init(layer: layer)
         let original = layer as! RotateLayer
@@ -37,7 +36,7 @@ open class RotateLayer : CALayer {
         transform = original.transform
     }
     
-    // Notify needs of redraw.
+    /// Notify needs of redraw.
     open override class func needsDisplay(forKey key: String) -> Bool {
         if key == "offsetAngle" {
             return false
