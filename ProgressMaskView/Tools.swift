@@ -50,3 +50,17 @@ extension UIView {
         ])
     }
 }
+
+// MARK: - DispatchQueue Extension
+
+extension DispatchQueue {
+    public func syncInMainButAsyncIfNot(_ block: @escaping () -> ()) {
+        if Thread.isMainThread {
+            block()     // Execute immediately if in the main thread.
+        } else {
+            DispatchQueue.main.async {
+                block() // Execute in Main thread asyncronously.
+            }
+        }
+    }
+}

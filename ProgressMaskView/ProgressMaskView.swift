@@ -250,28 +250,34 @@ public class ProgressMaskView : UIView {
     /// Add this view onto the given view and set constraint for 4 sides.
     /// - Parameter view: Specify a parent view.
     public func install(to view: UIView) {
-        view.addAndSetConstraint(self)
+        DispatchQueue.main.syncInMainButAsyncIfNot {
+            view.addAndSetConstraint(self)
+        }
     }
 
     /// Add this view onto the given view controller and set constraint for 4 sides.
     /// This function will install this view to the UITabBarController if exist. If not, to UINavigationController. If not, to the passed controller.
     /// - Parameter controller: Specify current UIViewController. (e.g. "self")
     public func install(to controller: UIViewController) {
-        if let tab = controller.tabBarController {
-            tab.view.addAndSetConstraint(self)
-        } else if let navi = controller.navigationController {
-            navi.view.addAndSetConstraint(self)
-        } else {
-            controller.view.addAndSetConstraint(self)
+        DispatchQueue.main.syncInMainButAsyncIfNot {
+            if let tab = controller.tabBarController {
+                tab.view.addAndSetConstraint(self)
+            } else if let navi = controller.navigationController {
+                navi.view.addAndSetConstraint(self)
+            } else {
+                controller.view.addAndSetConstraint(self)
+            }
         }
     }
 
     /// Appear. Must be called from the main thread.
     /// - Parameter second: Optional. Animation duration in second. Default is 0.3.
     public func showIn(second: TimeInterval = 0.3) {
-        startAnimation()
-        UIView.animate(withDuration: second) {
-            self.alpha = 1
+        DispatchQueue.main.syncInMainButAsyncIfNot {
+            self.startAnimation()
+            UIView.animate(withDuration: second) {
+                self.alpha = 1
+            }
         }
     }
 
@@ -281,28 +287,30 @@ public class ProgressMaskView : UIView {
     ///   - uninstall: Optional. Set true (default) to remove this view from the view hierarchly. If false, it is disappeared since alpha is 0 but remains in the view hierarchly.
     ///   - completion: Optional. completion handler.
     public func hideIn(second: TimeInterval = 0.3, uninstall: Bool = true, completion: (()->())? = nil) {
-        UIView.animate(withDuration: second, animations: {
-            self.alpha = 0
-        }, completion: { _ in
-            self.stopAnimation()
-            if uninstall {
-                self.removeFromSuperview()
-            } else {
-                self.progress = 0    // Prepare for next execution.
-            }
-            completion?()
-        })
+        DispatchQueue.main.syncInMainButAsyncIfNot {
+            UIView.animate(withDuration: second, animations: {
+                self.alpha = 0
+            }, completion: { _ in
+                self.stopAnimation()
+                if uninstall {
+                    self.removeFromSuperview()
+                } else {
+                    self.progress = 0    // Prepare for next execution.
+                }
+                completion?()
+            })
+        }
     }
     
     /// Start animation
-    public func startAnimation() {
+    private func startAnimation() {
         circleActivityView.endAngle = circleActivityView.startAngle - pi / 2
         circleActivityView.startRotation(duration: 2.0)
         startTimer()
     }
     
     /// Stop animation
-    public func stopAnimation() {
+    private func stopAnimation() {
         stopTimer()
         circleActivityView.stopRotation()
     }
