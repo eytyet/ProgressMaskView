@@ -13,8 +13,6 @@ import UIKit
 class SimpleRView: UIView {
     @IBInspectable var cornerRadius : CGFloat {
         get { layer.cornerRadius }
-        set {
-            layer.cornerRadius = newValue
-        }
+        set { layer.cornerRadius = newValue }
     }
 }

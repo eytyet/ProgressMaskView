@@ -11,8 +11,8 @@ import UIKit
 private let pi = CGFloat.pi
 private let defaultProgressColor1 = UIColor.white
 private let defaultProgressColor2 = UIColor.lightGray
-private let defaultProgressBlendLevel:CGFloat = 0.9
-private let defaultProgressRadius:CGFloat = 0.45
+private let defaultProgressBlendLevel: CGFloat = 0.9
+private let defaultProgressRadius: CGFloat = 0.45
 private let defaultProgressWidth: CGFloat = 0.05
 private let defaultActivityColor1 = UIColor.white
 private let defaultActivityColor2 = UIColor.gray
@@ -141,10 +141,10 @@ public class ProgressMaskView : UIView {
     private var circleProgressView: LineArcRotateView!
     
     /// Time for color animation of activity view..
-    private var timer:Timer?
+    private var timer: Timer?
     
     /// Parameter to control length of activity view.
-    private var animationDirection:Int = -8
+    private var animationDirection: Int = -8
     
     /// Cache of an angle unit value.
     private let angleStep = CGFloat.pi / 90
@@ -165,7 +165,7 @@ public class ProgressMaskView : UIView {
     /// default value of each property did not passed to its didSet block. So call it again at here.
     private func setup() {
 
-        self.alpha = 0
+        alpha = 0
         isUserInteractionEnabled = true     // Disable user input.
 
         // Darken all area.
@@ -177,16 +177,16 @@ public class ProgressMaskView : UIView {
         backgroundPlateColor = UIColor(white: 0.6, alpha: 0.9)
         addSubview(backgroundRoundView)
         backgroundRoundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundRoundView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 8).isActive = true
-        backgroundRoundView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -8).isActive = true
-        backgroundRoundView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor, constant: 8).isActive = true
-        backgroundRoundView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -8).isActive = true
-        backgroundRoundView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        backgroundRoundView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        
+        NSLayoutConstraint.activate([
+            backgroundRoundView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 8),
+            backgroundRoundView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -8),
+            backgroundRoundView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor, constant: 8),
+            backgroundRoundView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -8),
+            backgroundRoundView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            backgroundRoundView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
         // Progress View
         circleProgressView = LineArcRotateView(frame: frame)
-        //circleProgressView.angleDifference = 0
         circleProgressView.setInitialAngle(start: 0, end: 0)
         circleProgressView.widthAndHeight = defaultMinCircleSize
         progressColor1 = defaultProgressColor1
@@ -216,12 +216,14 @@ public class ProgressMaskView : UIView {
         titleLabel.textAlignment = .center
         backgroundRoundView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.topAnchor, constant: titleWidthInset).isActive = true
-        titleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.bottomAnchor, constant: -titleWidthInset).isActive = true
-        titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.leftAnchor, constant: titleHeightInset).isActive = true
-        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: -titleHeightInset).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: backgroundRoundView.centerYAnchor).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: backgroundRoundView.centerXAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.topAnchor, constant: titleWidthInset),
+            titleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.bottomAnchor, constant: -titleWidthInset),
+            titleLabel.leftAnchor.constraint(greaterThanOrEqualTo: backgroundRoundView.leftAnchor, constant: titleHeightInset),
+            titleLabel.rightAnchor.constraint(lessThanOrEqualTo: backgroundRoundView.rightAnchor, constant: -titleHeightInset),
+            titleLabel.centerYAnchor.constraint(equalTo: backgroundRoundView.centerYAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: backgroundRoundView.centerXAnchor)
+        ])
     }
 
     /// Setup all parameters of activity or progress bar.

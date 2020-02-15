@@ -8,12 +8,9 @@
 
 import Foundation
 
-
-
-
 /// Arc with thick line filled with two color gradation.
 @IBDesignable
-open class LineArcView : UIView, ArcShape {
+open class LineArcView: UIView, ArcShape {
     
     /// Bounds at current state.
     private var currentBounds: CGRect
@@ -102,6 +99,7 @@ open class LineArcView : UIView, ArcShape {
             requestUpdate()
         }
     }
+
     /// Remember size of cached information.
     private var sizeOfCachedInformatin: CGSize?
     
@@ -116,7 +114,7 @@ open class LineArcView : UIView, ArcShape {
         let height = Int(bounds.size.height)
         let colorSpace = CGColorSpaceCreateDeviceGray()
         guard let cg = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: 0) else {
-            print("Failed to create a CGContext for a gradation mask.")
+            print("ProgressMaskView: Failed to create a CGContext for a gradation mask.")
             return _gradientMaskCache
         }
         let color1 = UIColor.white
@@ -144,7 +142,7 @@ open class LineArcView : UIView, ArcShape {
         let width = Int(bounds.size.width)
         let height = Int(bounds.size.height)
         guard let cg = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4, space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
-            print("Cannot create fillContext!")
+            print("ProgressMaskView: Cannot create CGContext for fillImage.")
             return _fillImageCache
         }
         cg.setFillColor(lineColor.cgColor)
@@ -254,7 +252,7 @@ open class LineArcView : UIView, ArcShape {
         let newPath = makeArcPath(startAngle: to.0, endAngle: to.1)
         anime.fromValue = oldPath
         anime.toValue = newPath
-        anime.duration = 0.05//endAngleAnimationLink!.duration
+        anime.duration = 0.05
         anime.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         if let mask = layer.mask as? CAShapeLayer {
             CATransaction.begin()
