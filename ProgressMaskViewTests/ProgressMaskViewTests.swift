@@ -21,14 +21,14 @@ class ProgressMaskViewTests: XCTestCase {
 
     func testTools() {
         
-        // Check getRadian function
+        // Check matrixRotateZ and convertRotationZToRadian function
         func check(_ radian: CGFloat) {
-            let a = matrixRotateZ(Float(radian))
-            let b = getRadian(from: a)
-            let int = Int(b / Float.pi)
-            let result = radian - CGFloat(int) * CGFloat.pi
-            let diff = abs(result - radian)//.truncatingRemainder(dividingBy: CGFloat.pi)
-            XCTAssertTrue(diff < 0.000001, "Fail on \(radian) radian. atan=\(b).  diff=\(diff)" )
+            let a = Tool.matrixRotateZ(Float(radian))
+            let b = Tool.convertRotationZToRadian(from: a)
+            let diff = abs(radian - CGFloat(b))
+            let remainder = diff.remainder(dividingBy: CGFloat.pi)
+            XCTAssertTrue(remainder < 0.000001, "Failed. Original radian is '\(radian)'. reverted radian is '\(b)'.  diff=\(diff), remainder=\(remainder)" )
+            print("diff = \(remainder)")
         }
         let dig90 = CGFloat.pi / 2
         let dig30 = CGFloat.pi / 6
