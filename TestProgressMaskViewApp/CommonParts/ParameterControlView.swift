@@ -71,7 +71,7 @@ class ParameterControlView: UIView {
         blendSlider.value = 0.5
         blendLabel.text = "0.5"
         widthSliderView.minimumValue = 0
-        widthSliderView.maximumValue = 0.5
+        widthSliderView.maximumValue = 1.0
         widthSliderView.value = 0.1
         widthValue.text = "0.10"
         radiusSliderView.minimumValue = 0
@@ -157,8 +157,9 @@ class ParameterControlView: UIView {
             blendLabel.text = blend.decimal(2)
         }
         if let radius = radiusRatio {
-            radiusSliderView.value = Float(radius)
-            radiusValue.text = radius.decimal(2)
+            let value = Float(radius)
+            radiusSliderView.value = value
+            radiusValue.text = value.decimal(2)
         }
         if let width = widthRatio {
             widthSliderView.value = Float(width)

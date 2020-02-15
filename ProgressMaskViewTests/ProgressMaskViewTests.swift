@@ -40,6 +40,32 @@ class ProgressMaskViewTests: XCTestCase {
         }
     }
 
+    func testArcShape() {
+        struct Test: ArcShape {
+            var widthAndHeight: CGFloat
+            var autoFitInside: Bool
+            var arcRadiusRatio: CGFloat
+            var arcLineWidthRatio: CGFloat
+            var arcCenterRatio: CGPoint
+            var arcCenter: CGPoint
+            var arcGradation: CGFloat
+            var startAngle: CGFloat
+            var endAngle: CGFloat
+        }
+
+        var a = Test(widthAndHeight: 100, autoFitInside: false, arcRadiusRatio: 0.5, arcLineWidthRatio: 0.1, arcCenterRatio: CGPoint(x: 0.5, y: 0.5), arcCenter: CGPoint(x: 50, y: 50), arcGradation: 1, startAngle: 0, endAngle: .pi)
+        XCTAssert(a.arcRadius == 45)
+        XCTAssert(a.arcLineWidth == 10)
+
+        a.arcRadiusRatio = 0.4
+        XCTAssert(a.arcRadius == 35)
+        XCTAssert(a.arcLineWidth == 10)
+
+        a.arcLineWidthRatio = 0.4
+        XCTAssert(a.arcRadius == 20)
+        XCTAssert(a.arcLineWidth == 40)
+    }
+  
     func testScopes() {
         // Check these functions are accessible or not.
         var progressMaskView = ProgressMaskView()
