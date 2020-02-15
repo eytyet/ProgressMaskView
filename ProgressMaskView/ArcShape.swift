@@ -21,10 +21,10 @@ public protocol ArcShape {
     /// Set radius of the arc as a ratio against widthAndHeight. 0 - 0.5. 0.5 is largest.
     var arcRadiusRatio: CGFloat { get set }
 
-    /// widthAndHeight * arcRadiusRatio.
+    /// Distance between circle center to arc line center.
     var arcRadius: CGFloat { get }
 
-    /// Set width of the line of circumference as a ratio against widthAndHeight. 0 - arcRadiusRatio.
+    /// Set width of the arc line as a ratio against widthAndHeight. 0 - 1.
     var arcLineWidthRatio: CGFloat { get set }
 
     /// widthAndHeight * arcLineWidthRatio.
