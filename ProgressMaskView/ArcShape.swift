@@ -10,7 +10,7 @@ import UIKit
 
 /// Protocol for a view of arc shape
 ///  Width and height is the same.
-public protocol ArcShape {
+protocol ArcShape {
 
     /// Set length of width and height of the view.
     var widthAndHeight: CGFloat { get set }
@@ -51,12 +51,12 @@ public protocol ArcShape {
 extension ArcShape {
     
     /// Radius of arc. Rasius is from the center of circle to the center of line width.
-    public var arcRadius: CGFloat {
+    var arcRadius: CGFloat {
         return widthAndHeight * (arcRadiusRatio - arcLineWidthRatio / 2)
     }
     
     /// Line width.
-    public var arcLineWidth: CGFloat {
+    var arcLineWidth: CGFloat {
         return widthAndHeight * arcLineWidthRatio
     }
 }
@@ -64,7 +64,7 @@ extension ArcShape {
 extension ArcShape where Self: UIView {
 
     /// Center position.
-    public var arcCenter: CGPoint {
+    var arcCenter: CGPoint {
         let minLength = min(bounds.width, bounds.height)
         return CGPoint(x: minLength * arcCenterRatio.x, y: minLength * arcCenterRatio.y )
     }

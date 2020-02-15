@@ -10,7 +10,7 @@ import Foundation
 
 /// Arc with thick line filled with two color gradation.
 @IBDesignable
-open class LineArcView: UIView, ArcShape {
+class LineArcView: UIView, ArcShape {
     
     /// Bounds at current state.
     private var currentBounds: CGRect
@@ -34,7 +34,7 @@ open class LineArcView: UIView, ArcShape {
     public var shouldAnimate = false
     
     /// Offset against startAngle and endAngle
-    @IBInspectable public var offsetAngle: CGFloat = 0 {
+    @IBInspectable var offsetAngle: CGFloat = 0 {
         didSet {
             (layer as! RotateLayer).offsetAngle = Float(offsetAngle)
         }
@@ -42,31 +42,31 @@ open class LineArcView: UIView, ArcShape {
 
     // MARK: ArcShape protocol
     
-    @IBInspectable public var widthAndHeight: CGFloat = 100 {
+    @IBInspectable var widthAndHeight: CGFloat = 100 {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var autoFitInside: Bool = true {
+    @IBInspectable var autoFitInside: Bool = true {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var arcRadiusRatio: CGFloat = 0.45 {
+    @IBInspectable var arcRadiusRatio: CGFloat = 0.45 {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var arcLineWidthRatio: CGFloat = 0.05 {
+    @IBInspectable var arcLineWidthRatio: CGFloat = 0.05 {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var arcCenterRatio: CGPoint = CGPoint(x: 0.5, y: 0.5) {
+    @IBInspectable var arcCenterRatio: CGPoint = CGPoint(x: 0.5, y: 0.5) {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var arcGradation: CGFloat = 0.5 {
+    @IBInspectable var arcGradation: CGFloat = 0.5 {
         didSet { requestUpdate() }
     }
     
-    @IBInspectable public var startAngle: CGFloat = 0 {
+    @IBInspectable var startAngle: CGFloat = 0 {
         didSet {
             if shouldAnimate {
                 currentStartAngle = oldValue
@@ -80,7 +80,7 @@ open class LineArcView: UIView, ArcShape {
         }
     }
     
-    @IBInspectable public var endAngle: CGFloat = 0 {
+    @IBInspectable var endAngle: CGFloat = 0 {
         didSet {
             if shouldAnimate {
                 currentEndAngle = oldValue
@@ -94,7 +94,7 @@ open class LineArcView: UIView, ArcShape {
         }
     }
     
-    @IBInspectable public var lineColor: UIColor = UIColor.white {
+    @IBInspectable var lineColor: UIColor = UIColor.white {
         didSet {
             requestUpdate()
         }
@@ -153,13 +153,13 @@ open class LineArcView: UIView, ArcShape {
 
     // MARK: - UIView
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         currentBounds = frame
         super.init(frame: frame)
         setup()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented.")
     }
     private func setup() {
@@ -168,18 +168,18 @@ open class LineArcView: UIView, ArcShape {
         //clipsToBounds = true
     }
     
-    // Use RotateLayer
-    open override class var layerClass : AnyClass {
+    /// Use RotateLayer
+    override class var layerClass : AnyClass {
         return RotateLayer.self
     }
     
-    // This view wants to be widthAndHeight x widthAndHeight in size.
-    open override var intrinsicContentSize: CGSize {
+    /// This view wants to be widthAndHeight x widthAndHeight in size.
+    override var intrinsicContentSize: CGSize {
         return CGSize(width: widthAndHeight, height: widthAndHeight)
     }
     
-    // Fit inside if required.
-    open override func layoutSubviews() {
+    /// Fit inside if required.
+    override func layoutSubviews() {
         guard autoFitInside else { return }
         guard currentBounds.size != bounds.size else { return }
         currentBounds = frame
@@ -187,8 +187,8 @@ open class LineArcView: UIView, ArcShape {
         widthAndHeight = minLength
     }
     
-    // Draw a thick arc.
-    open override func draw(_ rect: CGRect) {
+    /// Draw a thick arc.
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
         guard let cg = UIGraphicsGetCurrentContext() else { return }
 

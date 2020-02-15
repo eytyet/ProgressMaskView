@@ -64,7 +64,20 @@ class ProgressMaskViewTests: XCTestCase {
         a.arcLineWidthRatio = 0.4
         XCTAssert(a.arcRadius == 20)
         XCTAssert(a.arcLineWidth == 40)
-
+    }
+  
+    func testScopes() {
+        // Check these functions are accessible or not.
+        var progressMaskView = ProgressMaskView()
+        progressMaskView = ProgressMaskView(frame:CGRect.zero)
+        let _ = ProgressMaskView.init(coder:)
+        let _ = ProgressMaskView.BarType.self
+        let _ = ProgressMaskView.showIn
+        let _ = ProgressMaskView.hideIn
+        let _ = progressMaskView.setParameters(bar:parameter:)
+        // Check properties
+        let _ = progressMaskView.progress
+        let _ = progressMaskView.backgroundPlateColor
     }
 
     func testPerformanceExample() {

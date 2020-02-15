@@ -70,8 +70,11 @@ class RandamDemoViewController: UIViewController {
         view.progressRadiusRatio = .random / 4 + 0.25
         view.progressWidthRatio = .random / 4 + 0.25
 
-        view.install(to: self)
-        view.showIn(second: 1.0)
+        // Call from non-main thread to reproduce bug #3.
+        DispatchQueue.global().async {
+            view.install(to: self)
+            view.showIn(second: 1.0)
+        }
         return view
     }
 
