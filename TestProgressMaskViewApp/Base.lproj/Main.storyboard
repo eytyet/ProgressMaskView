@@ -11,7 +11,7 @@
         <!--Main Table View Controller-->
         <scene sceneID="Fvo-Bg-sOI">
             <objects>
-                <tableViewController id="JjR-D9-5KN" customClass="MainTableViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="JjR-D9-5KN" customClass="MainTableViewController" customModule="TestProgressMaskViewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MZD-gX-aL8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +79,7 @@
         <!--Randam Demo View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RandamDemoViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RandamDemoViewController" customModule="TestProgressMaskViewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -281,18 +281,18 @@
         <!--Parameter Demo View Controller-->
         <scene sceneID="3NE-CF-luj">
             <objects>
-                <viewController id="bdi-oN-992" customClass="ParameterDemoViewController" customModule="TestProgressMaskView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bdi-oN-992" customClass="ParameterDemoViewController" customModule="TestProgressMaskViewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VyG-BZ-Skr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-Gs-Q7A" customClass="ParameterControlView" customModule="TestProgressMaskView" customModuleProvider="target">
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-Gs-Q7A" customClass="ParameterControlView" customModule="TestProgressMaskViewApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="471" width="414" height="168.5"/>
-                                <color key="backgroundColor" red="1" green="0.896484375" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctN-QO-Wcq" customClass="ParameterControlView" customModule="TestProgressMaskView" customModuleProvider="target">
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctN-QO-Wcq" customClass="ParameterControlView" customModule="TestProgressMaskViewApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="639.5" width="414" height="168.5"/>
-                                <color key="backgroundColor" red="0.78553082191780821" green="0.95186750856164382" blue="0.86009738869863017" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6r-OW-ynb" customClass="ProgressMaskView" customModule="ProgressMaskView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="471"/>
@@ -318,8 +318,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="NXU-PV-B4B"/>
                     <connections>
-                        <outlet property="activityControlView" destination="fcr-Gs-Q7A" id="w2V-Yj-dRH"/>
-                        <outlet property="progressControlerView" destination="ctN-QO-Wcq" id="H8f-jH-0Vp"/>
+                        <outlet property="activityControllerView" destination="fcr-Gs-Q7A" id="w2V-Yj-dRH"/>
+                        <outlet property="progressControllerView" destination="ctN-QO-Wcq" id="H8f-jH-0Vp"/>
                         <outlet property="progressMaskView" destination="u6r-OW-ynb" id="S7u-G1-gDY"/>
                     </connections>
                 </viewController>

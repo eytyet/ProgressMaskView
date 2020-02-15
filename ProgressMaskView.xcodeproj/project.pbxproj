@@ -26,6 +26,7 @@
 		B74B28C322D201DC00D111F3 /* ProgressMaskView.h in Headers */ = {isa = PBXBuildFile; fileRef = B74B28B522D201DC00D111F3 /* ProgressMaskView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B74B28CD22D203CC00D111F3 /* ProgressMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */; };
 		B74B28D122D2134600D111F3 /* SimpleRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B28D022D2134600D111F3 /* SimpleRView.swift */; };
+		B75A93DB23F7AF5600A7712D /* SampleProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75A93DA23F7AF5600A7712D /* SampleProcess.swift */; };
 		B7B155E023F51BA300A84799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155DF23F51BA300A84799 /* AppDelegate.swift */; };
 		B7B155E223F51BA300A84799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155E123F51BA300A84799 /* SceneDelegate.swift */; };
 		B7B155E423F51BA300A84799 /* RandamDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B155E323F51BA300A84799 /* RandamDemoViewController.swift */; };
@@ -101,6 +102,7 @@
 		B74B28C222D201DC00D111F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskView.swift; sourceTree = "<group>"; };
 		B74B28D022D2134600D111F3 /* SimpleRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRView.swift; sourceTree = "<group>"; };
+		B75A93DA23F7AF5600A7712D /* SampleProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProcess.swift; sourceTree = "<group>"; };
 		B761636322E5148D00FC3D07 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B7B155DD23F51BA300A84799 /* TestProgressMaskViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProgressMaskViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B155DF23F51BA300A84799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				B72F5C1023F67751003D0F4B /* MainTableViewController.swift */,
 				B7B155E323F51BA300A84799 /* RandamDemoViewController.swift */,
 				B72F5C1223F67996003D0F4B /* ParameterDemoViewController.swift */,
+				B75A93DA23F7AF5600A7712D /* SampleProcess.swift */,
 				B7B155E823F51BA800A84799 /* Assets.xcassets */,
 				B7B155EA23F51BA800A84799 /* LaunchScreen.storyboard */,
 				B7B155ED23F51BA800A84799 /* Info.plist */,
@@ -514,6 +517,7 @@
 				B72F5C0A23F654B1003D0F4B /* SidewayView.swift in Sources */,
 				B72F5C0F23F67020003D0F4B /* SimpleRView.swift in Sources */,
 				B72F5C1123F67751003D0F4B /* MainTableViewController.swift in Sources */,
+				B75A93DB23F7AF5600A7712D /* SampleProcess.swift in Sources */,
 				B72F5C1E23F6E7DF003D0F4B /* UIViewExtensions.swift in Sources */,
 				B72F5C1C23F690BB003D0F4B /* BinaryFloatingPointExtensions.swift in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ProgressMaskView
 
 @objc protocol ParameterControlViewDelegate: class {
     @objc optional func didColorChanged(_ parameterView: ParameterControlView, index: Int, color: UIColor)
@@ -36,6 +37,13 @@ class ParameterControlView: UIView {
         set { titleLabel.text = newValue }
     }
 
+    /// Return parameter set
+    public var parameters: ProgressMaskBarParameter {
+        return ProgressMaskBarParameter(color1: color1View.backgroundColor!, color2: color2View.backgroundColor!, blend: CGFloat(blendSlider!.value), widthRatio: CGFloat(widthSliderView!.value), radiusRatio: CGFloat(radiusSliderView!.value))
+    }
+
+    private var _backgroundColor: UIColor?
+
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -64,19 +72,39 @@ class ParameterControlView: UIView {
         blendLabel.text = "0.5"
         widthSliderView.minimumValue = 0
         widthSliderView.maximumValue = 0.5
-        widthSliderView.value = 0.25
-        widthValue.text = "0.25"
+        widthSliderView.value = 0.1
+        widthValue.text = "0.10"
         radiusSliderView.minimumValue = 0
         radiusSliderView.maximumValue = 0.5
-        radiusSliderView.value = 0.25
-        radiusValue.text = "0.25"
+        radiusSliderView.value = 0.5
+        radiusValue.text = "0.50"
     }
 
     // MARK: - UIView
 
+    /// IB set this backgroundColor and then set backgroundView.backgroundColor. Therefore, the specified background color is removed. So, keep it on _backgroundColor.
     override var backgroundColor: UIColor? {
         get { backgroundView?.backgroundColor }
-        set { backgroundView?.backgroundColor = newValue }
+        set {
+            _backgroundColor = newValue
+            backgroundView?.backgroundColor = newValue
+        }
+    }
+
+    override func awakeFromNib() {
+        if let color = _backgroundColor {
+            backgroundView.backgroundColor = color
+        }
+    }
+
+    override func prepareForInterfaceBuilder() {
+        // Avoid 0 width on title.
+        if let view = titleLabel.superview {
+            view.addConstraint(view.widthAnchor.constraint(equalToConstant: 30))
+        }
+        if let color = _backgroundColor {
+            backgroundView.backgroundColor = color
+        }
     }
 
     // MARK: - Actions
@@ -114,4 +142,29 @@ class ParameterControlView: UIView {
         blendLabel.text = value.decimal(2)
         delegate?.didBlendLevelChanged?(self, blendLevel: CGFloat(value))
     }
+
+    // MARK: - Methods
+
+    func setParameter(color1: UIColor? = nil, color2: UIColor? = nil, blendLevel: CGFloat? = nil, radiusRatio: CGFloat? = nil, widthRatio: CGFloat? = nil) {
+        if let color = color1 {
+            color1View.backgroundColor = color
+        }
+        if let color = color2 {
+            color2View.backgroundColor = color
+        }
+        if let blend = blendLevel {
+            blendSlider.value = Float(blend)
+            blendLabel.text = blend.decimal(2)
+        }
+        if let radius = radiusRatio {
+            radiusSliderView.value = Float(radius)
+            radiusValue.text = radius.decimal(2)
+        }
+        if let width = widthRatio {
+            widthSliderView.value = Float(width)
+            widthValue.text = width.decimal(2)
+        }
+    }
+
+
 }
