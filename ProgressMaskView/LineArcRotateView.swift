@@ -11,7 +11,7 @@ import UIKit
 
 /// UIView of a thick beautiful arc. Rotatable.
 @IBDesignable
-open class LineArcRotateView: UIView, ArcShape {
+class LineArcRotateView: UIView, ArcShape {
     
     /// Arc view on front side.
     private let foregroundArcView: LineArcView
@@ -124,14 +124,14 @@ open class LineArcRotateView: UIView, ArcShape {
     
     // MARK: - UIView
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         backgroundArcView = LineArcView(frame: frame)
         foregroundArcView = LineArcView(frame: frame)
         super.init(frame: frame)
         setup()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         let dummy = CGRect(x: 0, y: 0, width: 100, height: 100)
         backgroundArcView = LineArcView(frame: dummy)
         foregroundArcView = LineArcView(frame: dummy)
@@ -160,11 +160,11 @@ open class LineArcRotateView: UIView, ArcShape {
         startAngle = 0
     }
     
-    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(width: widthAndHeight, height: widthAndHeight)
     }
     
-    open override var intrinsicContentSize: CGSize {
+    override var intrinsicContentSize: CGSize {
         return CGSize(width: widthAndHeight, height: widthAndHeight)
     }
     
@@ -172,7 +172,7 @@ open class LineArcRotateView: UIView, ArcShape {
     
     /// Start rotate animation
     /// - Parameter duration: Time period of one rotation.
-    public func startRotation(duration: TimeInterval) {
+    func startRotation(duration: TimeInterval) {
         guard isRotating == false else { return }
         isRotating = true
         foregroundArcLayer.rotate(duration: duration)
@@ -181,7 +181,7 @@ open class LineArcRotateView: UIView, ArcShape {
     }
     
     /// Stop rotate animation.
-    public func stopRotation() {
+    func stopRotation() {
         isRotating = false
         foregroundArcLayer.stopRotation()
         backgroundArcLayer.stopRotation()
@@ -192,7 +192,7 @@ open class LineArcRotateView: UIView, ArcShape {
     ///   - start: Start angle of the arc in radian.
     ///   - end: End angle of the arc in radian.
     ///   - offset: Offset of angle in radian. If 0, start/end angle begin at 03:00. -pi/2 is 0:00.
-    public func setInitialAngle(start: CGFloat, end: CGFloat, offset: CGFloat? = nil) {
+    func setInitialAngle(start: CGFloat, end: CGFloat, offset: CGFloat? = nil) {
         func setup(_ view: LineArcView, diff: CGFloat) {
             view.shouldAnimate = false
             view.startAngle = start + diff
