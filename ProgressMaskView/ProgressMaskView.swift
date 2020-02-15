@@ -148,8 +148,8 @@ public class ProgressMaskView : UIView {
     
     /// Cache of an angle unit value.
     private let angleStep = CGFloat.pi / 90
-    
-    // MARK: - Methods
+
+    // MARK: - UIView
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -160,7 +160,14 @@ public class ProgressMaskView : UIView {
         super.init(coder: aDecoder)
         setup()
     }
-    
+
+    public override func prepareForInterfaceBuilder() {
+        circleProgressView.setInitialAngle(start: .pi * 1.3, end: .pi * -0.5)
+        circleActivityView.setInitialAngle(start: .pi, end: .pi * 0.3)
+    }
+
+    // MARK: - Methods
+
     /// Create all views and set up all constraints.
     /// default value of each property did not passed to its didSet block. So call it again at here.
     private func setup() {
