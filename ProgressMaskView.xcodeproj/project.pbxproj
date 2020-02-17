@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B701D49622DF433B0075107E /* LineArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B701D49522DF433B0075107E /* LineArcView.swift */; };
 		B7075DAE22E25BE5007C620A /* RotateLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7075DAD22E25BE5007C620A /* RotateLayer.swift */; };
+		B70C994623FA2B37003D4595 /* ProgressMaskView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B70C994523FA2B37003D4595 /* ProgressMaskView.podspec */; };
+		B70C994823FA2B6D003D4595 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B70C994723FA2B6D003D4595 /* LICENSE */; };
 		B72F5C0823F64C3D003D0F4B /* ParameterControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C0723F64C3D003D0F4B /* ParameterControlView.swift */; };
 		B72F5C0A23F654B1003D0F4B /* SidewayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C0923F654B1003D0F4B /* SidewayView.swift */; };
 		B72F5C0F23F67020003D0F4B /* SimpleRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72F5C0D23F67019003D0F4B /* SimpleRView.swift */; };
@@ -82,6 +84,8 @@
 /* Begin PBXFileReference section */
 		B701D49522DF433B0075107E /* LineArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineArcView.swift; sourceTree = "<group>"; };
 		B7075DAD22E25BE5007C620A /* RotateLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateLayer.swift; sourceTree = "<group>"; };
+		B70C994523FA2B37003D4595 /* ProgressMaskView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProgressMaskView.podspec; sourceTree = "<group>"; };
+		B70C994723FA2B6D003D4595 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B72F5C0723F64C3D003D0F4B /* ParameterControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterControlView.swift; sourceTree = "<group>"; };
 		B72F5C0923F654B1003D0F4B /* SidewayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidewayView.swift; sourceTree = "<group>"; };
 		B72F5C0D23F67019003D0F4B /* SimpleRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleRView.swift; path = TestProgressMaskViewApp/CommonParts/SimpleRView.swift; sourceTree = SOURCE_ROOT; };
@@ -103,7 +107,7 @@
 		B74B28CC22D203CC00D111F3 /* ProgressMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMaskView.swift; sourceTree = "<group>"; };
 		B74B28D022D2134600D111F3 /* SimpleRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRView.swift; sourceTree = "<group>"; };
 		B75A93DA23F7AF5600A7712D /* SampleProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProcess.swift; sourceTree = "<group>"; };
-		B761636322E5148D00FC3D07 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B761636322E5148D00FC3D07 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B7B155DD23F51BA300A84799 /* TestProgressMaskViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProgressMaskViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B155DF23F51BA300A84799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B155E123F51BA300A84799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,9 @@
 		B74B28A822D201DC00D111F3 = {
 			isa = PBXGroup;
 			children = (
+				B761636322E5148D00FC3D07 /* README.md */,
+				B70C994723FA2B6D003D4595 /* LICENSE */,
+				B70C994523FA2B37003D4595 /* ProgressMaskView.podspec */,
 				B74B28B422D201DC00D111F3 /* ProgressMaskView */,
 				B74B28BF22D201DC00D111F3 /* ProgressMaskViewTests */,
 				B7B155DE23F51BA300A84799 /* TestProgressMaskViewApp */,
@@ -222,7 +229,6 @@
 				B73C2F5F22DF5B1E005BC4E8 /* ArcShape.swift */,
 				B74B28D022D2134600D111F3 /* SimpleRView.swift */,
 				B73C2F6122DFB1EA005BC4E8 /* Tools.swift */,
-				B761636322E5148D00FC3D07 /* README.md */,
 				B74B28B622D201DC00D111F3 /* Info.plist */,
 			);
 			path = ProgressMaskView;
@@ -442,6 +448,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B70C994823FA2B6D003D4595 /* LICENSE in Resources */,
+				B70C994623FA2B37003D4595 /* ProgressMaskView.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

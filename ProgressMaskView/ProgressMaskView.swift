@@ -114,12 +114,12 @@ public class ProgressMaskView: UIView {
     
     /// Progress of the progress bar. 0 - 1.0. Default is 0.
     public var progress: Float {
+        get { Float(_progress) }
         set {
             _progress = CGFloat(newValue)
-            circleProgressView.startAngle = pi * 2 * _progress + circleProgressView.endAngle
-        }
-        get {
-            return Float(_progress)
+            DispatchQueue.main.syncInMainButAsyncIfNot {
+                self.circleProgressView.startAngle = pi * 2 * self._progress + self.circleProgressView.endAngle
+            }
         }
     }
     
@@ -277,28 +277,28 @@ public class ProgressMaskView: UIView {
         }
     }
 
-    /// Appear. Must be called from the main thread.
-    /// - Parameter second: Optional. Animation duration in second. Default is 0.3.
-    public func showIn(second: TimeInterval = 0.3) {
+    /// Appear.
+    /// - Parameter duration: Optional. Fade in animation duration in second. Default is 0.3.
+    public func show(in duration: TimeInterval = 0.3) {
         DispatchQueue.main.syncInMainButAsyncIfNot {
-            self.startAnimation()
-            UIView.animate(withDuration: second) {
+            self.startActivityAnimation()
+            UIView.animate(withDuration: duration) {
                 self.alpha = 1
             }
         }
     }
 
-    /// Disappear. Must be called from the main thread.
+    /// Disappear.
     /// - Parameters:
-    ///   - second: Optional. Default is 0.3. Animation duration in second.
+    ///   - duration: Optional. Default is 0.3. Fade out animation duration in second.
     ///   - uninstall: Optional. Set true (default) to remove this view from the view hierarchly. If false, it is disappeared since alpha is 0 but remains in the view hierarchly.
     ///   - completion: Optional. completion handler.
-    public func hideIn(second: TimeInterval = 0.3, uninstall: Bool = true, completion: (()->())? = nil) {
+    public func hide(in duration: TimeInterval = 0.3, uninstall: Bool = true, completion: (()->())? = nil) {
         DispatchQueue.main.syncInMainButAsyncIfNot {
-            UIView.animate(withDuration: second, animations: {
+            UIView.animate(withDuration: duration, animations: {
                 self.alpha = 0
             }, completion: { _ in
-                self.stopAnimation()
+                self.stopActivityAnimation()
                 if uninstall {
                     self.removeFromSuperview()
                 } else {
@@ -310,14 +310,14 @@ public class ProgressMaskView: UIView {
     }
     
     /// Start animation
-    private func startAnimation() {
+    private func startActivityAnimation() {
         circleActivityView.endAngle = circleActivityView.startAngle - pi / 2
         circleActivityView.startRotation(duration: 2.0)
         startTimer()
     }
     
     /// Stop animation
-    private func stopAnimation() {
+    private func stopActivityAnimation() {
         stopTimer()
         circleActivityView.stopRotation()
     }
@@ -325,7 +325,7 @@ public class ProgressMaskView: UIView {
     /// Start animation timer
     private func startTimer() {
         guard timer == nil else { return }
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerFunc), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
     }
     
     /// Stop animation timer
@@ -335,7 +335,7 @@ public class ProgressMaskView: UIView {
     }
     
     /// Timer callback to control activity bar length and color.
-    @objc func timerFunc() {
+    @objc func timerCallback() {
         let center = animationDirection > 0 ? 4 : -4
         let d = angleStep * CGFloat(center - animationDirection)
         let d2 = angleStep * 4

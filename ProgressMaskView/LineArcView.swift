@@ -73,6 +73,9 @@ class LineArcView: UIView, ArcShape {
                 guard angleAnimationLink == nil else { return }
                 angleAnimationLink = CADisplayLink(target: self, selector: #selector(animateAngles))
                 angleAnimationLink?.add(to: .main, forMode: .default)
+                if #available(iOS 10.0, *) {
+                    angleAnimationLink?.preferredFramesPerSecond = 30
+                }
             } else {
                 currentStartAngle = startAngle
                 setNeedsDisplay()
@@ -87,6 +90,9 @@ class LineArcView: UIView, ArcShape {
                 guard angleAnimationLink == nil else { return }
                 angleAnimationLink = CADisplayLink(target: self, selector: #selector(animateAngles))
                 angleAnimationLink?.add(to: .main, forMode: .default)
+                if #available(iOS 10.0, *) {
+                    angleAnimationLink?.preferredFramesPerSecond = 30
+                }
             } else {
                 currentEndAngle = endAngle
                 setNeedsDisplay()
@@ -101,15 +107,16 @@ class LineArcView: UIView, ArcShape {
     }
 
     /// Remember size of cached information.
-    private var sizeOfCachedInformatin: CGSize?
+    private var sizeOfCachedImages: CGSize?
     
     /// Content of gradientMaskCache
     private var _gradientMaskCache: CGImage?
     
     /// Cache for gradient image mask.
     private var gradientMaskCache: CGImage? {
-        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _gradientMaskCache }
-        sizeOfCachedInformatin = bounds.size
+        if let size = sizeOfCachedImages,
+            size.width == bounds.width || size.height == bounds.height { return _gradientMaskCache }
+        sizeOfCachedImages = bounds.size
         let width = Int(bounds.size.width)
         let height = Int(bounds.size.height)
         let colorSpace = CGColorSpaceCreateDeviceGray()
@@ -137,7 +144,8 @@ class LineArcView: UIView, ArcShape {
 
     /// A lineColor filled image. Cached
     private var fillImageCache: CGImage? {
-        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _fillImageCache }
+        if let size = sizeOfCachedImages,
+            size.width == bounds.width || size.height == bounds.height { return _fillImageCache }
         sizeOfFillImage = bounds.size
         let width = Int(bounds.size.width)
         let height = Int(bounds.size.height)
@@ -162,12 +170,7 @@ class LineArcView: UIView, ArcShape {
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented.")
     }
-    private func setup() {
-        backgroundColor = nil
-        isOpaque = false
-        //clipsToBounds = true
-    }
-    
+
     /// Use RotateLayer
     override class var layerClass : AnyClass {
         return RotateLayer.self
@@ -210,9 +213,15 @@ class LineArcView: UIView, ArcShape {
     
     // MARK: - Methods
     
+    /// Initialize UI
+    private func setup() {
+        backgroundColor = nil
+        isOpaque = false
+    }
+
     /// Set force redraw
     private func requestUpdate() {
-        sizeOfCachedInformatin = nil
+        sizeOfCachedImages = nil
         setNeedsDisplay()
     }
     
@@ -231,7 +240,7 @@ class LineArcView: UIView, ArcShape {
     /// - Parameter current: Current angle in radian
     /// - Parameter final: Target angle in radian
     /// - Returns: Next angle in radian.
-    func nextTickAngle(current: CGFloat, final: CGFloat) -> CGFloat {
+    private func nextTickAngle(current: CGFloat, final: CGFloat) -> CGFloat {
         var next:CGFloat = (current + final) / 2
         if abs(next - final) > angleStep {
             if current < final {
@@ -242,23 +251,14 @@ class LineArcView: UIView, ArcShape {
         }
         return next
     }
-    
+
     /// Set path animation.
     /// - Parameter from : Start point of the animation. (Start Angle, End Angle)
     /// - Parameter to : End point of the animation. (Start Angle, End Angle)
-    func executePathAnimation(from: (CGFloat, CGFloat), to: (CGFloat, CGFloat)) {
-        let anime = CABasicAnimation(keyPath: "path")
-        let oldPath = makeArcPath(startAngle: from.0, endAngle: from.1)
+    private func executePathAnimation(from: (CGFloat, CGFloat), to: (CGFloat, CGFloat)) {
         let newPath = makeArcPath(startAngle: to.0, endAngle: to.1)
-        anime.fromValue = oldPath
-        anime.toValue = newPath
-        anime.duration = 0.05
-        anime.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         if let mask = layer.mask as? CAShapeLayer {
-            CATransaction.begin()
-            mask.add(anime, forKey: "angle")
             mask.path = newPath
-            CATransaction.commit()
         }
     }
     

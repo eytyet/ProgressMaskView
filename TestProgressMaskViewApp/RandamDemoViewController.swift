@@ -73,7 +73,7 @@ class RandamDemoViewController: UIViewController {
         // Call from non-main thread to reproduce bug #3.
         DispatchQueue.global().async {
             view.install(to: self)
-            view.showIn(second: 1.0)
+            view.show(in: 1.0)
         }
         return view
     }
@@ -99,7 +99,7 @@ class RandamDemoViewController: UIViewController {
         if progress > 1 {
             progress = 1
             progressMaskView.progress = progress
-            progressMaskView.hideIn(second: 1.0, uninstall: true) {
+            progressMaskView.hide(in: 1.0, uninstall: true) {
                 self.progressMaskView = nil
                 self.startDemo()
             }

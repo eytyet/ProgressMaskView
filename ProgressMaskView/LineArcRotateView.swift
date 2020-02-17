@@ -139,6 +139,16 @@ class LineArcRotateView: UIView, ArcShape {
         setup()
     }
     
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: widthAndHeight, height: widthAndHeight)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: widthAndHeight, height: widthAndHeight)
+    }
+    
+    // MARK: - Methods
+    
     /// setup views, constraints and default values.
     private func setup() {
         func addAndSetup(_ view: LineArcView) {
@@ -159,17 +169,7 @@ class LineArcRotateView: UIView, ArcShape {
         endAngle = 0
         startAngle = 0
     }
-    
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize(width: widthAndHeight, height: widthAndHeight)
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: widthAndHeight, height: widthAndHeight)
-    }
-    
-    // MARK: - Methods
-    
+
     /// Start rotate animation
     /// - Parameter duration: Time period of one rotation.
     func startRotation(duration: TimeInterval) {
