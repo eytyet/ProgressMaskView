@@ -48,7 +48,7 @@ class ParameterDemoViewController: UIViewController {
         progressMaskView.progress = 0
         progressMaskView.setParameters(bar: .activity, parameter: activityControllerView.parameters)
         progressMaskView.setParameters(bar: .progress, parameter: progressControllerView.parameters)
-        progressMaskView.showIn(second: 1.0)
+        progressMaskView.show(in: 1.0)
 
         sampleProcess = SampleProcess()
         sampleProcess?.delegate = self
@@ -114,7 +114,7 @@ extension ParameterDemoViewController: SampleProcessDelegate {
     }
 
     func notify(completion: Bool) {
-        progressMaskView.hideIn(second: 1.0, uninstall: false) {
+        progressMaskView.hide(in: 1.0, uninstall: false) {
             self.sampleProcess = nil
         }
     }

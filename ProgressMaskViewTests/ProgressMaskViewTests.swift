@@ -72,8 +72,8 @@ class ProgressMaskViewTests: XCTestCase {
         progressMaskView = ProgressMaskView(frame:CGRect.zero)
         let _ = ProgressMaskView.init(coder:)
         let _ = ProgressMaskView.BarType.self
-        let _ = ProgressMaskView.showIn
-        let _ = ProgressMaskView.hideIn
+        let _ = ProgressMaskView.show
+        let _ = ProgressMaskView.hide
         let _ = progressMaskView.setParameters(bar:parameter:)
         // Check properties
         let _ = progressMaskView.progress
