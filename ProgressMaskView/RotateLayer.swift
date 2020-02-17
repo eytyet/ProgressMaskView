@@ -8,6 +8,8 @@
 
 import Foundation
 
+fileprivate let keyRotationZ = "transform.rotation.z"
+
 /// Layer with automatic rotation feature.
 class RotateLayer: CALayer {
     /// Rotation degree offset
@@ -51,19 +53,19 @@ class RotateLayer: CALayer {
     ///   - duration: Time of one round.
     ///   - startAngle: Start angle. omit it to start current location.
     func rotate(duration: TimeInterval, from startAngle: Float? = nil) {
-        guard animation(forKey: "transform.rotation.z") == nil else { return }
-        var start:Float
-        if startAngle == nil {
-            start = Tool.convertRotationZToRadian(from: transform) + offsetAngle
+        guard animation(forKey: keyRotationZ) == nil else { return }
+        var start: Float
+        if let angle = startAngle {
+            start = angle
         } else {
-            start = startAngle!
+            start = Tool.convertRotationZToRadian(from: transform) + offsetAngle
         }
-        let anime = CABasicAnimation(keyPath: "transform.rotation.z")
+        let anime = CABasicAnimation(keyPath: keyRotationZ)
         anime.duration = duration
         anime.fromValue = NSNumber(value: start - offsetAngle)
-        anime.toValue = NSNumber(value: start - offsetAngle + Float.pi * 2)
-        anime.repeatCount = Float.infinity
-        add(anime, forKey: "transform.rotation.z")
+        anime.toValue = NSNumber(value: start - offsetAngle + .pi * 2)
+        anime.repeatCount = .infinity
+        add(anime, forKey: keyRotationZ)
     }
     
     /// Stop rotation.
@@ -71,6 +73,6 @@ class RotateLayer: CALayer {
         if let current = presentation() {
             transform = current.transform
         }
-        removeAnimation(forKey: "transform.rotation.z")
+        removeAnimation(forKey: keyRotationZ)
     }
 }
