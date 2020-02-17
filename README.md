@@ -1,9 +1,9 @@
 #  ProgressMaskView for iOS
 
-**Progress Mask View** is a view which covers the entire screen to disable any user interaction including Tab bar items and navigation bar buttons. It shows an activity indicator and progress. User can aware that any interaction is disabled and he/she has to wait. Activity movement and color change are very beautiful.
+**Progress Mask View** is a view which covers the entire screen to disable any user interaction including Tab bar items and navigation bar buttons. It shows an activity indicator and a progress bar. User can aware that any interaction is disabled and he/she has to wait. Activity movement and color change are beautiful.
 
 Basically, you should not use this. Disabling user interaction is not a good idea as a recent modern app.
-However, in some case, it is necessary. I created this view to use on a backup function and a restore function since it is not possible to change any data while it is backing up or restoring from the backup data. This view does not has any cancel button. If your function can be cancelled, you should not disable navigation bar nor tab bar.
+However, in some case, it is necessary. I created this view to use on a backup function and a restore function since it is not possible to change any data while it is backing up or restoring from the backup data. This view has no cancel button.
 You should use this at very limited case.
 
 ## Screenshots
@@ -24,23 +24,33 @@ This is:
  - Fit to all screen size.
  - Easy to use.
 
-Animation is implemented at CALayer and it is lightweight.
+Animation is implemented at CALayer.
 
 ## How to Use
 
-It is recommended to use this view from a code.
-This view automatically insert itself into the view hierarchy at beginning, and remove it at the end.
+You can use it with Interface Builder or code.
+### Interface Builder
+1. Put a UIView and change its class to ProgressMaskView.
+
+**Notes:**
+- If you want to cover entire screen, you have to put the ProgressMaskView into the UITabBarController or UINavigationBarController when you use it. 
+- You should set `false` to  `uninstall:` argument at `hide` function. It is true by default.
+
+### Code
+This is easiest way to use this.
+Just pass the current view controller to the install(to:) function. This view will automatically insert itself into the appropriate position of the view hierarchy.
+At the end, this view will remove itself at `hide` request. 
 
 Start:
 1. Make a `ProgressMaskView` instance.
-2. Pass your UIViewController to the `install(to:)` method of the instance.
-3. Call the `showIn()` method to show the progress view.
+2. Pass current UIViewController to the `install(to:)` method of the instance.
+3. Call the `show(in:)` method to show the progress view.
 
 Update:
 4. Specify the `progress` property like a UIProgressView to update UI.
 
 End:
-5. Call the `hideIn(second:uninstall)` method at the end.
+5. Call the `hide(in:uninstall:completion:)` method at the end.
 
 That's all. This view automatically decide appropriate insert point in the view hierarchy and insert it, set up all constraint, and start animation. At the end, this view is removed from the tree so that it can be freed.
 
@@ -54,10 +64,19 @@ If you want, you can use Interface builder. But I suggest above code approach be
 
 ## Installation
 
+### Code
 - Get all code.
 - Add the ProgressMaskView.xcodeproj onto your project.
 - Add ProgressMaskView.framework into the Embedded Binaries section at Project - Target - General.
 - `import ProgressMaskView` will enable you to use ProgressMaskView.
+
+### CocoaPod
+Add one line to your Podfile.
+
+```podfile
+    pod 'ProgressMaskView'
+```
+Close Xcode, open Terminal, go to the folder contains the Pod file, and run `pod install`.
 
 ## Sample Code
 
@@ -81,7 +100,7 @@ private var maskView: ProgressMaskView?
     maskView = ProgressMaskView()
     maskView?.title = "Processing..."
     maskView?.install(to: self)
-    maskView?.showIn(second: 1.0)
+    maskView?.show(in: 1.0)
         
     startYourProcess()
 }
@@ -97,11 +116,12 @@ maskView?.progress = progressValue // 0.0 - 1.0
 
 ### End
 
-At the end, call `hideIn` method to discard the view.
+At the end, call `hide` method to discard the view.
 
 ```Swift
-maskView?.hideIn(second: 1.0, uninstall: true)
-maskView = nil
+maskView?.hide(in: 1.0, uninstall: true) {
+    self.maskView = nil
+}
 ```
 
 If uninstall is false, The Progress Mask View become hidden but remains in the view hierarchy. You can reuse it by calling `show(in:)` method.
