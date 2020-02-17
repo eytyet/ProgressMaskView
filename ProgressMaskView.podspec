@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ProgressMaskView"
-  spec.version      = "0.1.0"
-  spec.summary      = "A progress view with an activity indicator which covers entire screen."
+  spec.version      = "0.2.0"
+  spec.summary      = "A progress view with an activity indicator which covers the whole screen."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -54,7 +54,6 @@ DESC
 
   spec.author             = { "eytyet" => "eytyet@gmail.com" }
   # Or just: spec.author    = "eytyet"
-  # spec.authors            = { "eytyet" => "yuusoftware@gmail.com" }
   # spec.social_media_url   = "https://twitter.com/eytyet"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -64,7 +63,6 @@ DESC
   #
 
   spec.platform     = :ios, "9.3"
-  # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
   # spec.ios.deployment_target = "5.0"
@@ -90,8 +88,9 @@ DESC
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "ProgressMaskView", "ProgressMaskView/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
+  spec.source_files  = "ProgressMaskView"
+  #, "ProgressMaskView/**/*.{h,m}"
+  #spec.exclude_files = "Classes/Exclude"
   spec.swift_versions = "5.1"
 
   # spec.public_header_files = "Classes/**/*.h"
