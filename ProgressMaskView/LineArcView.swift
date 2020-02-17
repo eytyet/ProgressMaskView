@@ -170,12 +170,7 @@ class LineArcView: UIView, ArcShape {
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented.")
     }
-    private func setup() {
-        backgroundColor = nil
-        isOpaque = false
-        //clipsToBounds = true
-    }
-    
+
     /// Use RotateLayer
     override class var layerClass : AnyClass {
         return RotateLayer.self
@@ -218,6 +213,12 @@ class LineArcView: UIView, ArcShape {
     
     // MARK: - Methods
     
+    /// Initialize UI
+    private func setup() {
+        backgroundColor = nil
+        isOpaque = false
+    }
+
     /// Set force redraw
     private func requestUpdate() {
         sizeOfCachedImages = nil
@@ -239,7 +240,7 @@ class LineArcView: UIView, ArcShape {
     /// - Parameter current: Current angle in radian
     /// - Parameter final: Target angle in radian
     /// - Returns: Next angle in radian.
-    func nextTickAngle(current: CGFloat, final: CGFloat) -> CGFloat {
+    private func nextTickAngle(current: CGFloat, final: CGFloat) -> CGFloat {
         var next:CGFloat = (current + final) / 2
         if abs(next - final) > angleStep {
             if current < final {
@@ -254,7 +255,7 @@ class LineArcView: UIView, ArcShape {
     /// Set path animation.
     /// - Parameter from : Start point of the animation. (Start Angle, End Angle)
     /// - Parameter to : End point of the animation. (Start Angle, End Angle)
-    func executePathAnimation(from: (CGFloat, CGFloat), to: (CGFloat, CGFloat)) {
+    private func executePathAnimation(from: (CGFloat, CGFloat), to: (CGFloat, CGFloat)) {
         let newPath = makeArcPath(startAngle: to.0, endAngle: to.1)
         if let mask = layer.mask as? CAShapeLayer {
             mask.path = newPath
