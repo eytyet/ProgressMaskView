@@ -73,6 +73,9 @@ class LineArcView: UIView, ArcShape {
                 guard angleAnimationLink == nil else { return }
                 angleAnimationLink = CADisplayLink(target: self, selector: #selector(animateAngles))
                 angleAnimationLink?.add(to: .main, forMode: .default)
+                if #available(iOS 10.0, *) {
+                    angleAnimationLink?.preferredFramesPerSecond = 30
+                }
             } else {
                 currentStartAngle = startAngle
                 setNeedsDisplay()
@@ -87,6 +90,9 @@ class LineArcView: UIView, ArcShape {
                 guard angleAnimationLink == nil else { return }
                 angleAnimationLink = CADisplayLink(target: self, selector: #selector(animateAngles))
                 angleAnimationLink?.add(to: .main, forMode: .default)
+                if #available(iOS 10.0, *) {
+                    angleAnimationLink?.preferredFramesPerSecond = 30
+                }
             } else {
                 currentEndAngle = endAngle
                 setNeedsDisplay()
@@ -244,23 +250,14 @@ class LineArcView: UIView, ArcShape {
         }
         return next
     }
-    
+
     /// Set path animation.
     /// - Parameter from : Start point of the animation. (Start Angle, End Angle)
     /// - Parameter to : End point of the animation. (Start Angle, End Angle)
     func executePathAnimation(from: (CGFloat, CGFloat), to: (CGFloat, CGFloat)) {
-        let anime = CABasicAnimation(keyPath: "path")
-        let oldPath = makeArcPath(startAngle: from.0, endAngle: from.1)
         let newPath = makeArcPath(startAngle: to.0, endAngle: to.1)
-        anime.fromValue = oldPath
-        anime.toValue = newPath
-        anime.duration = 0.05
-        anime.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         if let mask = layer.mask as? CAShapeLayer {
-            CATransaction.begin()
-            mask.add(anime, forKey: "angle")
             mask.path = newPath
-            CATransaction.commit()
         }
     }
     
