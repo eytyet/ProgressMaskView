@@ -28,34 +28,22 @@ Animation is implemented at CALayer.
 
 ## How to Use
 
-You can use it with Interface Builder or code.
+You can use ProgressMaskView on Interface Builder or from code.
+
 ### Interface Builder
-1. Put a UIView and change its class to ProgressMaskView.
+Put a UIView and change its class to ProgressMaskView.
+
 
 **Notes:**
-- If you want to cover entire screen, you have to put the ProgressMaskView into the UITabBarController or UINavigationBarController when you use it. 
-- You should set `false` to  `uninstall:` argument at `hide` function. It is true by default.
+- If you want to cover whole screen, you have to add a ProgressMaskView onto the UITabBarController or UINavigationBarController when you use it. 
+- You should set `false` to  `uninstall:` argument at `hide` function to avoid removing it from the view hierarchy. It is `true` by default.
 
 ### Code
-This is easiest way to use this.
-Just pass the current view controller to the install(to:) function. This view will automatically insert itself into the appropriate position of the view hierarchy.
-At the end, this view will remove itself at `hide` request. 
+I suggest this way.
+Just pass the current view controller to the install(to:) function. This view will automatically insert itself into the appropriate position of the view hierarchy. If you use UITabBarController or UINavigationController, it will find these root view controller.
+At the end, this view will remove itself when `hide` is called. 
 
-Start:
-1. Make a `ProgressMaskView` instance.
-2. Pass current UIViewController to the `install(to:)` method of the instance.
-3. Call the `show(in:)` method to show the progress view.
-
-Update:
-4. Specify the `progress` property like a UIProgressView to update UI.
-
-End:
-5. Call the `hide(in:uninstall:completion:)` method at the end.
-
-That's all. This view automatically decide appropriate insert point in the view hierarchy and insert it, set up all constraint, and start animation. At the end, this view is removed from the tree so that it can be freed.
-
-If you want, you can use Interface builder. But I suggest above code approach because it is easier.
-
+Refer to the sample code below.
 
 ## Customization
  - Change colors.
@@ -64,12 +52,6 @@ If you want, you can use Interface builder. But I suggest above code approach be
 
 ## Installation
 
-### Code
-- Get all code.
-- Add the ProgressMaskView.xcodeproj onto your project.
-- Add ProgressMaskView.framework into the Embedded Binaries section at Project - Target - General.
-- `import ProgressMaskView` will enable you to use ProgressMaskView.
-
 ### CocoaPod
 Add one line to your Podfile.
 
@@ -77,6 +59,12 @@ Add one line to your Podfile.
     pod 'ProgressMaskView'
 ```
 Close Xcode, open Terminal, go to the folder contains the Pod file, and run `pod install`.
+
+### Manually
+- Get all code.
+- Add the ProgressMaskView.xcodeproj onto your project.
+- Add ProgressMaskView.framework into the Embedded Binaries section at Project - Target - General.
+- `import ProgressMaskView` will enable you to use ProgressMaskView.
 
 ## Sample Code
 
@@ -124,7 +112,7 @@ maskView?.hide(in: 1.0, uninstall: true) {
 }
 ```
 
-If uninstall is false, The Progress Mask View become hidden but remains in the view hierarchy. You can reuse it by calling `show(in:)` method.
+If `uninstall:` argumate is `false`, The Progress Mask View become hidden but remains in the view hierarchy. You can reuse it by calling `show(in:)` method.
 
 ## License
 MIT License
