@@ -101,15 +101,16 @@ class LineArcView: UIView, ArcShape {
     }
 
     /// Remember size of cached information.
-    private var sizeOfCachedInformatin: CGSize?
+    private var sizeOfCachedImages: CGSize?
     
     /// Content of gradientMaskCache
     private var _gradientMaskCache: CGImage?
     
     /// Cache for gradient image mask.
     private var gradientMaskCache: CGImage? {
-        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _gradientMaskCache }
-        sizeOfCachedInformatin = bounds.size
+        if let size = sizeOfCachedImages,
+            size.width == bounds.width || size.height == bounds.height { return _gradientMaskCache }
+        sizeOfCachedImages = bounds.size
         let width = Int(bounds.size.width)
         let height = Int(bounds.size.height)
         let colorSpace = CGColorSpaceCreateDeviceGray()
@@ -137,7 +138,8 @@ class LineArcView: UIView, ArcShape {
 
     /// A lineColor filled image. Cached
     private var fillImageCache: CGImage? {
-        if let size = sizeOfCachedInformatin, size.width == bounds.width || size.height == bounds.height { return _fillImageCache }
+        if let size = sizeOfCachedImages,
+            size.width == bounds.width || size.height == bounds.height { return _fillImageCache }
         sizeOfFillImage = bounds.size
         let width = Int(bounds.size.width)
         let height = Int(bounds.size.height)
@@ -212,7 +214,7 @@ class LineArcView: UIView, ArcShape {
     
     /// Set force redraw
     private func requestUpdate() {
-        sizeOfCachedInformatin = nil
+        sizeOfCachedImages = nil
         setNeedsDisplay()
     }
     
